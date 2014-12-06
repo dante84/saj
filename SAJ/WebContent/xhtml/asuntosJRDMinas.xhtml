@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head>	
+	<title>
+		Sistemas de Asuntos Juridicos
+	</title>
+	<h:outputScript name="es.js" library="js"/>
+</h:head> 
+
+<h:body>
+
+   <h:outputStylesheet library="css" name="Style.css"/>
+   
+   <div class="se-sheet">
+	<div id="content" class="se-sheet-body">		
+		<div class="contenedor">
+                    <h:form>  
+				      <ui:insert name="header"><ui:include src="/plantillas/header.xhtml"/></ui:insert>		       
+					  <ui:insert name="logeo" ><ui:include src="/plantillas/logeo.xhtml" /></ui:insert>		       
+					  <ui:insert name="menuCabecera"><ui:include src="/plantillas/menuCabecera.xhtml"/></ui:insert>					  
+				   </h:form>
+		</div>     			
+		  <center>	      
+		 			 <table width="960px" border="0" cellpadding="0" cellspacing="0">
+		 			 <tr>
+             	  <td>   	              		 	   		       			 
+	                  <div class="titulo"><h:graphicImage library="imagenes" name="RecepciondeDocs.png"/></div>                  
+	                  <p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>
+                  </td>
+                  </tr>
+		 			 <tr>
+		 			 	<td>		 			 			  
+                                   						
+                	<center>
+					<p:dataTable id="tblSeguimiento" var="sdAsuntosJud" value="#{CAsuntosJuridicos.ltSeguimiento}" 
+							style="margin-bottom:20px; clear:both; widt: 900px;"
+							paginator="true" paginatorPosition="bottom"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} 
+							{NextPageLink} {LastPageLink}"
+							rowsPerPageTemplate="15,20,25" >
+							
+				    <f:facet name="header">
+			           Amparo Foraneo
+			        </f:facet>
+					 
+												
+					<p:column headerText="No. de Registro" width="80">
+						<center>  
+						   <h:outputText value="#{sdAsuntosJud.sNoAmparo}" />
+						</center>		
+					</p:column>
+					
+					<p:column headerText="Fecha de Recepcion" width="100">
+						<center>  
+							   <h:outputText value="#{sdAsuntosJud.sFechaRecepcion}" />
+						</center>	   
+					</p:column>
+					
+					<p:column headerText="Hora de Recepcion" width="40">
+							<center>  
+								   <h:outputText value="#{sdAsuntosJud.sHoraRecepcion}" />
+							</center>	   
+					</p:column>
+					
+					<p:column headerText="Materia" width="40">
+							<center>  
+								   <h:outputText value="#{sdAsuntosJud.sMateria}" />
+							</center>	   
+					</p:column>
+					
+					<p:column headerText="Fecha de Vencimiento" width="40">
+							<center>  
+								   <h:outputText value="#{sdAsuntosJud.sFechaVencimiento}" />
+							</center>	   
+					</p:column>
+					
+					<p:column headerText="No. de Expediente" width="40">
+							<center>  
+								   <h:outputText value="#{sdAsuntosJud.sNoExpediente}" />
+							</center>	   
+					</p:column>
+					
+					<p:column headerText="Promovente" width="40">
+							<center>  
+								   <h:outputText value="#{sdAsuntosJud.sPromovente}" />
+							</center>	   
+					</p:column>										
+					
+					<p:column headerText="Acciones" style="width:60px">																											   																   
+									<h:graphicImage library="imagenes" name="ConsultarDoc.png" width="20px"/>							   							   
+									<h:graphicImage library="imagenes" name="TurnarDoc.png" width="20px"/>							   							   							   
+					</p:column>
+										
+					</p:dataTable>							 			
+																						    
+              	  	</center>
+
+                
+            		</td>
+		 			 </tr>
+		 			 </table>	
+          </center>		 	
+		</div>
+		
+		<div id="footer">
+			  
+			     <ui:insert name="footer"><ui:include src="/plantillas/footer.xhtml"/></ui:insert>
+			
+		</div>
+   </div>
+
+</h:body>
+</html>

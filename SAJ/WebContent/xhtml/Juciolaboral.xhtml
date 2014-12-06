@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head>
+	<h:outputScript name="es.js" library="js"/>
+</h:head> 
+
+<h:body>
+
+		<div class="x">
+		
+		<h:selectOneRadio id="rbTipoAsunto2" value="#{CArchivoGeneral.rdoTipoAsunto}" >
+  			<f:selectItem itemValue="1" itemLabel="Amparo" ></f:selectItem>
+  			<f:selectItem itemValue="2" itemLabel="Requerimientos Jurisdiccionales" ></f:selectItem>
+  			<f:selectItem itemValue="3" itemLabel="Oficios Internos" ></f:selectItem>
+  			<f:ajax render="x"></f:ajax>
+  		</h:selectOneRadio>
+		       		
+		       		
+		 <h:panelGroup id="x" >
+		 	<h:panelGrid rendered="#{CArchivoGeneral.rdoTipoAsunto == 1}">
+    	    	<ui:insert name="juiciosLaboral" ><ui:include src="Jlaboral.xhtml" /></ui:insert>
+        	</h:panelGrid>  
+        	<h:panelGrid rendered="#{CArchivoGeneral.rdoTipoAsunto == 2}">
+        		<ui:insert><ui:include src="Jlaboralj.xhtml" /></ui:insert>
+        	</h:panelGrid>
+        	<h:panelGrid rendered="#{CArchivoGeneral.rdoTipoAsunto == 3}">
+        		<ui:insert><ui:include src="oficiosInternos.xhtml" /></ui:insert>
+        	</h:panelGrid>
+		 </h:panelGroup>                                  
+         
+         </div>
+         
+       
+</h:body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui"> 
+      
+
+<h:head>      
+    <h:outputStylesheet library="css" name="Style.css"/>
+</h:head>
+ 
+<h:body >        
+   <f:view>
+      
+     <h:form>
+			<ui:insert name="header"> <ui:include src="/plantillas/header.xhtml" /> </ui:insert>
+			<ui:insert name="logeo"> <ui:include src="/plantillas/logeo.xhtml" /> </ui:insert>
+			<ui:insert name="menuCabecera"> <ui:include src="/plantillas/menuCabecera.xhtml" /> </ui:insert>
+			
+			<div class="se-sheet">
+				<div class="se-sheet-body">
+					<div class="contenedor">
+						<div class="titulo3">
+							<hr/>
+							<center>Perfiles</center>
+							<hr/>
+							<h:outputLabel id="lblUsuario" style="display:none" value="#{sesionBean.sUser}"></h:outputLabel>
+							<h:inputText id="itUsuarioActual" style="display:none" value="#{sesionBean.sUser}"></h:inputText>
+							<br/><br/>
+							<p:dataTable id="perfiles" var="perfil"
+								value="#{CAdministracion.perfiles}"
+								style="margin-bottom:20px; clear:both;">
+								<f:facet name="header">
+							           Perfiles
+							    </f:facet>
+							    <br/><br/>
+								<p:column headerText="Id" width="30">
+		
+									<h:outputText value="#{perfil.sIdCat}" />
+		
+		
+								</p:column>
+								<p:column headerText="Perfil">
+		
+									<h:outputText value="#{perfil.sDescripcionCat}" />
+		
+								</p:column>
+								<p:column style="width:40px">
+									<h:commandLink action="#{CAdministracion.editarPerfil(perfil.sIdCat, perfil.sDescripcionCat)}">
+										<h:graphicImage library="imagenes" name="pencil.png" width="20" />
+									</h:commandLink>
+									<h:commandLink
+										action="#{CAdministracion.eliminarPerfil(perfil.sIdCat)}">
+										<h:graphicImage library="imagenes" name="eliminar.png"
+											width="20" />
+									</h:commandLink>
+								</p:column>
+							</p:dataTable>
+						</div>
+					</div>
+					<br />
+					<div>
+						<table width="100%">
+							<tr align="center">
+								<td align="center"><h:commandButton value="Aceptar" action="#{CAdministracion.agregarPerfil}" ></h:commandButton></td>
+							</tr>
+						</table>
+					</div>
+
+
+				</div>
+			</div>
+
+		</h:form>
+ 
+   </f:view>
+</h:body>
+ 
+</html>

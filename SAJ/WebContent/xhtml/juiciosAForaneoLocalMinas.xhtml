@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head></h:head> 
+<h:body>
+
+     <table>
+      
+       <tr>
+       
+           <td><h:outputLabel value="*Número de Juicio: " styleClass="etiqueta"/></td>           
+           <td>
+               <h:inputText id="textoNumeroJuicio" value="#{CArchivoGeneral.textoNumeroJuicio}" required="true" requiredMessage="Introduzca un valor" 
+                            styleClass="texto"/>
+           </td>           
+           <td><h:message for="textoNumeroJuicio" styleClass="etiquetaError"/></td>
+           
+       </tr>
+                            
+       <tr>
+       
+       	   <td><h:outputLabel value="*Juzgado: " styleClass="etiqueta"/></td>
+           <td>  
+               <h:selectOneMenu id="comboJuzgados" value="#{CArchivoGeneral.cgbJuzgados}" converter="omnifaces.SelectItemsConverter" 
+		                        required="true" requiredMessage="Selecciona un valor" converterMessage="Seleccione un Juzgado">
+			      <f:selectItem itemLabel="-- Selecciona tipo de Juzgado --" noSelectionOption="true"/>
+	              <f:selectItems value="#{CArchivoGeneral.lcgbJuzgados}" var="juzgados" itemLabel="#{juzgados.sDescripcionCat}"/>
+	              <f:ajax render="otrosJuzgados" />
+	           </h:selectOneMenu>
+	       </td>
+	       <td><h:message for="comboJuzgados" styleClass="etiquetaError"/></td>
+	       
+	   </tr>
+	   
+	   <tr>
+	       <td>
+	           <h:panelGroup id="otrosJuzgados">
+		          <h:panelGrid rendered="#{CArchivoGeneral.cgbJuzgados.sIdCat == 50}">
+			         <table class="tabla">
+				            <tr>
+					            <td><h:outputLabel value="Otros: " styleClass="etiqueta" /></td>
+					            <td>
+					                <h:inputText id="textoOtrosJuzgados" value="#{CArchivoGeneral.textoOtrosJuzgados}" required="true" requiredMessage="Introduzca un valor" styleClass="texto">
+						               <f:validateLength maximum="500" />
+					                </h:inputText>
+					            </td>
+					            <td><h:message for="textoOtrosJuzgados" styleClass="etiquetaError" /></td>
+				            </tr>
+			         </table>
+		          </h:panelGrid>
+	           </h:panelGroup>
+	       </td>
+       </tr>
+					        
+	   <tr>
+       	   <td><h:outputLabel value="Promovente: " styleClass="etiqueta"/></td>
+           <td><h:inputText id="textoPromovente" value="#{CArchivoGeneral.textoPromovente}" styleClass="texto"/></td>
+           <td><h:message for="textoPromovente" styleClass="etiquetaError"/></td>
+       </tr>
+                            
+       <tr>
+       	   <td><h:outputLabel value="*Remitente: " styleClass="etiqueta"/></td>
+           <td><h:inputText id="textoRemitente" value="#{CArchivoGeneral.textoRemitente}" required="true" requiredMessage="Introduzca un valor" styleClass="texto"/></td>
+           <td><h:message for="textoRemitente" styleClass="etiquetaError"/></td>
+       </tr>
+                            
+       <tr>
+       	   <td><h:outputLabel value="Síntesis: " styleClass="etiqueta"/></td>
+           <td><h:inputTextarea id="textoSintesis" value="#{CArchivoGeneral.textoSintesis}"/></td>
+           <td><h:message for="textoSintesis" styleClass="etiquetaError"/></td>
+       </tr>
+                                  
+       <tr>
+           <td><h:outputLabel value="*Número de Oficio: " styleClass="etiqueta"/></td>
+           <td>
+               <h:inputText id="textoNumeroOficio" value="#{CArchivoGeneral.textoNumeroOficio}" required="true" requiredMessage="Introduzca un valor" 
+                            styleClass="texto" >
+                  <f:validateLength maximum="25"/>
+               </h:inputText>
+           </td>
+           <td><h:message for="textoNumeroOficio" styleClass="etiquetaError"/></td>           
+       </tr>
+                           		 
+       <tr>
+       	   <td><h:outputLabel value="*Fecha de Oficio: " styleClass="etiqueta"/></td>
+           <td>
+               <p:calendar id="fechaOficio" required="true" requiredMessage="Seleccione una Fecha" value="#{CArchivoGeneral.fechaOficio}" locale="es" 
+                           styleClass="texto" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/>
+           </td>
+           <td><h:message for="fechaOficio" styleClass="etiquetaError"/></td>
+       </tr>
+                            
+       <tr>
+       	   <td><h:outputLabel value="*Autoridad Responsable: " styleClass="etiqueta"/></td>
+           <td><h:inputText id="textoAutoridad" value="#{CArchivoGeneral.textoAutoridad}" required="true" requiredMessage="Introduzca un valor" styleClass="texto"/></td>
+           <td><h:message for="textoAutoridad" styleClass="etiquetaError"/></td>
+       </tr>                           		                            	
+                           		 
+       <tr>
+	       <td><h:outputLabel value="Número de Registro: " styleClass="etiqueta" /></td>
+		   <td><h:outputLabel id="textoNumeroRegistro2" value="#{CArchivoGeneral.textoNumeroRegistro}"/></td>
+		   <td><h:message for="textoNumeroRegistro2" styleClass="etiquetaError" /></td>
+	   </tr>                 
+                           	
+       <tr>
+           <td><h:outputLabel value="*Incidente de Suspensión: " styleClass="etiqueta"/></td>		                   
+		   <td>
+		       <h:selectOneRadio id="radioSuspension" value="#{CArchivoGeneral.radioSuspencion}" required="true" requiredMessage="Elija un valor">		                       
+		          <f:selectItem itemValue="1" itemLabel="Sí"/>
+		          <f:selectItem itemValue="0" itemLabel="No"/>
+		       </h:selectOneRadio>
+		   </td>    
+		   <td><h:message for="radioSuspension" styleClass="etiquetaError"/></td>
+		                    
+	   </tr>          	                           
+		                    
+	   <tr>
+           <td><h:outputLabel value="*Fecha de Notificación: " styleClass="etiqueta"/></td>
+           <td>
+               <p:calendar id="fechaNotificacion" required="true" requiredMessage="Seleccione una Fecha" value="#{CArchivoGeneral.fechaNotificacion}" 
+                           locale="es" styleClass="texto" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/>
+           </td>
+           <td><h:message for="fechaNotificacion" styleClass="etiquetaError"/></td>
+       </tr>
+                            
+       <tr>
+           <td><h:outputLabel value="Hora de Recepción: " styleClass="etiqueta"/></td>
+           <td><p:inputMask id="textoHoraRecepcion" value="#{CArchivoGeneral.textoHoraRecepcion}" mask="99:99"/></td>
+           <td><h:message for="textoHoraRecepcion" styleClass="etiquetaError"/></td>
+       </tr>
+                            
+       <tr>
+		   <td><h:outputLabel value="Folio: " styleClass="etiqueta" /></td>
+		   <td>
+		       <h:inputText id="textoNumeroFolio" value="#{CArchivoGeneral.textoNumeroFolio}"/>
+		   </td>
+	       <td><h:message for="textoNumeroFolio" styleClass="etiquetaError" /></td>			     
+	   </tr>
+                                                              		                                                                                                                                                               
+       <tr>
+           <td class="txtcuerpo" valign="middle" align="left" colspan="4">
+               <span class="txtcuerpo2">
+                     <h:graphicImage library="imagenes" name="linearoja.png" styleClass="linea"/>
+               </span>
+           </td>
+       </tr>
+                            
+       <tr>
+       	   <td><h:outputText value="Nombre del Responsable: " styleClass="etiqueta"/></td>
+           <td><h:outputLabel id="comboResponsable" value="#{CArchivoGeneral.lcgbResponsables[0].nombre}"/></td>
+           <td><h:message for="comboResponsable"/></td>
+       </tr>                           
+                         
+       <tr>
+	       <td><h:outputLabel value="Cargo: " styleClass="etiqueta"/></td>
+	       <td><h:outputLabel id="etiquetaResponsable" for="comboResponsable" value="#{CArchivoGeneral.lcgbResponsables[0].descripcionPuesto}"/></td>
+	       <td></td>
+       </tr> 					        					                                                                               
+        
+     </table> 
+
+</h:body> 
+</html>

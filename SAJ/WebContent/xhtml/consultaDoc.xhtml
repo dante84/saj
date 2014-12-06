@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head>
+	<title>
+		Sistemas de Asuntos Juridicos
+	</title>
+</h:head> 
+<h:body>
+	<h:form>	
+		<div class="se-sheet"> 
+              <div class="se-sheet-body">                
+                   <p:growl id="growl" showDetail="true" sticky="true" />             
+                   <ui:insert name="header" > <ui:include src="/plantillas/header.xhtml" /> </ui:insert>		               		      
+		           <ui:insert name="logeo" >  <ui:include src="/plantillas/logeo.xhtml" />  </ui:insert>		       
+		           <ui:insert name="menuCabecera" > <ui:include src="/plantillas/menuCabecera.xhtml" /> </ui:insert>		                                                                		  
+		      </div>
+         </div> 	
+	</h:form>
+
+<center>
+	<table width="960px" border="0" cellpadding="0" cellspacing="0">                                            
+             <tr>
+             	<td>   	              		 	   		       			 
+	                  <div class="titulo"><h:graphicImage library="imagenes/Titulos" name="ConsultarDoc.png"/></div>                  
+	                  <p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>
+             	</td>
+             </tr>
+             <tr>
+	             <td>	            
+	                <center> 
+					
+					<table border="0" cellpadding="1" cellspacing="1" >
+					<tr>
+						<td width="25%" align="left" valign="top">
+							DATOS GENERALES
+						</td>
+						<td width="50%">
+						     <table border="0" cellpadding="1" cellspacing="1">
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Tipo de Juicio: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm1" style="width:250px;" value="#{CConsultar.dats.desctipojuicio}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Oficio S/Juicio: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm2"  style="width:250px;" value="#{CConsultar.dats.OFICIOSINJUICIO}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Número de Oficio: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm3" style="width:250px;" value="#{CConsultar.dats.NUMOFICIO}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Fecha de Oficio: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm4" style="width:250px;" value="#{CConsultar.dats.fechaOficio}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Fecha de Recepcion: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm5"  style="width:250px;" value="#{CConsultar.dats.fechaRecep}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Número de Expediente: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm6" style="width:250px;" value="#{CConsultar.dats.numexpediente}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Número de Juicio: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm7" style="width:250px;" value="#{CConsultar.dats.numjuicio}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Número de Registro: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm8" style="width:250px;" value="#{CConsultar.dats.numreg}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Archivos Adjuntos: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm9" style="width:250px;" value="" /> 									   									   
+					</td>     	
+			     </tr>			     
+				 </table>
+						</td>
+						<td width="25%">
+						
+						</td>
+					</tr>					
+					<tr>					
+						<td colspan="3">
+							<span class="txtcuerpo2"> <h:graphicImage
+										library="imagenes" name="linearoja.png" style="width:950px; height:8px;" styleClass="linea" />
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td width="25%" align="left" valign="top">
+							DATOS DEL DOCUMENTO
+						</td>
+						<td width="50%">
+							<table border="0" style=" left: -5px;" cellpadding="1" cellspacing="1">		
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Estado: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm10" style="width:250px;" value="#{CConsultar.dats.estatus}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Remitente: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm11" style="width:250px;" value="#{CConsultar.dats.remitente}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Usuario: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm12" style="width:250px;" value="#{CConsultar.dats.usuario}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Incidentes Suspension: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm13"  style="width:250px;" value="#{CConsultar.dats.INCIDENTESUSPENSION}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Fecha de Notificacion: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm14" style="width:250px;" value="#{CConsultar.dats.FECNOT}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Juzgado: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm15" style="width:250px;" value="#{CConsultar.dats.descjuzgado}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Organo Jurisdiccional: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm16" style="width:250px;" value="#{CConsultar.dats.organo}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Demandado: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm17" style="width:250px;" value="#{CConsultar.dats.demandado}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Juez de Distrito: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm18" style="width:250px;" value="#{CConsultar.dats.descripcion}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Causa Penal: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm19" style="width:250px;" value="#{CConsultar.dats.AVERIGUACIONPREVIA_CAUSAPENAL}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Responsable: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm20" style="width:250px;" value="#{CConsultar.dats.responsable}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Promovente: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm21" style="width:250px;" value="#{CConsultar.dats.promovente}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Remitente: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm22" style="width:250px;" value="#{CConsultar.dats.promovente}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Tribunal: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm23" style="width:250px;" value="#{CConsultar.dats.tribunal}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Materia: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm24" style="width:250px;" value="#{CConsultar.dats.materia}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Fecha de Vencimiento: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm25" style="width:250px;" value="#{CConsultar.dats.fecvencimiento}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Fecha Convencional: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm26" style="width:250px;" value="#{CConsultar.dats.FECCONVENCIONAL}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Folio: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm27" style="width:250px;" value="#{CConsultar.dats.FOLIO}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Tipo Asunto: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm28" style="width:250px;" value="#{CConsultar.dats.TIPOASUNTO}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Acuerdo/Citatorio: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel  id="prm29" style="width:250px;" value="#{CConsultar.dats.ACUERDO_CITATORIO}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Numero Controversia: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm30" style="width:250px;" value="#{CConsultar.dats.NUMEROCONTROVERSIA}" /> 									   									   
+					</td>     	
+			     </tr>
+			     </table>
+						</td>
+						<td width="25%">
+						
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<span class="txtcuerpo2"> 
+								<h:graphicImage
+										library="imagenes" name="linearoja.png" style="width:950px; height:8px;" styleClass="linea" />
+							</span>		
+						</td>
+					</tr>
+					<tr>
+						<td width="25%" align="left" valign="top">
+							OTROS DATOS DEL DOCUMENTO
+						</td>
+						<td width="50%">
+							<table border="0" cellpadding="1" cellspacing="1">
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Acuerdo/Citatorio: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm31" style="width:250px;" value="#{CConsultar.dats.autoridadresponsable}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Autoridad Responsable: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm32"  style="width:250px;" value="#{CConsultar.dats.autoridadresponsable}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Procedencia: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel  id="prm33" style="width:250px;" value="#{CConsultar.dats.descprocedencia}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Salas Fiscales: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm34" style="width:250px;" value="#{CConsultar.dats.descsalasfiscales}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Juicio de Amaparo: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm35" style="width:250px;" value="#{CConsultar.dats.JUICIODEAMPARO}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Quejoso: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm36" style="width:250px;" value="#{CConsultar.dats.quejoso}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Expediente Laboral: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm37" style="width:250px;" value="#{CConsultar.dats.EXPEDIENTELABORAL}" /> 									   									   
+					</td>     	
+			     </tr>
+			     <tr>              
+			     	<td align="right">
+			     		<h:outputLabel value="Cedula de Notificacion: " style="width: 150px; color: red;" />
+			     	</td>
+					<td align="left">
+						<h:outputLabel id="prm38" style="width:250px;" value="#{CConsultar.dats.CEDULANOTIFICACION}" /> 									   									   
+					</td>     	
+			     </tr>
+			     </table>
+						</td>
+						<td width="25%">
+						
+						</td>
+					</tr>
+					</table>
+								     				 											 				 								  
+				  </center>				
+				</td>
+             </tr>
+              <tr>
+             	<td>   	              		 	   		       			 
+	                  <div class="titulo"><h:graphicImage library="imagenes" name="RegActvidadesDoc.png"/></div>                  
+	                  <p:growl id="growl1" showDetail="true" sticky="true" globalOnly="true"/>
+             	</td>
+             </tr>
+             <tr>
+             	<td>
+             	 
+             			<div>
+						  <p:dataTable id="dtHistorico" var="historiaDoc" value="#{CConsultar.histDoc}" styleClass="historia">
+						   <f:facet name="Registro de actividades"></f:facet>
+						    <p:column headerText="Fecha">
+						     <h:outputText value="#{historiaDoc.fecha}"></h:outputText>
+						    </p:column>
+						    <p:column headerText="Movimiento">
+						     <h:outputLabel value="#{historiaDoc.descripcion}"></h:outputLabel>
+						    </p:column>
+						  </p:dataTable> 
+						</div>
+					</td>
+             </tr>
+	</table>
+</center>
+		
+			<h:form>
+					<ui:insert name="footer" > <ui:include src="/plantillas/footer.xhtml" /> </ui:insert>
+			</h:form>
+	
+</h:body>
+</html>

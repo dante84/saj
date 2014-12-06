@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>Asuntos Jurídicos Minas</title>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+	<h:form id="form">
+
+		<p:growl id="msgs" showDetail="true" />
+
+		<div class="se-sheet">
+			<div class="se-sheet-body">
+
+				<ui:insert name="header">
+					<ui:include src="/plantillas/header.xhtml" />
+				</ui:insert>
+				<ui:insert name="logeo">
+					<ui:include src="/plantillas/logeo.xhtml" />
+				</ui:insert>
+				<ui:insert name="menuCabecera">
+					<ui:include src="/plantillas/menuCabecera.xhtml" />
+				</ui:insert>
+
+				<div class="AmparoBusqueda">
+
+					<div class="titulo">
+						<h:graphicImage library="imagenes"
+							name="Titulos/penalOCestudioPGR.png" />
+					</div>
+					<p:growl id="growl" showDetail="true" sticky="true"
+						globalOnly="true" />
+
+					<div align="right">
+						<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+					</div>
+
+					<table width="100%">
+						<tr>
+							<td align="right">
+								<table>
+									<tr>
+										<td>Buscar:</td>
+										<td><h:inputText value="#{CAcciones.txtBusqueda}"></h:inputText></td>
+										<td><h:commandLink>
+												<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+											</h:commandLink></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div>
+					<center>
+						<p:selectOneRadio id="rbOrdCivilPenal"
+							value="#{CAcciones.rbOrdCivilPenal}">
+							<f:selectItem itemValue="1" itemLabel="Pruebas Actor" />
+							<f:selectItem itemValue="2" itemLabel="Pruebas Demandado" />
+							<f:ajax render="tablaOrdCivilPenal" />
+						</p:selectOneRadio>
+					</center>
+				</div>
+
+				<br />
+				<h:panelGroup id="tablaOrdCivilPenal" rendered="true">
+					<p:dataTable id="tblEstudioPGRActor" var="vPGRActor"
+						value="#{CAcciones.locpEstudioPGR}" widgetVar="tblEstudioPGR"
+						rows="25" paginator="true" paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						editable="true" rowIndexVar="rowIndex"
+						rendered="#{CAcciones.rbOrdCivilPenal == 1}">
+
+						<p:ajax event="rowEdit" listener="#{CAcciones.onRowEditActor}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel"
+							listener="#{CAcciones.onRowCancelActor}" update=":form:msgs" />
+
+						<p:column headerText="IdF_Procesal"
+							style="font-size:12px; display:none">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vPGRActor.idF_Procesal}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vPGRActor.idF_Procesal}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="RegDoc" style="font-size:12px; display:none">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vPGRActor.idRegDoc}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vPGRActor.idRegDoc}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Oficio" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vPGRActor.sOficio}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtOficio}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Fecha" style="font-size:12px;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{vPGRActor.dFecha}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar id="FechaActor"
+										requiredMessage="Seleccione una Fecha"
+										value="#{CAcciones.txtFecha}" locale="es" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Requerimiento de la PGR"
+							style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vPGRActor.sRequerimientoPGR}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtRequerimientoPGR}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Editar" style="width:120px; font-size:12px;">
+							<p:rowEditor />
+						</p:column>
+					</p:dataTable>
+
+					<p:dataTable id="tblEstudioPGRDemandado" var="vPGRDemandado"
+						value="#{CAcciones.locpEstudioPGR}" widgetVar="tblEstudioPGR"
+						rows="25" paginator="true" paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						editable="true" rowIndexVar="rowIndex"
+						rendered="#{CAcciones.rbOrdCivilPenal == 2}">
+
+						<p:ajax event="rowEdit" listener="#{CAcciones.onRowEditActor}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel"
+							listener="#{CAcciones.onRowCancelActor}" update=":form:msgs" />
+
+						<p:column headerText="IdF_Procesal"
+							style="font-size:12px; display:none">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vPGRDemandado.idF_Procesal}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vPGRDemandado.idF_Procesal}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="RegDoc" style="font-size:12px; display:none">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vPGRDemandado.idRegDoc}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vPGRDemandado.idRegDoc}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Oficio" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vPGRDemandado.sOficio}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtOficio}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Fecha" style="font-size:12px;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{vPGRDemandado.dFecha}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:calendar id="FechaDemandado"
+										requiredMessage="Seleccione una Fecha"
+										value="#{CAcciones.txtFecha}" locale="es" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Requerimiento de la PGR"
+							style="font-size:12px; display:none">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vPGRDemandado.sRequerimientoPGR}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtRequerimientoPGR}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Editar" style="width:32px; font-size:12px;">
+							<p:rowEditor />
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGroup>
+				<br />
+				<div>
+					<center>
+						<table>
+							<tr>
+								<td></td>
+								<td></td>
+								<td align="center"><p:commandLink
+										onclick="PF('dlg1').show();" immediate="true">
+										<h:graphicImage library="imagenes" name="AgregarR.png"
+											width="110px" height="24px"></h:graphicImage>
+									</p:commandLink></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</center>
+				</div>
+			</div>
+		</div>
+	</h:form>
+	<p:dialog id="idDemanini" header="Turnar Documento" widgetVar="dlg1"
+		fixedCenter="true" modal="true" height="380px" width="580px"
+		resizable="false">
+		<h:graphicImage library="imagenes/Titulos"
+			name="penalOCdemandaiyc.png" width="340" height="75" />
+		<br></br>
+
+		<table width="500px">
+
+			<tr>
+				<td><label class="etiqueta" width="150px">Oficio:</label></td>
+				<td><h:inputText id="txtOficio" value="#{CAcciones.tr_sOficio}"
+						style="border-left-style: outset;
+                  border-right-style: inset;
+                  border-top-style: outset;
+                  border-bottom-style: inset; width: 300px; ">
+					</h:inputText></td>
+			</tr>
+<!-- 			<tr> -->
+<!-- 				<td><label class="etiqueta" width="150px">Fecha</label></td> -->
+<!-- 				<td><p:calendar id="txtFecha" locale="es" -->
+<!-- 						value="#{CAcciones.tr_dfecha}" /></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><label class="etiqueta" width="150px">Requerimiento:</label></td> -->
+<!-- 				<td><h:inputText id="txtRequerimiento" -->
+<!-- 						value="#{CAcciones.tr_sRequerimiento}" -->
+<!-- 						style="border-left-style: outset; -->
+<!--                   border-right-style: inset;  -->
+<!--                    border-top-style: outset;  -->
+<!--                   border-bottom-style: inset; width: 300px; "> -->
+<!-- 					</h:inputText></td> -->
+<!-- 			</tr> -->
+			<tr>
+				<td></td>
+				<td align="left">
+					<center>
+						<p:commandLink
+							onclick="alert('Guardar el Asunto en Demanda Inicial y Contestación?'); PF('dlg1').hide();"
+							action="#{CAcciones.guardar}" >
+							<h:graphicImage library="imagenes" name="guardar.png"
+								width="110px" height="24px"></h:graphicImage>
+						</p:commandLink>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+						<p:commandLink onclick="PF('dlg1').hide();">
+							<h:graphicImage library="imagenes" name="cancelarg.png"
+								width="110px" height="24px"></h:graphicImage>
+						</p:commandLink>
+
+					</center>
+				</td>
+			</tr>
+		</table>
+	</p:dialog>
+	<ui:insert name="fotter">
+		<ui:include src="/plantillas/footer.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

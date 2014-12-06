@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+   <h:outputStylesheet library="css" name="Style.css"/>
+   <title>Sistema de Recepción y Archivo de Asuntos Jurídicos</title>
+</h:head> 
+
+<h:body> 
+
+   <f:view>
+      
+     <h:form> 
+     
+         <div class="se-sheet"> 
+              <div class="se-sheet-body">
+                 
+                   <p:growl id="growl" showDetail="true" sticky="true" />
+             
+                   <ui:insert name="header" >
+		               <ui:include src="/plantillas/header.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="logeo" >
+		               <ui:include src="/plantillas/logeo.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="menuCabecera" >
+ 		               <ui:include src="/plantillas/menuCabecera.xhtml" />
+		           </ui:insert>
+		     
+		           <div class="contenedor">
+		           
+		                <div class="titulo"><h:graphicImage library="imagenes" name="SAOrdinariosCiviles.png"/></div>
+		                
+		                <table>
+                           <tr>
+                               <td>
+                                   <h:selectOneRadio id="radioOrdinarioCivilForaneo" value="#{COCivilForaneo.radioOrdinarioCivilForaneo}">
+                                      <f:selectItem  itemValue="9" itemLabel="Ordinario Civil Local"   />
+                                      <f:selectItem  itemValue="10" itemLabel="Ordinario Civil Foráneo" />
+                                      <f:ajax render="cuerpo" listener="#{COCivilForaneo.listenerRadio}"/>
+                                   </h:selectOneRadio>
+                               </td>                               
+                           </tr>
+                        </table>
+                        
+                        <div align="right">
+				<h:commandLink >
+					<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+				</h:commandLink>
+			</div>
+
+			<div class="AmparoBusqueda">
+				<table width="100%">
+					<tr>
+						<td align="right">
+							<table>
+								<tr>
+									<td><a>Buscar:</a></td>
+									<td><h:inputText value="#{COCivilForaneo.textoBusqueda}"></h:inputText></td>
+									<td><h:commandLink
+											action="#{COCivilForaneo.busquedaPorTexto}">
+											<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+										</h:commandLink></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+                                                
+            <h:panelGroup>
+                            
+               <h:panelGroup id="cuerpo">
+                        
+                  <p:dataTable id="tbl1" var="tbl" value="#{COCivilForaneo.datosSeguimiento}" editable="true" style="margin-bottom:20px" rendered="#{COCivilForaneo.radioOrdinarioCivilForaneo == 9}">					
+					
+				     <p:ajax event="rowEdit" listener="#{COCivilForaneo.onRowEdit}"/>
+					 <p:ajax event="rowEditCancel" listener="#{COCivilForaneo.onRowCancel}"/>
+											
+					 <p:column headerText="Número de Juicio" style="font-size:12px;">
+				        <p:cellEditor>
+				           <f:facet name="output"><h:outputText value="#{tbl.numexpediente}" /></f:facet>
+				           <f:facet name="input"><h:outputText value="#{tbl.numexpediente}"/></f:facet>
+				        </p:cellEditor>
+	       		     </p:column>
+	       				
+	       				 <p:column headerText="Expediente Interno" style="font-size:12px;">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.numreg}" /></f:facet>
+				               <f:facet name="input"><h:outputText value="#{tbl.numreg}"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+						
+						 <p:column headerText="Actor" style="font-size:12px;">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.fecha}" /></f:facet>
+				               <f:facet name="input"><h:outputText value="#{tbl.fecha}"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+	       				
+	       				 <p:column headerText="Órgano Jurisdiccional" style="font-size:12px;">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.hora}" /></f:facet>
+				               <f:facet name="input"><h:outputText value="#{tbl.hora}"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+	       				
+	       				 <p:column headerText="Materia" style="font-size:12px;">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.ac_de_pr_qu}" /></f:facet>
+				               <f:facet name="input"><h:outputText value="#{tbl.ac_de_pr_qu}"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+	       				       				
+	       				 <p:column headerText="Turnado a:" style="font-size:12px;">
+					       <center>
+					        <p:cellEditor>
+					         <f:facet name="output"><h:outputLabel value="#{tbl.descmateria}" /></f:facet>
+					         <f:facet name="input">
+					          <p:selectOneMenu value="#{COCivilForaneo.materia}"
+					           converter="omnifaces.SelectItemsConverter" style="width:100%">
+					           <f:selectItem itemLabel="-Seleccionar-"></f:selectItem>
+					           <f:selectItems value="#{COCivilForaneo.materias}"
+					            var="vRespuesta" itemLabel="#{vRespuesta.descmateria}" />
+					          </p:selectOneMenu>
+					         </f:facet>
+					        </p:cellEditor>
+					       </center>
+					     </p:column>
+					      
+					     <p:column headerText="Estado">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.fecconvencional}" /></f:facet>
+				               <f:facet name="input"><p:calendar id="fechaconven" requiredMessage="Seleccione una Fecha" value="#{COCivilForaneo.fechaconven}" locale="es" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+					      				     			     
+					    <p:column headerText="Acciones" style="font-size:12px;">
+						   <h:commandLink action="#{COCivilForaneo.cargar(tbl.numjuicio, tbl.ac_de_pr_qu, tbl.numexpediente)}">
+							  <h:graphicImage library="imagenes" name="VerDocRelacionadaaExp.png"/>
+						   </h:commandLink>																	
+					    </p:column>			      					
+				      
+				</p:dataTable>
+			
+                        
+                <p:dataTable id="tbl2" var="tbl" value="#{COCivilForaneo.datosSeguimiento}" editable="true" style="margin-bottom:20px" rendered="#{COCivilForaneo.radioOrdinarioCivilForaneo == 10}">
+                
+				   <p:ajax event="rowEdit" listener="#{COCivilForaneo.onRowEdit}"></p:ajax>
+				   <p:ajax event="rowEditCancel" listener="#{COCivilForaneo.onRowCancel}"/>
+						
+						
+			   	   <p:column headerText="Número de Juicio" style="font-size:12px;">
+				      <p:cellEditor>
+				         <f:facet name="output"><h:outputText value="#{tbl.numexpediente}" /></f:facet>
+		                 <f:facet name="input"><h:outputText value="#{tbl.numexpediente}"/></f:facet>
+				      </p:cellEditor>
+	       		   </p:column>
+	       				
+	       				 <p:column headerText="Expediente Interno" style="font-size:12px;">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.numreg}" /></f:facet>
+				               <f:facet name="input"><h:outputText value="#{tbl.numreg}"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+						
+						 <p:column headerText="Actor" style="font-size:12px;">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.fecha}" /></f:facet>
+				               <f:facet name="input"><h:outputText value="#{tbl.fecha}"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+	       				
+	       				 <p:column headerText="Órgano Jurisdiccional" style="font-size:12px;">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.hora}" /></f:facet>
+				               <f:facet name="input"><h:outputText value="#{tbl.hora}"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+	       				
+	       				 <p:column headerText="Materia" style="font-size:12px;">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.ac_de_pr_qu}" /></f:facet>
+				               <f:facet name="input"><h:outputText value="#{tbl.ac_de_pr_qu}"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+	       				       				
+	       				 <p:column headerText="Turnado a:" style="font-size:12px;">
+					       <center>
+					        <p:cellEditor>
+					         <f:facet name="output"><h:outputLabel value="#{tbl.descmateria}" /></f:facet>
+					         <f:facet name="input">
+					          <p:selectOneMenu value="#{COCivilForaneo.materia}"
+					           converter="omnifaces.SelectItemsConverter" style="width:100%">
+					           <f:selectItem itemLabel="-Seleccionar-"></f:selectItem>
+					           <f:selectItems value="#{COCivilForaneo.materias}"
+					            var="vRespuesta" itemLabel="#{vRespuesta.descmateria}" />
+					          </p:selectOneMenu>
+					         </f:facet>
+					        </p:cellEditor>
+					       </center>
+					     </p:column>
+					      
+					     <p:column headerText="Estado">
+				            <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{tbl.fecconvencional}" /></f:facet>
+				               <f:facet name="input"><p:calendar id="fechaconven" requiredMessage="Seleccione una Fecha" value="#{COCivilForaneo.fechaconven}" locale="es" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/></f:facet>
+				            </p:cellEditor>
+	       				 </p:column>
+					      				     			     
+					     <p:column headerText="Acciones" style="font-size:12px;">
+						   <h:commandLink action="#{COCivilForaneo.cargar(tbl.numjuicio, tbl.ac_de_pr_qu, tbl.numexpediente)}">
+							  <h:graphicImage library="imagenes" name="VerDocRelacionadaaExp.png"/>
+						   </h:commandLink>																	
+					    </p:column>		
+				      
+				</p:dataTable>
+                              
+               </h:panelGroup>
+                        
+            </h:panelGroup>
+		                
+		</div>      		     
+                                   
+             
+        <ui:insert name="footer" >
+            <ui:include src="/plantillas/footer.xhtml" />
+        </ui:insert>
+		       		    
+		      </div>
+         </div>
+ 
+     </h:form>
+ 
+   </f:view>
+
+</h:body> 
+</html>

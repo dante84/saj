@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head></h:head>
+ 
+<h:body> 
+
+   <div id="se-nav">
+        <div id="menu"> 
+                               
+	         <ul id="lista" class="menus" 			
+		      		style="
+      background: rgba(254,254,254,1);
+
+background: -moz-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(224,220,224,1) 26%, rgba(186,180,186,1) 87%, rgba(226,226,226,1) 88%, rgba(254,254,254,1) 89%, rgba(181,177,181,1) 93%, rgba(254,254,254,1) 97%, rgba(176,170,176,1) 100%);
+
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(254,254,254,1)), color-stop(26%, rgba(224,220,224,1)), color-stop(87%, rgba(186,180,186,1)), color-stop(88%, rgba(226,226,226,1)), color-stop(89%, rgba(254,254,254,1)), color-stop(93%, rgba(181,177,181,1)), color-stop(97%, rgba(254,254,254,1)), color-stop(100%, rgba(176,170,176,1)));
+
+background: -webkit-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(224,220,224,1) 26%, rgba(186,180,186,1) 87%, rgba(226,226,226,1) 88%, rgba(254,254,254,1) 89%, rgba(181,177,181,1) 93%, rgba(254,254,254,1) 97%, rgba(176,170,176,1) 100%);
+
+background: -o-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(224,220,224,1) 26%, rgba(186,180,186,1) 87%, rgba(226,226,226,1) 88%, rgba(254,254,254,1) 89%, rgba(181,177,181,1) 93%, rgba(254,254,254,1) 97%, rgba(176,170,176,1) 100%);
+
+background: -ms-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(224,220,224,1) 26%, rgba(186,180,186,1) 87%, rgba(226,226,226,1) 88%, rgba(254,254,254,1) 89%, rgba(181,177,181,1) 93%, rgba(254,254,254,1) 97%, rgba(176,170,176,1) 100%);" >
+	      
+	             <li><h:commandLink action="bienvenido?faces-redirect=true">Inicio</h:commandLink></li>
+		  
+	           	 <li>	 
+	                 <h:outputLink>Archivo General</h:outputLink>
+	                 <ul>		          			           	              	                        	                 
+		                 <li><h:commandLink action="#{CArchivoGeneral.doMuestraRegistraExpediente}">Registrar Documento</h:commandLink></li>
+		                 <li><h:commandLink action="#{CRegExpediente.consultaDocumentoDescargo}">Descargo</h:commandLink></li>
+		                 <li><h:commandLink action="#{CArchivoGeneral.consultarDocumento}">Consultar Documento</h:commandLink></li>
+	   	             </ul>		        			    			          			          		        
+		         </li>
+		         
+		       	 <li>	 
+	                 <h:outputLink>Administrador</h:outputLink>
+	                 <ul>		          			           	              	                        	                 
+		                 <li><h:commandLink action="#{CUsuarios.doMuestraUsuarios}">Usuarios</h:commandLink></li>
+		                 <li><h:commandLink action="#{CAdministracion.muestraPerfiles}">Perfiles</h:commandLink></li>
+		                 <li><h:commandLink action="#{CCatalogos.doMuestraCatalogos}">Catalogos</h:commandLink></li>
+	   	             </ul>		        			    			          			          		        
+		         </li>
+		    
+		         <li>
+		         	<h:outputLink>Asuntos Juridicos</h:outputLink>
+		             <ul>	 	          
+ 		                 <li><h:commandLink action="#{CRecepcion.recepcionLaboral}">Recepción de Documentos</h:commandLink></li>
+ 		                 <li>
+ 		                        <a href="#">Amparo</a>	
+ 		                 	
+ 		                 		<li><h:commandLink action="#{CAsuntosJuridicos.load}">Recepción de Documentos</h:commandLink></li>
+ 		                 		<li><h:commandLink>Seguimiento a Expedientes</h:commandLink></li>
+ 		                 	
+ 		                 </li>
+ 		                 <li>
+ 		                 <h:outputLink>Penal</h:outputLink>
+ 		                 		<ul>	
+	 		                 		<li><h:commandLink action="#{CPenal.Load}">Recepción de Documentos del Área</h:commandLink></li>
+	 		                 		<li><h:commandLink action="#{CPenal.LoadSeguimiento}"> Seguimiento a Expedientes </h:commandLink></li>
+ 		                 		</ul>
+ 		                 </li>	     
+ 		                 <li>
+ 		                     <a href="#">Ordinario Civil</a>	
+ 		                 		<li><h:commandLink action="#{COCivilForaneo.irRecepcion}">    Recepción de Documentos   </h:commandLink></li>
+ 		                 		<li><h:commandLink action="#{COCivilForaneo.irSeguimiento}"> Seguimiento a Expedientes </h:commandLink></li>
+ 		                 </li>
+		             </ul>
+		         </li>
+		  
+		    		           		       
+		         <li>
+		             <a href="#">Opciones</a>
+		             <ul>		          
+		                 <li><h:link outcome="cambiarContrasenia" value="Cambiar Contraseña"/></li>		                 
+   		                 <li><a href="Manual/Manual_Secretaria.pdf" title="Nosotros te Ayudamos">Ayuda</a></li>
+ 		                 <li><a href="usuario.go?realize=doMuestraMiPerfil" title="Tus datos">Mi Perfil</a></li> 		                 		
+		             </ul>
+		         </li>
+		    
+		         <li><h:commandLink action="#{CCerraSesion.cerrarSesion}">Cerrar Sesión</h:commandLink></li>
+		         		    
+		     </ul>
+		     
+        </div>
+        <div class="vtem_roundedright"></div>
+        
+</div>
+
+</h:body> 
+</html>

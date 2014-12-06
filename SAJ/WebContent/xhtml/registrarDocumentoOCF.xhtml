@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>Sistemas de Asuntos Juridicos</title>
+</h:head>
+<h:body>
+	<center>
+
+		<table width="700px" border="0" cellpadding="0" cellspacing="0">
+
+			<tr>
+				<td><h:outputLabel value="*Numero de Juicio: " styleClass="etiqueta" /></td>
+				<td>
+				    <h:inputText id="textoNumeroJuicioOCF" value="#{CArchivoGeneral.textoNumeroJuicio}" required="true"
+						         requiredMessage="Introduzca un valor">
+						<f:validateLength maximum="50" />
+					</h:inputText>
+				</td>
+				<td><h:message for="textoNumeroJuicioOCF" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Juzgado: " styleClass="etiqueta" /></td>
+				<td><h:selectOneMenu id="textoJuzgadoOCF"
+						value="#{CArchivoGeneral.cgbJuzgados}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="Selecciona un valor"
+						converterMessage="Selecciona un valor">
+						<f:selectItem itemLabel="-- Selecciona tipo de Juzgado --"
+							noSelectionOption="true" />
+						<f:selectItems value="#{CArchivoGeneral.lcgbJuzgados}"
+							var="juzgados" itemLabel="#{juzgados.sDescripcionCat}" />
+						<f:ajax listener="#{CArchivoGeneral.listenerJuzgado}"></f:ajax>
+					</h:selectOneMenu></td>
+				<td><h:message for="textoNumeroJuicioOCF"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Remitente: " styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoRemitenteOCF"
+						value="#{CArchivoGeneral.textoRemitente}" required="true"
+						requiredMessage="Introduzca un valor">
+						<f:validateLength maximum="500" />
+					</h:inputText></td>
+				<td><h:message for="textoRemitenteOCF"
+						styleClass="etiquetaError" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="*Actor: " styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoUsuarioOCF"
+						value="#{CArchivoGeneral.textoUsuario}" required="true"
+						requiredMessage="Introduzca un valor">
+						<f:validateLength maximum="500" />
+					</h:inputText></td>
+				<td><h:message for="textoUsuarioOCF" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Estado: " styleClass="etiqueta" /></td>
+				<td><h:selectOneMenu id="textoEstadoOCF"
+						value="#{CArchivoGeneral.cgbEstados}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="Introduzca un valor"
+						converterMessage="Solo Numeros">
+						<f:selectItem itemLabel="-- Selecciona Estado --"
+							noSelectionOption="true" />
+						<f:selectItems value="#{CArchivoGeneral.lcgbEstados}"
+							var="vEstados" itemLabel="#{vEstados.sDescripcionCat}" />
+						<f:ajax listener="#{CArchivoGeneral.listenerEstados}" />
+					</h:selectOneMenu></td>
+				<td><h:message for="textoEstadoOCF" styleClass="etiquetaError" /></td>
+			</tr>
+
+
+			<tr>
+				<td><h:outputLabel value="Sintesis: " styleClass="etiqueta" /></td>
+				<td><h:inputTextarea id="textoSintesisOCF"
+						value="#{CArchivoGeneral.textoSintesis}">
+						<f:validateLength maximum="500" />
+					</h:inputTextarea></td>
+				<td><h:message for="textoSintesisOCF"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Numero de Oficio: "
+						styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoNumeroOficioOCF"
+						value="#{CArchivoGeneral.textoNumeroOficio}" required="true"
+						requiredMessage="Introduzca un valor">						
+						<f:validateLength maximum="25" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroOficioOCF"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Fecha de Oficio: " styleClass="etiqueta" /></td>
+				<td>
+				    <p:calendar required="true" id="textoFechaOficioOCF" requiredMessage="Seleccione una Fecha" value="#{CArchivoGeneral.fechaOficio}" 
+				                locale="es" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/>
+				</td>
+				<td><h:message for="textoFechaOficioOCF" styleClass="etiquetaError" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="*Numero de Registro: "
+						styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoNumeroRegistroOCF"
+						value="#{CArchivoGeneral.textoNumeroRegistro}" required="true"
+						requiredMessage="Introduzca un valor"
+						converterMessage="Solo Numeros">
+						<f:convertNumber type="number" integerOnly="true" />
+						<f:validateLength maximum="500" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroRegistroOCF"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+
+			<tr>
+				<td><h:outputLabel value="*Hora de Recepción: "
+						styleClass="etiqueta" /></td>
+
+				<td><p:inputMask id="textoHoraRecepcionOCF"
+						value="#{CArchivoGeneral.textoHoraRecepcion}" mask="99:99" /></td>
+				<td><h:message for="textoHoraRecepcionOCF"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td class="txtcuerpo" valign="middle" align="left" colspan="4">
+					<span class="txtcuerpo2"> <h:graphicImage library="imagenes"
+							name="linearoja.png" styleClass="linea" />
+				</span>
+				</td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="Nombre del Responsable: "
+						styleClass="etiqueta" /></td>
+				<td><h:selectOneMenu id="textoNombreResponsableOCF"
+						value="#{CArchivoGeneral.cgbResponsables}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="-- Selecciona responsable --" />
+						<f:selectItems value="#{CArchivoGeneral.lcgbResponsables}"
+							var="responsable" itemLabel="#{responsable.nombre}" />
+						<f:ajax listener="#{CArchivoGeneral.listenerResposnable}"></f:ajax>
+					</h:selectOneMenu></td>
+				<td><h:message for="textoNombreResponsableOCF" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="Cargo: " styleClass="etiqueta" /></td>
+				<td><h:outputLabel for="textoNombreResponsableOCF"
+						value="#{CArchivoGeneral.cgbResponsables.descripcionPuesto}" /></td>
+				<td></td>
+			</tr>			
+
+		</table>
+
+	</center>
+
+</h:body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head></h:head>
+
+<h:body>
+	<center>
+		<table width="400px">
+
+			<tr>
+				<td><h:outputLabel value="*Número de Juicio: " styleClass="etiqueta" /></td>
+				<td>
+				    <h:inputText style="width:100%" id="textoNumeroJuicioEML" value="#{CArchivoGeneral.textoNumeroJuicio}" required="true"
+				 				 requiredMessage="Introduzca un valor">
+						<f:validateLength maximum="50" />
+					</h:inputText>
+			    </td>
+				<td><h:message for="textoNumeroJuicioEML" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Juzgado: " styleClass="etiqueta" /></td>
+				<td><h:selectOneMenu id="textoJuzgadoEML"
+						value="#{CArchivoGeneral.cgbJuzgados}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="Selecciona un valor"
+						converterMessage="Selecciona un valor">
+						<f:selectItem itemLabel="-- Selecciona tipo de Juzgado --"
+							noSelectionOption="true" />
+						<f:selectItems value="#{CArchivoGeneral.lcgbJuzgados}"
+							var="juzgados" itemLabel="#{juzgados.sDescripcionCat}" />
+					    <f:ajax render="otrosJuzgadosEML" />
+					</h:selectOneMenu> <h:message for="textoJuzgadoEML" styleClass="etiquetaError" /></td>
+			</tr>
+			
+			<tr>
+				<td><h:panelGroup id="otrosJuzgadosEML">
+						<h:panelGrid
+							rendered="#{CArchivoGeneral.cgbJuzgados.sIdCat == 50}">
+							<table class="tabla">
+								<tr>
+									<td><h:outputLabel value="Otros: " styleClass="etiqueta" /></td>
+									<td><h:inputText id="textoOtrosJuzgadosEML"
+											value="#{CArchivoGeneral.textoOtrosJuzgados}" required="true"
+											requiredMessage="Introduzca un valor" styleClass="texto">
+											<f:validateLength maximum="500" />
+										</h:inputText></td>
+									<td><h:message for="textoOtrosJuzgadosEML"
+											styleClass="etiquetaError" /></td>
+								</tr>
+							</table>
+						</h:panelGrid>
+					</h:panelGroup></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Remitente: " styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoRemitenteEML"
+						value="#{CArchivoGeneral.textoRemitente}" required="true"
+						requiredMessage="Introduzca un valor">
+						<f:validateLength maximum="500" />
+					</h:inputText></td>
+				<td><h:message for="textoRemitenteEML"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Actor: " styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoActorEML"
+						value="#{CArchivoGeneral.textoActor}" required="true"
+						requiredMessage="Introduzca un valor">
+						<f:validateLength maximum="500" />
+					</h:inputText></td>
+				<td><h:message for="textoActorEML" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="Síntesis: " styleClass="etiqueta" /></td>
+				<td><h:inputTextarea id="textoSintesisEML"
+						value="#{CArchivoGeneral.textoSintesis}">
+						<f:validateLength maximum="1000" />
+					</h:inputTextarea></td>
+				<td><h:message for="textoSintesisEML"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Numero de Oficio: "
+						styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoNumeroOficioEML"
+						value="#{CArchivoGeneral.textoNumeroOficio}" required="true"
+						requiredMessage="Introduzca un valor">
+						<f:validateLength maximum="25" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroOficioEML"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Fecha de Oficio: " styleClass="etiqueta" /></td>
+				<td>
+				    <p:calendar id="textoFechaOficio5" required="true" requiredMessage="Seleccione una Fecha" value="#{CArchivoGeneral.fechaOficio}"
+				                locale="es" converterMessage="El formato de fecha debe ser dd/MM/aaaa" /> 
+				</td>
+                <td><h:message for="textoFechaOficio5" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="Número de Registro: "
+						styleClass="etiqueta" /></td>
+				<td><h:outputLabel id="textoNumeroRegistroML"
+						value="#{CArchivoGeneral.numeroRegistro}" /></td>
+				<td><h:message for="textoNumeroRegistroML"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+
+			<tr>
+				<td><h:outputLabel value="Hora de Recepción: "
+						styleClass="etiqueta" /></td>
+				<td><p:inputMask id="textoHoraRecepcionEML"
+						value="#{CArchivoGeneral.textoHoraRecepcion}" mask="99:99" /></td>
+				<td><h:message for="textoHoraRecepcionEML"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="Folio: " styleClass="etiqueta" /></td>
+				<td>
+				    <h:inputText id="textoNumeroFolioEML" value="#{CArchivoGeneral.textoNumeroFolio}" >
+						<f:validateLength maximum="50" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroFolioEML" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td class="txtcuerpo" valign="middle" align="left" colspan="4">
+					<span class="txtcuerpo2"><h:graphicImage library="imagenes" name="linearoja.png" styleClass="linea" /></span>
+				</td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="Nombre del Responsable: " styleClass="etiqueta" /></td>
+				<td><h:outputLabel id="comboResponsableEML" value="#{CArchivoGeneral.lcgbResponsables[0].nombre}" /></td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="Cargo: " styleClass="etiqueta" /></td>
+				<td>
+				    <h:outputLabel id="etiquetaResponsableEML" for="comboResponsableEML" value="#{CArchivoGeneral.lcgbResponsables[0].descripcionPuesto}"/>
+				</td>
+				<td></td>
+			</tr>
+
+		</table>
+	</center>
+</h:body>
+
+</html>

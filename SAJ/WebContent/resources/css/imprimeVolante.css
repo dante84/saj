@@ -1,0 +1,5 @@
+@media print {
+    #header, #footer, #menu { 
+        display: none;
+    }
+}

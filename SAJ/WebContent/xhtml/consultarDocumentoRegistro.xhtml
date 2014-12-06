@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>      
+    <h:outputStylesheet library="css" name="Style.css"/>
+    <title>
+      Sistema de Recepción y Archivo de Asuntos Jurídicos
+     </title>
+</h:head>
+ 
+<h:body >        
+   <f:view>
+      
+     <h:form> 
+     
+         <div class="se-sheet"> 
+              <div class="se-sheet-body">
+                 
+                   <p:growl id="growl" showDetail="true" sticky="true" />
+             
+                   <ui:insert name="header" >
+		               <ui:include src="/plantillas/header.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="logeo" >
+		               <ui:include src="/plantillas/logeo.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="menuCabecera" >
+ 		               <ui:include src="/plantillas/menuCabecera.xhtml" />
+		           </ui:insert>
+		           		       
+		           <div class="contenedor"> 
+		           
+		                <div class="titulo"><h:graphicImage library="imagenes" name="Titulos/ConsultarDoc.png"/></div>
+
+                        <table>
+                         
+                           <tr> 
+                               <td><h:outputLabel value="Datos Generales"/></td>
+                               <td><h:outputLabel value="Número de Oficio:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sNumeroOficio}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Clasificación Documental:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sClasificacionDocumental}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Número de Registro:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.iNumeroRegistro}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Fecha de Registro:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sFechaRegistro}"/></td>
+                           </tr>
+                           
+                           <tr>
+                               <td class="txtcuerpo" valign="middle" align="left" colspan="4">
+                                   <span class="txtcuerpo2">
+                                         <h:graphicImage library="imagenes" name="linearoja.png" styleClass="linea"/>
+                                   </span>
+                               </td>
+                           </tr>
+                           
+                           <tr> 
+                               <td><h:outputLabel value="Datos del Documento"/></td>
+                               <td><h:outputLabel value="Tipo de Juicio:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sFechaRegistro}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Número de Juicio:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sNumeroJuicio}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Demandado:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sNumeroJuicio}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Remitente:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sRemitente}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Estatus:"/></td>
+                               <td><h:outputLabel /></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Etiqueta:"/></td>
+                               <td><h:outputLabel /></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Sintesis:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sSint}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Monto:"/></td>
+                               <td><h:outputLabel /></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Fecha de Oficio:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sFechaOficio}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Folio:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sFolio}"/></td>
+                           </tr>
+                           
+                           <tr>
+                               <td class="txtcuerpo" valign="middle" align="left" colspan="4">
+                                   <span class="txtcuerpo2">
+                                         <h:graphicImage library="imagenes" name="linearoja.png" styleClass="linea"/>
+                                   </span>
+                               </td>
+                           </tr>
+                           
+                           <tr> 
+                               <td><h:outputLabel value="Otros Datos del Documento"/></td>
+                               <td><h:outputLabel value="Nombre del Responsable:"/></td>
+                               <td><h:outputLabel value="#{COCivilForaneo.db.sNombreUsuario}"/></td>
+                           </tr>
+                           
+                           <tr> 
+                               <td></td>
+                               <td><h:outputLabel value="Cargo:"/></td>
+                               <td><h:outputLabel/></td>
+                           </tr>
+                           
+                           <tr>
+                               <td class="txtcuerpo" valign="middle" align="left" colspan="4">
+                                   <span class="txtcuerpo2">
+                                         <h:graphicImage library="imagenes" name="linearoja.png" styleClass="linea"/>
+                                   </span>
+                               </td>
+                           </tr>
+                           
+                           <tr> 
+                               <td><h:outputLabel value="Fecha de Entrega"/></td>
+                               <td><h:outputLabel value="Fecha de Despacho:"/></td>
+                               <td><h:outputLabel /></td>
+                           </tr>
+                           
+                        </table>
+                        
+                        <div class="titulo"><h:graphicImage library="imagenes" name="Titulos/RegActvidadesDoc.png"/></div>
+		               
+		           </div>        		            
+             
+                   <ui:insert name="footer" >
+                       <ui:include src="/plantillas/footer.xhtml" />
+                   </ui:insert>
+		       		    
+		      </div>
+         </div>
+ 
+     </h:form>
+ 
+   </f:view>
+</h:body>
+ 
+</html>

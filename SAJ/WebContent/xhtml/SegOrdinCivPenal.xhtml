@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>
+		Asuntos Jurídicos Seguimiento Ordinario Civil Penal
+	</title>
+		<h:outputStylesheet library="css" name="principal.css" />
+		<h:outputStylesheet library="css" name="Style.css" />	    		
+</h:head>
+
+<body>
+
+		<h:outputStylesheet library="css" name="StyleCtrl.css" />		
+		<h:outputScript library="js" name="script.js" />
+		
+		<link rel="stylesheet" href="menu icono_files/css3menu1/style.css" type="text/css" />		
+		<style type="text/css">._css3m{display:none}</style>
+
+		
+	<h:form id="forma">
+		<p:growl id="msgs" showDetail="true" />
+
+
+		<div class="se-sheet">
+			<div class="se-sheet-body">
+
+				<ui:insert name="header">
+					<ui:include src="/plantillas/header.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="logeo">
+					<ui:include src="/plantillas/logeo.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="menuCabecera">
+					<ui:include src="/plantillas/menuCabecera.xhtml" />
+				</ui:insert>
+
+
+
+
+				<div class="CAmparo">					
+
+					<div class="AmparoBusqueda">
+
+						<div class="titulo">
+							<h:graphicImage library="imagenes"
+								name="Titulos/SAPenalOrdinariosCiviles.png" />
+						</div>
+							<div align="right">
+								<h:commandLink>
+									<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+								</h:commandLink>
+							</div>
+						<p:growl id="growl" showDetail="true" sticky="true"
+							globalOnly="true" />
+
+						<table width="100%">
+							<tr>
+								<td align="left"><br></br>
+									<table>
+										<tr>
+											<td><a>Mostrar los documentos recibidos del:</a></td>
+											<td><p:calendar id="busquedaFecha"
+													requiredMessage="Seleccione una Fecha"
+													value="#{CSegOrdinCiv.fechaBusqueda}" locale="es"></p:calendar>
+											</td>
+											<td><h:commandLink action="#{CSegOrdinCiv.busquedaPorFecha}">
+													<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+												</h:commandLink></td>
+										</tr>
+									</table> <br></br> <br></br></td>
+								<td align="right">
+									<table>
+										<tr>
+											<td><a>Buscar:</a></td>
+											<td><h:inputText value="#{CSegOrdinCiv.txtBusqueda}"></h:inputText></td>
+											<td><h:commandLink action="#{CSegOrdinCiv.busquedaPorTexto}">
+													<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+												</h:commandLink></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- 	fin busqueda amparo -->
+
+					<div>
+
+						<h:panelGroup id="tabla">
+
+							<p:dataTable id="tbl1" var="tbl" 
+								value="#{CSegOrdinCiv.penalTbl}" editable="true" style=""
+								styleClass="tblscroll"
+								scrollable="true" scrollWidth="960">
+								<p:ajax event="rowEdit" listener="#{CSegOrdinCiv.onRowEdit}"/>
+								<p:ajax event="rowEditCancel" listener="#{CSegOrdinCiv.onRowCancel}" />
+
+								<p:column headerText="Número de Expediente" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.numexpediente}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.numexpediente}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Demandado" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.demandado}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.demandado}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Síntesis" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.sintesis}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{CSegOrdinCiv.sintesisSelect}" />
+										</f:facet>										
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Solicitud de Intervención a PGR" style="width:120px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.SOLICITUDINTPGR}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.SOLICITUDINTPGR}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+							
+								
+								<p:column headerText="Fecha de Demanda" style="width:150px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.FECHADENUNCIA}" />
+										</f:facet>
+										<f:facet name="input">											
+											<h:outputText value="#{tbl.FECHADENUNCIA}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+																
+								<p:column headerText="Turnar a:" style="width:120px;">
+									<center>
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputLabel value="#{tbl.nombrecompleto}" />
+											</f:facet>
+											<f:facet name="input">
+												<h:outputLabel value="#{tbl.nombrecompleto}" />
+											</f:facet>
+										</p:cellEditor>
+									</center>
+								</p:column>
+								
+								<p:column headerText="Importe" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.IMPORTE}" />
+										</f:facet>
+										<f:facet name="input">																							
+											<h:inputText value="#{CSegOrdinCiv.importeSelect}" >
+        										<f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+        									</h:inputText>    									
+    									</f:facet>
+    																								
+									</p:cellEditor>
+								</p:column>
+								
+								<p:column headerText="Órgano Jurisdiccional" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.mporganoJurisdiccional}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.mporganoJurisdiccional}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+								
+								<p:column headerText="Juicio" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.desctipojuicio}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.desctipojuicio}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+								<p:column headerText="Estatus" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.estatus}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{CSegOrdinCiv.estatusSelect}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+								<p:column headerText="Flujo Procesal" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.FLUJOPROCESAL}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.FLUJOPROCESAL}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+								<p:column headerText="Acciones" style="width:200px;">
+									<center>
+									
+									
+									<p:splitButton  style="font-size: 10px;" value="Selecciona..."  icon="ui-icon-disk">
+										<p:menuitem style="font-size: 10px;" value="Estudio de la PGR" actionListener="#{buttonView.f_estudio(10)}" icon="ui-icon-radio-off" />
+								        <p:menuitem style="font-size: 10px;" value="Demanda inicial y Contestación " actionListener="#{buttonView.f_demanda}" icon="ui-icon-radio-off" />
+								        <p:menuitem style="font-size: 10px;" value="Termino probatorio" actionListener="#{buttonView.f_termino}" icon="ui-icon-radio-off" />
+								        <p:menuitem style="font-size: 10px;" value="Audiencia final de juicio" actionListener="#{buttonView.f_audiencia}" icon="ui-icon-radio-off" />
+								        <p:menuitem style="font-size: 10px;" value="Sentencia" actionListener="#{buttonView.f_sentencia}" icon="ui-icon-radio-off" />
+								        <p:menuitem style="font-size: 10px;" value="Ejecución" actionListener="#{buttonView.f_ejecucion}" icon="ui-icon-radio-off" />
+								   </p:splitButton>
+																								
+									<h:commandLink>
+										<h:graphicImage library="imagenes/iconos" name="VerDocRelacionadaaExp.png"></h:graphicImage>
+									</h:commandLink>
+									<h:commandLink>
+										<h:graphicImage library="imagenes/iconos" name="GenerarReportePDF.png"></h:graphicImage>
+									</h:commandLink>
+									
+									</center>
+																		
+								</p:column>
+																											
+								<p:column headerText="Editar" style="width:35px;">									
+										<p:rowEditor />																	
+								</p:column>
+
+							</p:dataTable>
+							
+							
+						</h:panelGroup>
+				
+							
+					</div>
+					<!-- 	fin tabla -->
+
+				</div>
+				<!-- 	fin cuerpo -->
+				<ui:insert name="footer">
+					<ui:include src="/plantillas/footer.xhtml" />
+				</ui:insert>
+
+			</div>
+								
+						
+		</div>
+
+
+
+	</h:form>
+
+</body>
+
+
+</html>

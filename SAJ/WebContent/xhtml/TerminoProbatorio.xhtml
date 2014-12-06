@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>Audiencia Final de Juicio</title>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+		<div class="se-sheet">
+			<div class="se-sheet-body">
+
+				<ui:insert name="header">
+					<ui:include src="/plantillas/header.xhtml" />
+				</ui:insert>
+				<ui:insert name="logeo">
+					<ui:include src="/plantillas/logeo.xhtml" />
+				</ui:insert>
+				<ui:insert name="menuCabecera">
+					<ui:include src="/plantillas/menuCabecera.xhtml" />
+				</ui:insert>
+
+				<div class="AmparoBusqueda">
+
+					<div class="titulo">
+						<h:graphicImage library="imagenes"
+							name="Titulos/penalOCterminoprobatorio.png" />
+					</div>
+					<p:growl id="growl" showDetail="true" sticky="true"
+						globalOnly="true" />
+
+					<div align="right">
+						<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+					</div>
+
+					<div>
+						<table width="100%">
+							<tr>
+								<td align="right">
+									<table>
+										<tr>
+											<td>Buscar:</td>
+											<td><h:inputText value="#{CAcciones.txtBusqueda}"></h:inputText></td>
+											<td><h:commandLink>
+													<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+												</h:commandLink></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div>
+						<table width="100%">
+							<tr>
+								<td align="Left">
+									<table>
+										<tr>
+											<td>Fecha de Apertura:</td>
+											<td><p:calendar value="#{CAcciones.txtFechaApertura}" /></td>
+										</tr>
+										<tr>
+											<td>Fecha de Notificación:</td>
+											<td><p:calendar
+													value="#{CAcciones.txtFechaNotificacion}" /></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div>
+						<br />
+						<center>
+							<p:selectOneRadio value="#{CAcciones.rbOrdCivilPenal}">
+								<f:selectItem itemValue="1" itemLabel="Pruebas del Actor" />
+								<f:selectItem itemValue="2" itemLabel="Pruebas del Demandado" />
+								<f:ajax render="tablaOrdCivilPenal" />
+							</p:selectOneRadio>
+						</center>
+					</div>
+
+				</div>
+
+				<h:panelGroup id="tablaOrdCivilPenal" rendered="true">
+					<p:dataTable id="tblTerminoProbatorioActor" var="vTermino"
+						value="#{CAcciones.locpEstudioPGR}"
+						widgetVar="tblTerminoProbatorio" rows="25" paginator="true"
+						paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						editable="true" rowIndexVar="rowIndex"
+						rendered="#{CAcciones.rbOrdCivilPenal == 1}">
+
+						<p:ajax event="rowEdit" listener="#{CAcciones.onRowEditActor}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel"
+							listener="#{CAcciones.onRowCancelActor}" update=":form:msgs" />
+
+						<p:column headerText="IdF_Procesal" style="font-size:12px; display:none ">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.idF_Procesal}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vTermino.idF_Procesal}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="RegDoc" style="font-size:12px; display:none ">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.idRegDoc}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vTermino.idRegDoc}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Periciales" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.sPericiales}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtPericiales}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Documentales" style="font-size:12px;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{vTermino.sDocumentales}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:inputText value="#{CAcciones.txtDocumentales}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Confecional" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.sConfecionales}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtConfecionales}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Inspección Jurídica" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.sInspeccion_Judicial}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtInspeccion_Judicial}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Otras" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.sOtras}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtOtras}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Editar" style="width:120px; font-size:12px;">
+							<p:rowEditor />
+						</p:column>
+					</p:dataTable>
+
+					<p:dataTable id="tblTerminoProbatorioDemandado" var="vTermino"
+						value="#{CAcciones.locpEstudioPGR}"
+						widgetVar="tblTerminoProbatorio" rows="25" paginator="true"
+						paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						editable="true" rowIndexVar="rowIndex"
+						rendered="#{CAcciones.rbOrdCivilPenal == 2}">
+
+						<p:ajax event="rowEdit" listener="#{CAcciones.onRowEditActor}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel"
+							listener="#{CAcciones.onRowCancelActor}" update=":form:msgs" />
+
+						<p:column headerText="IdF_Procesal" style="font-size:12px; display:none">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.idF_Procesal}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vTermino.idF_Procesal}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="RegDoc" style="font-size:12px; display:none ">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.idRegDoc}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vTermino.idRegDoc}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Periciales" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.sPericiales}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtPericiales}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Documentales" style="font-size:12px;">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{vTermino.sDocumentales}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:inputText value="#{CAcciones.txtDocumentales}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Confecional" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.sConfecionales}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtConfecionales}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Inspección Jurídica" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.sInspeccion_Judicial}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtInspeccion_Judicial}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Otras" style="font-size:12px;">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vTermino.sOtras}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:inputText value="#{CAcciones.txtOtras}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Editar" style="width:120px; font-size:12px;">
+							<p:rowEditor />
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</div>
+		</div>
+		<div>
+			<center>
+				<table>
+					<tr>
+						<td></td>
+						<td></td>
+						<td align="center"><p:commandLink
+								onclick="PF('dlg1').show();" immediate="true">
+								<h:graphicImage library="imagenes" name="AgregarR.png"
+									width="110px" height="24px"></h:graphicImage>
+							</p:commandLink></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</center>
+		</div>
+
+	</h:form>
+
+	<ui:insert name="fotter">
+		<ui:include src="/plantillas/footer.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

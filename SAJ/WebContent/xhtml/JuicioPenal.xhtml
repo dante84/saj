@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+
+
+	<h:form id="forma">
+		<p:growl id="msgs" showDetail="true" />
+
+
+		<div class="se-sheet">
+			<div class="se-sheet-body">
+
+				<ui:insert name="header">
+					<ui:include src="/plantillas/header.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="logeo">
+					<ui:include src="/plantillas/logeo.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="menuCabecera">
+					<ui:include src="/plantillas/menuCabecera.xhtml" />
+				</ui:insert>
+
+
+
+
+				<div class="CAmparo">					
+
+					<div class="AmparoBusqueda">
+
+						<div class="titulo">
+							<h:graphicImage library="imagenes"
+								name="Titulos/RecepciondeDocs.png" />
+						</div>
+							<div align="right">
+								<h:commandLink>
+									<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+								</h:commandLink>
+							</div>
+						<p:growl id="growl" showDetail="true" sticky="true"
+							globalOnly="true" />
+
+						<table width="100%">
+							<tr>
+								<td align="left"><br></br>
+									<table>
+										<tr>
+											<td><a>Mostrar los documentos recibidos del:</a></td>
+											<td><p:calendar id="busquedaFecha"
+													requiredMessage="Seleccione una Fecha"
+													value="#{CPenal.fechaBusqueda}" locale="es"></p:calendar>
+											</td>
+											<td><h:commandLink action="#{CPenal.busquedaPorFecha}">
+													<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+												</h:commandLink></td>
+										</tr>
+									</table> <br></br> <br></br></td>
+								<td align="right">
+									<table>
+										<tr>
+											<td><a>Buscar:</a></td>
+											<td><h:inputText value="#{CPenal.txtBusqueda}"></h:inputText></td>
+											<td><h:commandLink action="#{CPenal.busquedaPorTexto}">
+													<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+												</h:commandLink></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- 	fin busqueda amparo -->
+
+					<div>
+
+						<h:panelGroup id="tabla">
+
+							<p:dataTable id="tbl1" var="tbl"
+								value="#{CPenal.penalTbl}" editable="true" style=""
+								styleClass="tblscroll"
+								scrollable="true" scrollWidth="960">
+
+								<p:ajax event="rowEdit" listener="#{CPenal.onRowEdit}"/>
+								<p:ajax event="rowEditCancel" listener="#{CPenal.onRowCancel}" />
+
+								<p:column headerText="Número de Expediente" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.numexpediente}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.numexpediente}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Número de Oficio" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.numoficio}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.numoficio}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Fecha de Recepción" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.fechaRecep}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.fechaRecep}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Remitente" style="width:120px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.descremitente}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.descremitente}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Catálogo Penal" style="width:200px;">
+									<center>
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputLabel value="#{tbl.descpenal}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:selectOneMenu value="#{CPenal.penalSelect}"
+													converter="omnifaces.SelectItemsConverter"
+													style="width:100%">
+													<f:selectItem itemLabel="-Seleccionar-"></f:selectItem>
+													<f:selectItems value="#{CPenal.catPenal}"
+														var="vRespuesta" itemLabel="#{vRespuesta.descripcion}" />
+												</p:selectOneMenu>
+											</f:facet>
+										</p:cellEditor>
+									</center>
+								</p:column>
+								
+								<p:column headerText="Carpeta de Investigación / Averiguación Previa / Causa Penal" style="width:150px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.AVERIGUACIONPREVIA_CAUSAPENAL}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.AVERIGUACIONPREVIA_CAUSAPENAL}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Indiciado" style="width:150px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.indiciado}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{CPenal.indiciadoSelect}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+								<p:column headerText="Instrucción" style="width:120px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.instrucciones}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:selectCheckboxMenu  value="#{CPenal.instruccionesSelect}" label="-Selecionar-">
+									            <f:selectItem itemLabel="Instrucción 1" itemValue="1" />
+									            <f:selectItem itemLabel="Instrucción 2" itemValue="2" />
+									            <f:selectItem itemLabel="Instrucción 3" itemValue="3" />
+									            <f:selectItem itemLabel="Instrucción 4" itemValue="4" />
+									            <f:selectItem itemLabel="Instrucción 5" itemValue="5" />
+									            <f:selectItem itemLabel="Instrucción 6" itemValue="6" />
+									            <f:selectItem itemLabel="Instrucción 7" itemValue="7" />
+									            <f:selectItem itemLabel="Instrucción 8" itemValue="8" />
+									            <f:ajax  listener="#{CPenal.listenerOtros}"/>
+									        </p:selectCheckboxMenu>
+								        </f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+								<p:column headerText="Turnar a:" style="width:120px;">
+									<center>
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputLabel value="#{tbl.nombrecompleto}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:selectOneMenu value="#{CPenal.turnar}"
+													converter="omnifaces.SelectItemsConverter"
+													style="width:100%">
+													<f:selectItem itemLabel="-Seleccionar-"></f:selectItem>
+													<f:selectItems value="#{CPenal.catTurnarA}"
+														var="vRespuesta" itemLabel="#{vRespuesta.descripcion}"  />
+												</p:selectOneMenu>
+											</f:facet>
+										</p:cellEditor>
+									</center>
+								</p:column>
+								
+								<p:column headerText="Fecha de Término" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.fecvencimiento}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:calendar value="#{CPenal.fecvencimientoSelect}" locale="es"/>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+								<p:column headerText="Estatus" style="width:100px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.estatus}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{CPenal.estatusSelect}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+
+								<p:column headerText="Acciones" style="width:100px;">
+									<h:commandLink>
+										<h:graphicImage library="imagenes" name="ConsultarDoc.png"></h:graphicImage>
+									</h:commandLink>
+									<p:commandLink>
+										<h:graphicImage library="imagenes" name="TurnarDoc.png"></h:graphicImage>
+									</p:commandLink>
+								</p:column>
+
+								<p:column headerText="Editar" style="width:60px;">
+									<p:rowEditor />
+								</p:column>
+
+							</p:dataTable>
+							
+							
+						</h:panelGroup>
+				
+							
+					</div>
+					<!-- 	fin tabla -->
+
+				</div>
+				<!-- 	fin cuerpo -->
+				<ui:insert name="footer">
+					<ui:include src="/plantillas/footer.xhtml" />
+				</ui:insert>
+
+			</div>
+								
+						
+		</div>
+
+
+
+	</h:form>
+
+
+</h:body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head>      
+    <h:outputStylesheet library="css" name="Style.css"/>
+</h:head>
+ 
+<h:body >        
+   <f:view>
+      
+     <h:form> 
+     
+         <div class="se-sheet"> 
+              <div class="se-sheet-body">
+             
+                   <ui:insert name="header" >
+		               <ui:include src="/plantillas/header.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="logeo" >
+		               <ui:include src="/plantillas/logeo.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="menuCabecera" >
+ 		               <ui:include src="/plantillas/menuCabecera.xhtml" />
+		           </ui:insert>
+		           
+		           <div class="Contenedor">
+		           		<div class="titulo3">
+		           			<hr/>
+		           				CATÁLOGOS
+		           			<hr/>
+		           		</div>
+		           		<br/>
+		           		<div>
+		           			<center><label class="etiqueta">Catálogos</label></center>
+			           			<center><h:selectOneMenu id="comboCatalogos" class="input" style="width:200px" value="#{CCatalogos.comboCatalogos}" converter="omnifaces.SelectItemsConverter">
+			           				<f:selectItem itemValue="#{CCatalogos.lCatalogos}" itemLabel="Prueba Combo"/>
+			           				<f:selectItems value="#{CCatalogos.lCatalogos}" var="vCatalogos" itemLabel="#{vCatalogos.sDescripcionCat}"></f:selectItems>
+			           				<f:ajax listener="#{CCatalogos.listener}"></f:ajax>
+			           			</h:selectOneMenu></center>
+			           		<center><h:commandButton value="Buscar" action="#{CCatalogos.muestraCatalogo}" /></center>
+		           		</div>
+		           		<br/>
+		           		<div>
+		           			<p:dataTable id="tbCatalogos" var="vCatalogos" value="#{CCatalogos.lCat}"
+		           						 				  rows="10" paginator="true"
+		           						 				  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+		           				<f:facet name="heder">
+		           					Catalogos
+		           				</f:facet>
+		           				
+		           				<p:column headerText="Id" width="30" footerText="Id">
+		           					<h:outputText value="#{vCatalogos.sIdCat}"/>
+		           				</p:column>
+		           				<p:column headerText="Descripcion" width="450" footerText="Descripcion">
+		           					<h:outputText value="#{vCatalogos.sDescripcionCat}" />
+		           				</p:column>
+		           				<p:column headerText="Activo" width="65" footerText="Activo"> 
+		           					<h:outputText value="#{vCatalogos.iActivo}" />
+		           				</p:column>
+		           				<p:column headerText="Acción" width="75" footerText="Accion">
+		           					<center><h:commandLink action="#{CCatalogos.doMuestraModificarCatalogo}"><h:graphicImage library="imagenes" name="pencil.png" width="20"/></h:commandLink></center>
+		           				</p:column>
+		           				
+		           				<center><h:commandLink action="#{CCatalogos.doMuestraModificarCatalogo}"><h:graphicImage library="imagenes" name="pencil.png" width="20"/></h:commandLink></center>
+		           				
+		           			</p:dataTable>
+		           			
+		           			<center><h:commandLink action="#{CCatalogos.doMuestraModificarCatalogo}"><h:graphicImage library="imagenes" name="pencil.png" width="20"/></h:commandLink></center>
+		           		</div>
+		           </div>
+		      </div>
+         </div>
+ 
+     </h:form>
+ 
+   </f:view>
+</h:body>
+ 
+</html>

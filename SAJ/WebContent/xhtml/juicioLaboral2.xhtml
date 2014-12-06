@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head></h:head> 
+<h:body>
+ 
+   <h:panelGrid rendered="#{CArchivoGeneral.rdoLaboral == 2}"> 
+	  <table>				
+	  	  			
+		     <tr>
+				 <td>*Expediente Laboral:</td>
+				 <td><h:inputText id="textoExpedienteLaboral" value="#{CArchivoGeneral.textoExpedienteLaboral}" required="true" requiredMessage="Introduzca un Valor"/></td>
+				 <td><h:message for="textoExpedienteLaboral" styleClass="etiquetaError"/></td>
+			 </tr>
+							 
+			 <tr>
+			 	 <td>*Actor:</td>
+				 <td><h:inputText id="textoActorDemandantePromovente" value="#{CArchivoGeneral.textoActorDemandantePromovente}" required="true" requiredMessage="Introduzca un Valor"/></td>
+				 <td><h:message for="textoActorDemandantePromovente" styleClass="etiquetaError"/></td>
+			 </tr>
+							 
+			 <tr>
+			 	 <td>Autoridad Laboral:</td>
+				 <td>
+				     <h:selectOneMenu id="ca" value="#{CArchivoGeneral.cgbAutoridad}" converter="omnifaces.SelectItemsConverter" required="true"
+					                  requiredMessage="Selecciona un valor"	converterMessage="Selecciona un valor">
+					    <f:selectItem itemLabel="-- Selecciona una Autoridad --" noSelectionOption="true" />
+					    <f:selectItems value="#{CArchivoGeneral.listaAutoridad}" var="autoridad" itemLabel="#{autoridad.descripcion}" />
+				     </h:selectOneMenu>
+		         </td>
+		         <td><h:message for="ca" styleClass="etiquetaError" /></td>
+			 </tr>
+							 
+			 <tr>
+			 	 <td>*Síntesis:</td>
+				 <td><h:inputTextarea id="textoSintesis6a" value="#{CArchivoGeneral.textoSintesis}" required="true" requiredMessage="Introduzca un Valor"/></td>
+				 <td><h:message for="textoSintesis6a" styleClass="etiquetaError"/></td>
+			 </tr>
+							 
+			 <tr>
+				 <td>*Fecha Notificación:</td>
+				 <td>
+				     <p:calendar id="fechaOficio6a" value="#{CArchivoGeneral.fechaOficio}" locale="es" required="true" requiredMessage="Selecciona un Valor"
+				                 converterMessage="El formato de fecha debe ser dd/MM/aaaa"/>
+				 </td>
+				 <td><h:message for="fechaOficio6a" styleClass="etiquetaError"/></td>
+			 </tr>
+							 
+			 <tr>
+			     <td>*Cédula de Notificación:</td>
+				 <td><h:inputTextarea id="textoCedulaNotificacion" value="#{CArchivoGeneral.textoCedulaNotificacion}" required="true" requiredMessage="Introduzca un Valor"/></td>
+				 <td><h:message for="textoCedulaNotificacion" styleClass="etiquetaError"/></td>
+			 </tr>
+							 
+			 <tr>
+			     <td>Número de Registro:</td>
+				 <td><h:outputLabel value="#{CArchivoGeneral.textoNumeroRegistro}" /></td>
+				 <td></td>
+             </tr>
+							 
+			 <tr>
+				<td>*Folio:</td>
+				<td><h:inputText id="textoNumeroFolio6a" value="#{CArchivoGeneral.textoNumeroFolio}" required="true" requiredMessage="Introduce un Valor"/></td>
+				<td><h:message for="textoNumeroFolio6a" styleClass="etiquetaError"/></td>
+			 </tr>
+			 
+			 <tr>
+			    <td class="txtcuerpo" valign="middle" align="left" colspan="4">
+				    <span class="txtcuerpo2"> 
+					      <h:graphicImage library="imagenes" name="linearoja.png" styleClass="linea" />
+					</span>
+			    </td>
+			 </tr>
+							 
+			 <tr>
+       	        <td><h:outputLabel value="Nombre del Responsable: " styleClass="etiqueta"/></td>
+                <td><h:outputLabel id="comboResponsable6a" value="#{CArchivoGeneral.lcgbResponsables[0].nombre}"/></td>
+                <td></td>
+             </tr>                           
+                         
+            <tr>
+	            <td><h:outputLabel value="Cargo: " styleClass="etiqueta"/></td>
+	            <td><h:outputLabel value="#{CArchivoGeneral.lcgbResponsables[0].descripcionPuesto}"/></td>
+	            <td></td>
+            </tr>
+							 
+			 <tr>
+				 <td></td>
+				 <td>*Campos Obligatorios.</td>
+			 </tr>
+							 
+	  </table>
+										 
+   </h:panelGrid>
+			 
+
+</h:body> 
+</html>

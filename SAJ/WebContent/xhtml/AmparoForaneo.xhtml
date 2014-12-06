@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>
+		Recepción de Documentos</title>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body >
+
+	<script type="text/javascript">
+	function removeSortableIconCSS()
+		{
+		
+		}
+		
+		$(document).ready(removeSortableIconCSS);
+	</script>
+
+
+	<f:view>
+
+		<h:form id="forma">
+         <div id="tbl"></div>  
+			<div class="se-sheet">
+				<div class="se-sheet-body">
+					<ui:insert name="header"> <ui:include src="/plantillas/header.xhtml" /> </ui:insert>						
+					<ui:insert name="logeo">  <ui:include src="/plantillas/logeo.xhtml" />  </ui:insert>
+					<ui:insert name="menuCabecera"> <ui:include src="/plantillas/menuCabecera.xhtml" /> </ui:insert>	
+		<div class="CAmparo">
+		
+		<div class="titulo"><h:graphicImage library="imagenes" name="RecepciondeDocs.png"/></div>                  
+	    <p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>
+			
+
+			<div align="right">
+				<h:commandLink action="#{CAsuntosJuridicos.imprimirBusqueda}">								
+					<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+				</h:commandLink>
+			</div>
+
+			<div class="AmparoBusqueda">
+			
+			<br></br>
+				<table width="100%">
+					<tr>
+						<td align="left">
+							<table>
+								<tr>
+									<td><a>Mostrar los documentos recibidos del:</a></td>
+									<td><p:calendar id="busquedaFecha"
+											requiredMessage="Seleccione una Fecha"
+											value="#{CAsuntosJuridicos.fechaBusqueda}" locale="es"></p:calendar>
+									</td>
+									<td><h:commandLink
+											action="#{CAsuntosJuridicos.busquedaPorFecha}">
+											<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+										</h:commandLink>										
+										</td>
+								</tr>
+							</table>
+						</td>
+						<td align="right">
+							<table>
+								<tr>
+									<td><a>Buscar:</a></td>
+									<td><h:inputText></h:inputText></td>
+									<td><h:commandLink
+											action="#{CAsuntosJuridicos.busquedaPorTexto}">
+											<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+										</h:commandLink></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- 	fin busqueda amparo -->
+
+			<div>
+				<br></br>
+				<p:dataTable id="tbl1" var="tbl" value="#{CAsuntosJuridicos.datosSeguimiento}" 
+							editable="true" style="margin-bottom:20px"> 							 
+							
+					<f:facet name="header">Número de Expendiente</f:facet>
+					
+					<p:ajax event="rowEdit" listener="#{CAsuntosJuridicos.onRowEdit}"></p:ajax>
+					<p:ajax event="rowEditCancel" listener="#{CAsuntosJuridicos.onRowCancel}"/>
+					
+					<p:column id="idUno" headerText="Número de Expendiente" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.numexpediente}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.numexpediente}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+       				
+       				<p:column headerText="Número de Registro" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.numreg}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.numreg}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+					
+					<p:column headerText="Fecha de Recepción" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.fecha}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.fecha}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+       				
+       				<p:column headerText="Hora de Recepción" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.hora}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.hora}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+       				
+       				<p:column headerText="Promovente" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.ac_de_pr_qu}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.ac_de_pr_qu}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+       				
+       				
+       				<p:column headerText="Materia" style="font-size:12px;">
+				       <center>
+				        <p:cellEditor>
+				         <f:facet name="output"><h:outputLabel value="#{tbl.descmateria}" /></f:facet>
+				         <f:facet name="input">
+				          <p:selectOneMenu value="#{CAsuntosJuridicos.materia}"
+				           converter="omnifaces.SelectItemsConverter" style="width:100%">
+				           <f:selectItem itemLabel="-Seleccionar-"></f:selectItem>
+				           <f:selectItems value="#{CAsuntosJuridicos.materias}"
+				            var="vRespuesta" itemLabel="#{vRespuesta.descmateria}" />
+				          </p:selectOneMenu>
+				         </f:facet>
+				        </p:cellEditor>
+				       </center>
+				      </p:column>				      
+				      
+				      <p:column headerText="Fecha de vencimiento" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.fecvencimiento}" /></f:facet>
+			               <f:facet name="input"><p:calendar id="fechaVencimiento"	requiredMessage="Seleccione una Fecha" value="#{CAsuntosJuridicos.fechaVencimiento}" locale="es"></p:calendar></f:facet>
+			            </p:cellEditor>
+       				  </p:column>
+       				  
+       				  <p:column headerText="Editar" style="width:32px; font-size:12px;">
+				           <p:rowEditor />
+				      </p:column>
+				      
+				      <p:column headerText="Acciones" style="font-size:12px;">
+				           <h:commandLink>
+				          	 <h:graphicImage alt="Consultar Documento"  library="imagenes" name="ConsultarDoc.png"></h:graphicImage>				          	 
+				           </h:commandLink>
+				           <h:commandLink onclick="PF('Turn').show();">
+				           		<h:graphicImage title="Turnado Documento"  library="imagenes" name="TurnarDoc.png"></h:graphicImage>
+				           </h:commandLink>
+				      </p:column>
+					
+				</p:dataTable>
+			</div>
+			<!-- 	fin tabla -->
+
+		</div>
+		<!-- 	fin cuerpo -->
+					<ui:insert name="footer"> <ui:include src="/plantillas/footer.xhtml" /> </ui:insert>
+	</div>
+			</div>
+			
+			<div>
+			<f:view>     
+	    <h:form prependId="false"> 
+				<p:dialog header="Turnar Documento" widgetVar="Turn"						  
+						  resizable="false"						  
+						  fixedCenter="true"            			            
+						  modal="true" 
+						  height="350px" width="500px" >				    				   
+				    
+				    <br></br>
+				    	<table>
+					    	<tr>
+						    	<td colspan="5" align="left">
+						    		<h:graphicImage library="imagenes/imgTitulos" name="TurnarDoc.png" width="340px" height="75px" />						    		
+						    	</td>
+					    	</tr>
+				    		<tr>
+				    			<td></td>
+				    			<td>
+				    				Turnado a:
+				    			</td>				    				
+				    			<td colspan="2" align="left">			                    	
+			                    	<h:selectOneMenu style="width:200px; font-size: 12px;" id="cbmTurnado"  value="#{CArchivoGeneral.cbmTurnado}" 
+						   		                       converter="omnifaces.SelectItemsConverter" converterMessage="Selecciona un valor">
+				                        <f:selectItem  noSelectionOption="true" itemLabel="Selecciona"/>
+				                        <f:selectItems value="#{CArchivoGeneral.turnados}" var="turnad" itemLabel="#{turnad.sDescripcionCat}"/>
+				                        <f:ajax render="lblCargo" listener="#{CArchivoGeneral.listenerCargo}"/>				                        				                       
+			                    	</h:selectOneMenu>					                    					                   
+		                   
+				    			</td>	
+				    			<td></td>						    				    							    		
+				    		</tr>
+				    		<tr>
+				    			<td></td>
+				    			<td >
+				    				Cargo: 				    					
+				    			</td>
+				    			<td colspan="2" align="left" >				    			 				    				
+				    				<h:outputLabel id="lblCargo" value=" - - -"
+				    							   style=" font-size: 12px; width:200px;"/> 
+				    			</td>
+				    			<td></td>				    			
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td>
+				    					Instruccion:
+				    			</td>
+				    			<td>								    					    				
+            							<h:selectBooleanCheckbox id="chk1"  value="0"  />
+            							<h:outputText value="Instrucción 1" />            							        						
+				    			</td>
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk2" value="0" />
+            							<h:outputText value="Instrucción 2" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk3" value="0" />
+            							<h:outputText value="Instrucción 3" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk4" value="0" />
+            							<h:outputText value="Instrucción 4" />            							        						
+				    			</td>				    						    		
+				    		</tr>
+				    		<tr>
+				    			<td> </td>				    			
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk5" value="0" />
+            							<h:outputText value="Instrucción 5" />            							        						
+				    			</td>
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk6" value="0" />
+            							<h:outputText value="Instrucción 6" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk7" value="0" />
+            							<h:outputText value="Instrucción 7" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk8" value="0" />
+            							<h:outputText value="Instrucción 8" />            							        						
+				    			</td>				    					
+				    		</tr>				    		
+				    		<tr>
+				    			<td></td>
+				    			<td>				    					
+            							<h:selectBooleanCheckbox id="chk9" value="0" />
+            							<h:outputText value="Otros" />            								
+				    			</td>
+				    			<td colspan="3">				    						
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td>
+				    				<label class="etiqueta">Especifique :</label>
+				    			</td>
+				    			<td colspan="4">
+				    				<h:inputText id="txtExpecifique" value="0"				    				  
+				    						     style="width:290px;" />
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td>
+				    				<label class="etiqueta">Acto Reclamado :</label>
+				    			</td>
+				    			<td colspan="4">				    				
+				    				<h:inputTextarea id="txtActo" value="1" 
+				    				rows="5" cols="54" autoResize="false" /> 				    				 	   								
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td></td> 
+				    			<td colspan="2" align="right">
+				    				<h:commandButton id="idbtnGuardar" value="Guardar"
+									 onclick="alert('Guardar, Turnar documento?');" 
+									 action="#{CTurnados.InsertaRegistroTurnado}" />									 			
+				    			</td>
+				    				<td colspan="2" align="left">
+				    				<h:commandButton id="idbtnCancelar" value="Cancelar" action="#"/>									 									 			
+				    			</td>
+				    		</tr>
+				    	</table>				    
+				</p:dialog>   
+			</h:form>
+			</f:view>
+			</div>
+			
+			
+			
+		</h:form>
+		
+	</f:view>
+</h:body>
+ 
+</html>

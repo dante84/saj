@@ -1,0 +1,71 @@
+.AmparoRdo
+{
+	text-align: center;
+	font-size:15px;
+	margin: 0 auto; 
+	width: 100%;
+	padding-right: 10px;
+}
+
+.CAmparo
+{
+	margin: 0 auto; 
+	width: 100%;
+}
+
+
+.tabla1.ui-datatable-header {
+    background: url(../images/myImage.png)
+}
+
+.ui-datalist-item
+{
+border: none !important;
+background: transparent;
+background-image: none;
+}
+
+.tblLocal .ui-state-default
+{
+	background: #BA2025;
+	color:white;
+	font-family: "Trajan Pro";
+	font-size:13px;
+	padding: 0;
+	padding-top:5px;
+	text-decoration: none;
+	border-style: none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+
+
+.tblLocal .ui-editable-column 
+{
+	font-size: 13px;
+	text-align: center;
+}
+
+.txtcaja
+{
+	font-size: 16px;
+}
+
+
+.calen .ui-inputfield
+{
+	width: 100px;
+}
+
+.calen .ui-datepicker td span, .ui-datepicker td a
+{
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.txtBusqueda .input, .select, .textarea
+{
+	font-size: 14px;
+}
+

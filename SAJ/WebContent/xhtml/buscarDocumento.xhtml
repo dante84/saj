@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+<h:head><h:outputScript name="es.js" library="js"/></h:head> 
+
+<h:body>
+
+   <h:outputStylesheet library="css" name="Style.css"/>
+    
+   <h:form>  
+   
+      <ui:insert name="header"><ui:include src="/plantillas/header.xhtml"/></ui:insert>	       
+	  <ui:insert name="logeo" ><ui:include src="/plantillas/logeo.xhtml" /></ui:insert>		       
+	  <ui:insert name="menuCabecera"><ui:include src="/plantillas/menuCabecera.xhtml"/></ui:insert>
+
+   </h:form>	  
+	  
+   <div class="se-sheet"> 
+        <div class="se-sheet-body">                                  
+             <div class="contenedor">
+	              		 	   		       			  	                	                             
+		          <h:form id="forma" styleClass="formaFaces">
+		           
+		             <p:dataTable var="documento" widgetVar="widget" lazy="false" value="#{CArchivoGeneral.listaDocumentos}" 
+		                          filteredValue="#{CArchivoGeneral.listaDocumentosTemp}">
+		             			           		 
+			            <f:facet name="header">
+			           	   <p:outputPanel>
+			           		  <h:outputText value="Consulta Documento" />
+			               </p:outputPanel>
+			            </f:facet>
+			           		 	
+			           	<p:column headerText="Numero de Expediente">
+			           	   <center><h:outputLabel value="#{documento.iNumeroExpediente}"/></center>
+			            </p:column>
+			           		 
+			           	<p:column headerText="Tipo de Juicio">
+			           	   <center><h:outputLabel value="#{documento.sDescripcionTipoJuicio}"/></center>
+			            </p:column>
+			           		 
+			           	<p:column headerText="Numero de Juicio">
+			           	   <center><h:outputLabel value="#{documento.sNumeroJuicio}"/></center>
+			            </p:column>
+			           		 
+			            <p:column headerText="Actor Demandante / Promovente">
+			           	   <center><h:outputLabel value="#{documento.sPromovente}"/></center>
+			            </p:column>
+			           		 
+			           	<p:column headerText="Numero de Registro">
+			           	   <center><h:outputLabel value="#{documento.iNumeroRegistro}"/></center>
+			            </p:column>
+			           		 			           			
+			           	<p:column headerText="Sintesis">
+			           	   <center><h:outputLabel value="#{documento.sSint}"/></center>
+			            </p:column>
+			           		 			           
+			           	<p:column headerText="Acciones">
+			           	   <center><h:outputText/></center>
+			            </p:column>
+			           		 			           					          			           						           			 							
+			         </p:dataTable>	          
+		                                            
+                  </h:form>
+                  
+             </div>                                   
+        </div>           
+   </div>     
+                                       		 		          		                                      		             		          
+</h:body>
+ 
+</html>

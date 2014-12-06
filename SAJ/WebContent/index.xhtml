@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns=    "http://www.w3.org/1999/xhtml"
+      xmlns:ui= "http://java.sun.com/jsf/facelets"
+      xmlns:h=  "http://java.sun.com/jsf/html"
+      xmlns:f=  "http://java.sun.com/jsf/core">
+
+<h:head>
+    <h:outputScript library="js" name="scripts.js"/>    
+    <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/imagenes/favicon.ico"/>
+    <title>Sistema de Recepción y Archivo de Asuntos Jurídicos</title>              
+</h:head>
+
+<h:body >        
+   <f:view>
+      
+     <div class="se-sheet"> 
+          <div class="se-sheet-body">
+             
+               <ui:insert name="header" >
+		           <ui:include src="/plantillas/header.xhtml" />
+		       </ui:insert>
+            
+               <br/>
+               <br/>
+                
+               <h:form id="forma">
+               
+                  <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">                   
+				         <tr>
+	   				         <td colspan="4">
+					             <h:graphicImage library="imagenes" name="F1.png" width="960" height="91"/>
+					         </td>
+				         </tr>
+				         <tr>
+  					         <td width="504" rowspan="4">
+					             <h:graphicImage library="imagenes" name="F3.png"/> 
+					         </td>
+					         <td colspan="3" width="456" height="55">
+  					             <h:graphicImage library="imagenes" name="loging1.png" />
+					         </td>
+				         </tr>
+				         <tr>
+					         <td height="166" colspan="3" align="center" valign="middle" style="background: url(&quot;resources/imagenes/Ffondo.png&quot;);">
+					     
+					             <h:inputText class="input3" id="txtUsuario" size="34" style="border-radius: 5px;" value="#{CLogin.usuario}"/>					         
+					             <br/><br/>
+					         
+					             <h:inputSecret value="#{CLogin.password}" class="input3" id="txtContrasena" onkeypress="searchKeyPress(event);" style="border-radius: 5px;" /> 
+						         <br/><br/>
+						     
+						         <div style="display: inline;width: 163px;" id="bloquecontrase" >
+							          <h:message for="txtUsuario"    style="color: #E6E6E6;"/>
+						         </div>
+						     
+				             </td>
+				         </tr>
+				         <tr>
+					         <td width="137" rowspan="2">
+					             <h:graphicImage library="imagenes" name="F4.png" width="137" height="73"/>
+					         </td>
+					         <td width="163" height="39">
+					             <h:commandButton action="#{CLogin.procesaUsuario}"     
+					                              onmouseout="MM_swapImgRestore()" 
+					                              onmouseover="MM_swapImage('botonA','','../resources/imagenes/B1Nrojo.png',1)"
+					                              style="background: url('resources/imagenes/B1N.png'); position: relative; top: 0px; left: 0px; width:100%; height:105%;" 					                          
+					             />					         					      
+					         </td>
+					         <td width="156" rowspan="2">
+					             <h:graphicImage library="imagenes" name="F5.png" width="156" height="73"/>
+					         </td>
+				         </tr>
+				         <tr>
+ 					         <td><h:graphicImage library="imagenes" name="F6.png" width="163" height="34"/></td>
+				         </tr>
+				         <tr>
+					         <td colspan="4"><h:graphicImage library="imagenes" name="F2.png" width="960" height="115"/></td>
+				         </tr>
+				     
+			      </table>
+			   
+			   </h:form>
+			   
+			   <ui:insert name="footer" >
+		           <ui:include src="/plantillas/footer.xhtml" />
+		       </ui:insert>
+
+          </div>
+     </div>
+     
+   </f:view>
+</h:body>
+
+</html>

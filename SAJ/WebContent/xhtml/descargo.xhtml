@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui" 
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>
+		Asuntos Jurídicos Minas
+	</title>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		
+			<p:growl id="msgs" showDetail="true" />
+
+			<div class="se-sheet">
+				<div class="se-sheet-body">
+						
+							<ui:insert name="header">
+								<ui:include src="/plantillas/header.xhtml" />
+							</ui:insert>
+							<ui:insert name="logeo">
+								<ui:include src="/plantillas/logeo.xhtml" />
+							</ui:insert>
+							<ui:insert name="menuCabecera">
+								<ui:include src="/plantillas/menuCabecera.xhtml" />
+							</ui:insert>
+							
+					<div class="AmparoBusqueda">
+					
+					<div class="titulo"><h:graphicImage library="imagenes" name="Titulos/DescargoDoc.png"/></div>                  
+	      			<p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>
+	      			
+	      			<div align="right">								
+						<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>												
+					</div>
+	      			
+						<table width="100%">
+							<tr>
+								<td align="right">
+									<table>
+										<tr>
+											<td><a>Buscar:</a></td>
+											<td><h:inputText value="#{CRegExpediente.textoBusqueda}"></h:inputText></td>
+											<td><h:commandLink
+													action="#{CRegExpediente.consultaDocumentoDescargo}">
+													<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+												</h:commandLink></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<p:dataTable id="tbDescargo" var="vDescargo"
+						value="#{CRegExpediente.lDescargo}" widgetVar="celDescargoTable"
+						emptyMessage="No hay registgros"
+						filteredValue="#{CRegExpediente.filteredDescargo}" rows="25"
+						paginator="true" paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						editable="true" rowIndexVar="rowIndex">
+
+						<p:ajax event="rowEdit" listener="#{CRegExpediente.onRowEdit}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel"
+							listener="#{CRegExpediente.onRowCancel}" update=":form:msgs" />
+
+						<p:column headerText="IdRegistro" style="display:none">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vDescargo.iIdRegDoc}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vDescargo.iIdRegDoc}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Respuesta">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputLabel value="#{vDescargo.sDescDescargo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:selectOneMenu value="#{CRegExpediente.cgbDescargo}"
+											converter="omnifaces.SelectItemsConverter" style="width:100%">
+											<f:selectItem itemLabel="Respuesta"></f:selectItem>
+											<f:selectItems value="#{CRegExpediente.lcgbDescargo}"
+												var="vRespuesta" itemLabel="#{vRespuesta.sDescripcionCat}" />
+										</p:selectOneMenu>
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Expediente">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vDescargo.sNumExpedienteDescargo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{CRegExpediente.textoExpediente}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Número de Documento">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vDescargo.sNumDocumentoDescargo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{CRegExpediente.textoDocumento}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Número de Oficio">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vDescargo.sNumeroOficio}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText id="modelInput"
+											value="#{vDescargo.sNumeroOficio}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="¿Tiene Registro?">
+
+							<center>
+								<p:cellEditor>
+
+									<f:facet name="output">
+										<h:selectBooleanCheckbox disabled="true"
+											value="#{vDescargo.iTieneRegistro == 1}">
+
+										</h:selectBooleanCheckbox>
+									</f:facet>
+									<f:facet name="input">
+										<h:selectBooleanCheckbox
+											value="#{CRegExpediente.cbTieneRegistro}">
+											<f:selectItem itemValue="1"></f:selectItem>
+										</h:selectBooleanCheckbox>
+									</f:facet>
+
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Número de registro">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vDescargo.iNumeroRegistro}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vDescargo.iNumeroRegistro}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Número de Juicio">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vDescargo.sNumeroJuicio}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vDescargo.sNumeroJuicio}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Responsable">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vDescargo.sNombreResposable}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vDescargo.sNombreResposable}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column headerText="Folio">
+							<center>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{vDescargo.sFolio}" />
+									</f:facet>
+									<f:facet name="input">
+										<h:outputText value="#{vDescargo.sFolio}" />
+									</f:facet>
+								</p:cellEditor>
+							</center>
+						</p:column>
+
+						<p:column  headerText="Editar" style="width:32px; font-size:12px;">
+							<p:rowEditor />
+						</p:column>
+
+					</p:dataTable>
+					<br /> <br />
+				</div>
+			</div>
+		
+	</h:form>
+							<ui:insert name="fotter">
+								<ui:include src="/plantillas/footer.xhtml" />
+							</ui:insert>
+</h:body>
+</html>

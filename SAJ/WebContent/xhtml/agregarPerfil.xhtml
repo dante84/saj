@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+	<f:view>
+
+		<h:form>
+			<ui:insert name="header">
+				<ui:include src="/plantillas/header.xhtml" />
+			</ui:insert>
+
+			<ui:insert name="logeo">
+				<ui:include src="/plantillas/logeo.xhtml" />
+			</ui:insert>
+
+			<ui:insert name="menuCabecera">
+				<ui:include src="/plantillas/menuCabecera.xhtml" />
+			</ui:insert>
+			
+			<div class="contenedor">
+				<div class="titulo3">
+					<hr/>
+					Mi Perfil
+					<hr/>
+				</div>
+				<h:inputText id="usuario" style="visibility:hidden;" value="#{CAdministracion.sesionBean.sUser}" />
+			<div class="se-sheet">
+				<div class="se-sheet-body">
+				<table>
+					<tr>
+						<td width="200"><label class="etiqueta">Nombre del Perfil: </label></td>
+						<td width="200">
+							<h:inputText id="itNomPerfil" value="#{CAdministracion.itNomPerfil}"></h:inputText>
+						</td>
+					</tr>
+					<br/>
+					<tr>
+						<td>
+						</td>
+					</tr>
+				</table>
+<!-- 						<label>Menu Administrador</label>  -->
+<!-- 						<ui:repeat var="vPermisos" value="#{CAdministracion.permisos}"> -->
+<!-- 							<label value="#{permisos.descSubMenu}" /> -->
+<!-- 							<h:outputLabel value="#{permisos.descSubMenu}" /> -->
+<!-- 							<h:outputText value="#{permisos.descSubMenu}" /> -->
+<!-- 							<h:selectBooleanCheckbox id="sbcDescSubMenu" value="#{CAdministracion.sbcDescSubMenu}" /> -->
+<!-- 						</ui:repeat> -->
+					<div>
+						<table>
+							<tr>
+								<tr>
+									<td></td>
+									<td> <label> Menú Administrador </label> </td>
+								</tr>
+								<tr>
+									<td><label>Usuarios</label></td> 
+									<td> <h:selectBooleanCheckbox id="sbcUsuarios" value="#{CAdministracion.sbcUsuarios}" /> </td> 
+								</tr>
+								<tr>
+									<td><label>Bitacora</label></td> 
+									<td> <h:selectBooleanCheckbox id="sbcBitacora" value="#{CAdministracion.sbcBitacora}" /> </td> 
+								</tr>
+								<tr> 
+									<td><label>Catálogos</label></td>
+									<td> <h:selectBooleanCheckbox id="sbcCatalogos" value="#{CAdministracion.sbcCatalogos}" /> </td> 
+								</tr>
+								<tr> 
+									<td><label>Perfiles</label></td>
+									<td> <h:selectBooleanCheckbox id="sbcPerfiles" value="#{CAdministracion.sbcPerfiles}" /> </td> 
+								</tr>
+								<br />
+								<br />
+								<tr>
+									<td />
+									<td> <label> Menú Archivpo General </label> </td>
+								</tr>
+								<tr>
+									<td><label>RegistrarDocumento</label></td> 
+									<td> <h:selectBooleanCheckbox id="sbcRegDocumento" value="#{CAdministracion.sbcRegDocumento}" /> </td> 
+								</tr>
+								<tr>
+									<td><label>Consultar Documento</label></td> 
+									<td> <h:selectBooleanCheckbox id="sbcConsultarDocumento" value="#{CAdministracion.sbcConsultarDocumento}" /> </td> 
+								</tr>
+								<tr> 
+									<td><label>Descargo</label></td>
+									<td> <h:selectBooleanCheckbox id="sbcDescargo" value="#{CAdministracion.sbcDescargo}" /> </td> 
+								</tr>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h:form>
+
+</f:view>
+</h:body>
+
+</html>

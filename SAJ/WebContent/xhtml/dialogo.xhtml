@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+   <h:outputStylesheet library="css" name="Style.css"/>
+</h:head>
+ 
+<h:body> 
+     
+   <h:form>  
+      <ui:insert name="header"><ui:include src="/plantillas/header.xhtml"/></ui:insert>		       
+	  <ui:insert name="logeo" ><ui:include src="/plantillas/logeo.xhtml" /></ui:insert>		       
+	  <ui:insert name="menuCabecera"><ui:include src="/plantillas/menuCabecera.xhtml"/></ui:insert>
+   </h:form>
+   
+   <div class="se-sheet"> 
+        <div class="se-sheet-body">                                  
+             <div class="contenedor">	
+
+                  <h:form>
+   
+                     <h:panelGrid id="tabla" columns="4">                      
+      
+                        <h:outputLabel value="Unidad de Asuntos Juridicos"/>
+                        <h:outputLabel />
+                        <h:outputLabel value="Unidad de Asuntos Juridicos"/>
+                        <h:outputLabel value="Fecha Captura"/>
+           
+                        <h:outputLabel value="Sistema de Registro de Amparos"/>
+                        <h:outputLabel />
+                        <h:outputLabel value="Sistema de Registro de Amparos"/>
+                        <h:outputLabel value="#{CArchivoGeneral.fechaImpresionVolante}"/>
+                        
+                        <h:outputLabel value="Volante de Correspondencia"/>
+                        <h:outputLabel />
+                        <h:outputLabel />
+                        <h:outputLabel />
+                        
+                        <h:outputLabel value="Número de Registro"/>
+                        <h:outputLabel value="#{CArchivoGeneral.textoNumeroRegistro}"/>
+                        <h:outputLabel value="Número de Registro"/>
+                        <h:outputLabel value="#{CArchivoGeneral.textoNumeroRegistro}"/>
+                        
+                        <h:outputLabel value="Número de Oficio"/>
+                        <h:outputLabel value="#{CArchivoGeneral.textoNumeroOficio}"/>
+                        <h:outputLabel value="Oficio"/>
+                        <h:outputLabel value="#{CArchivoGeneral.textoNumeroOficio}"/>
+                        
+                        <h:outputLabel value="Fecha del Oficio"/>
+                        <h:outputLabel value="#{CArchivoGeneral.fechaOficioVolante}"/>
+                        <h:outputLabel />
+                        <h:outputLabel />
+                        
+                        <h:outputLabel value="Juicio de Amparo"/>
+                        <h:outputLabel value="#{CArchivoGeneral.textoJuicioAmparo}"/>
+                        <h:outputLabel value="Amparo"/>
+                        <h:outputLabel value="#{CArchivoGeneral.textoJuicioAmparo}"/>
+                        
+                        <h:outputLabel value="Promovido por"/>
+                        <h:outputLabel value="#{CArchivoGeneral.textoPromovente}"/>
+                        <h:outputLabel />
+                        <h:outputLabel />
+                        
+                        <h:outputLabel value="Juzgado/Remitente"/>
+                        <h:outputLabel value="#{CArchivoGeneral.textoRemitente}"/>
+                        <h:outputLabel />
+                        <h:outputLabel />
+                        
+                        <h:outputLabel value="Turnando a"/>
+                        <h:outputLabel value="#{CArchivoGeneral.lcgbResponsables[0].nombre}"/>
+                        <h:outputLabel />
+                        <h:outputLabel value="#{CArchivoGeneral.lcgbResponsables[0].nombre}"/>
+                        
+                        <h:outputLabel value="Fecha de Captura"/>
+                        <h:outputLabel value="#{CArchivoGeneral.fechaImpresionVolante}"/>
+                        <h:outputLabel />
+                        <h:outputLabel value="Nombre y Firma"/>
+           
+                     </h:panelGrid>
+        
+                     <p:commandButton value="Imprimir Volante" type="button" action="bienvenido">
+                        <p:printer target="tabla" />
+                     </p:commandButton>
+        
+                  </h:form>
+                  
+             </div>                                   
+        </div>           
+   </div>           
+   
+</h:body>
+ 
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+<h:head>      
+    <h:outputStylesheet library="css" name="Style.css"/>
+    <title>Turnar Documento</title>    	
+</h:head>
+
+<h:body>        
+	<f:view>     
+	    <h:form prependId="false"> 
+		    		    				    	
+		    			<p:commandButton value="Turnado" onclick="PF('dlg2').show();"
+		    							 action="#{CArchivoGeneral.doMuestraTurnados}" />				    					    										    		    	    		
+				 		
+				 
+				<p:dialog header="Turnar Documento" widgetVar="dlg2"						  
+						  resizable="true"						  
+						  fixedCenter="true"            			            
+						  modal="true" height="380" width="750" >				    
+				    <td>
+				    				Turnado a :
+				    </td><h:graphicImage library="imagenes/imgTitulos" name="TurnarDoc.png" width="340" height="75" />
+				    <br></br>
+				    	<table>
+				    		<tr>
+				    			<td></td>
+				    			<td>
+				    				Turnado a:
+				    			</td>				    				
+				    			<td colspan="2">			                    	
+			                    	<h:selectOneMenu style="width:200px;" id="cbmTurnado"  value="#{CArchivoGeneral.cbmTurnado}" 
+						   		                  converter="omnifaces.SelectItemsConverter" converterMessage="Selecciona un valor">
+				                        <f:selectItem  noSelectionOption="true" itemLabel="Selecciona"/>
+				                        <f:selectItems value="#{CArchivoGeneral.turnados}" var="turnad" itemLabel="#{turnad.sDescripcionCat}"/>				                        
+			                    	</h:selectOneMenu>		
+			                    	
+				                    <h:selectOneMenu style="width:200px;" id="cbmPuesto"  value="#{CArchivoGeneral.cbmPuesto}" 
+							   		                  converter="omnifaces.SelectItemsConverter" converterMessage="Selecciona un valor">
+				                        <f:selectItem  noSelectionOption="true" itemLabel="Selecciona"/>
+				                        <f:selectItems value="#{CArchivoGeneral.puestos}" var="puesto" itemLabel="#{puesto.sDescripcionCat}"/>
+				                    </h:selectOneMenu>	
+			                    	
+			                    	<h:selectOneMenu id="comboJuicio">
+					                      <f:selectItem  itemValue="#{CArchivoGeneral.juicio}" itemLabel="Prueba combo"/>
+					                      <f:selectItems value="#{CArchivoGeneral.juicios}" var="juicio" itemLabel="#{juicio.sDescripcionCat}"/>
+				                   </h:selectOneMenu>
+		                   
+				    			</td>	
+				    			<td></td>						    				    							    		
+				    		</tr>
+				    		<tr>
+				    			<td></td>
+				    			<td >
+				    				Cargo: 				    					
+				    			</td>
+				    			<td colspan="2">
+				    				<label class="etiqueta">Cargo en un solo renglon </label>				    					
+				    			</td>
+				    			<td></td>				    			
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td>
+				    					Instruccion:
+				    			</td>
+				    			<td>								    					    				
+            							<h:selectBooleanCheckbox id="chk1" value="1" />
+            							<h:outputText value="Instrucción 1" />            							        						
+				    			</td>
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk2" value="2" />
+            							<h:outputText value="Instrucción 2" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk3" value="3" />
+            							<h:outputText value="Instrucción 3" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk4" value="4" />
+            							<h:outputText value="Instrucción 4" />            							        						
+				    			</td>				    						    		
+				    		</tr>
+				    		<tr>
+				    			<td> </td>				    			
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk5" value="5" />
+            							<h:outputText value="Instrucción 5" />            							        						
+				    			</td>
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk6" value="6" />
+            							<h:outputText value="Instrucción 6" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk7" value="7" />
+            							<h:outputText value="Instrucción 7" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="chk8" value="8" />
+            							<h:outputText value="Instrucción 8" />            							        						
+				    			</td>				    					
+				    		</tr>				    		
+				    		<tr>
+				    			<td></td>
+				    			<td>				    					
+            							<h:selectBooleanCheckbox id="chk9" value="9" />
+            							<h:outputText value="Otros" />            								
+				    			</td>
+				    			<td colspan="3">				    						
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td>
+				    				<label class="etiqueta">Especifique :</label>
+				    			</td>
+				    			<td colspan="4">
+				    				<p:inputText id="txtExpecifique" style="width:500px;" />
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td>
+				    				<label class="etiqueta">Acto Reclamado :</label>
+				    			</td>
+				    			<td colspan="4">				    				
+				    				<p:inputTextarea id="txtActo" rows="5" cols="54" autoResize="false" /> 				    				 
+    								<h:outputText id="display" />
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td></td>
+				    			<td colspan="2" align="right">
+				    				<h:commandButton id="idbtnGuardar" value="Guardar"
+									 onclick="alert('Guardar, Turnar documento?');" action="#" />									 			
+				    			</td>
+				    				<td colspan="2" align="left">
+				    				<h:commandButton id="idbtnCancelar" value="Cancelar" action="#"/>									 									 			
+				    			</td>
+				    		</tr>
+				    	</table>
+				    
+				</p:dialog>   
+
+	    </h:form>
+	</f:view>
+</h:body>
+
+</html>

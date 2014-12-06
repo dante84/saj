@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head>      
+    <h:outputStylesheet library="css" name="Style.css"/>
+</h:head>
+ 
+<h:body >        
+   <f:view>
+      
+     <h:form> 
+     
+         <div class="se-sheet"> 
+              <div class="se-sheet-body">
+             
+                   <ui:insert name="header" >
+		               <ui:include src="/plantillas/header.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="logeo" >
+		               <ui:include src="/plantillas/logeo.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="menuCabecera" >
+ 		               <ui:include src="/plantillas/menuCabecera.xhtml" />
+		           </ui:insert>
+		           
+		           <div class="Contenedor">
+		           		<div class="titulo3">
+		           			<hr/>
+		           				CATÁLOGOS
+		           			<hr/>
+		           		</div>
+		           		<br/>
+		           		<div>
+
+		           		</div>
+		           </div>
+		      </div>
+         </div>
+ 
+     </h:form>
+ 
+   </f:view>
+</h:body>
+ 
+</html>

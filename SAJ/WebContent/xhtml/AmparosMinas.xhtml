@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>
+		Asuntos Jurídicos Minas
+	</title>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body >
+	<f:view>
+
+		<h:form id="forma">
+
+			<div class="se-sheet">
+				<div class="se-sheet-body">
+
+					<ui:insert name="header">
+						<ui:include src="/plantillas/header.xhtml" />
+					</ui:insert>
+
+					<ui:insert name="logeo">
+						<ui:include src="/plantillas/logeo.xhtml" />
+					</ui:insert>
+
+					<ui:insert name="menuCabecera">
+						<ui:include src="/plantillas/menuCabecera.xhtml" />
+					</ui:insert>
+	
+		
+		
+		
+		<div class="CMinas">		
+		  <div class="titulo"><h:graphicImage library="imagenes" name="Titulos/RecepciondeDocs.png"/></div>                  
+	      <p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>
+	    
+			<div align="right">								
+					<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>												
+			</div>
+
+			<div class="MinasBusqueda">
+				<table width="100%">
+					<tr>
+						<td align="left">
+							<table>
+								<tr>
+									<td>Mostrar los documentos recibidos del:</td>
+									<td><p:calendar id="busquedaFecha"
+											requiredMessage="Seleccione una Fecha"
+											value="#{CAsuntosJuridicosMinas.fechaBusqueda}" locale="es"></p:calendar>
+									</td>
+									<td><h:commandLink
+											action="#{CAsuntosJuridicosMinas.busquedaPorFecha}">
+											<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+										</h:commandLink></td>
+								</tr>
+							</table>
+						</td>
+						<td align="right">
+							<table>
+								<tr>
+									<td>Buscar:</td>
+									<td><h:inputText value="#{CAsuntosJuridicosMinas.txtBusqueda}"></h:inputText></td>
+									<td><h:commandLink
+											action="#{CAsuntosJuridicosMinas.busquedaPorTexto}">
+											<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+										</h:commandLink></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- 	fin busqueda minas-->
+
+			<div>
+			<br>
+			</br>														
+				<p:dataTable styleClass="tblLocal" id="tbl1" var="tbl" value="#{CAsuntosJuridicosMinas.datosSeguimiento}" editable="true" style="margin-bottom:20px">					
+					<br></br>
+					<p:ajax immediate="true" event="rowEdit" listener="#{CAsuntosJuridicosMinas.onRowEdit}"></p:ajax>
+					<p:ajax immediate="true" event="rowEditCancel" listener="#{CAsuntosJuridicosMinas.onRowCancel}"/>
+					
+					
+					<p:column headerText="Número de Expendiente" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.numexpediente}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.numexpediente}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+       				
+       				<p:column headerText="Número de Registro" style="font-size:12px;" >
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.numreg}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.numreg}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+					
+					<p:column headerText="Fecha de Recepción" style="font-size:12px;" >
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.fecha}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.fecha}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+       				
+       				<p:column headerText="Hora de Recepción" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.hora}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.hora}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+       				
+       				<p:column headerText="Promovente" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.ac_de_pr_qu}" /></f:facet>
+			               <f:facet name="input"><h:outputText value="#{tbl.ac_de_pr_qu}"/></f:facet>
+			            </p:cellEditor>
+       				</p:column>
+       				
+       				
+       				<p:column headerText="Materia" style="font-size:12px;">
+				       <center>
+				        <p:cellEditor>
+				         <f:facet name="output"><h:outputLabel value="#{tbl.descmateria}" /></f:facet>
+				         <f:facet name="input">
+				          <p:selectOneMenu value="#{CAsuntosJuridicosMinas.materia}"
+				           converter="omnifaces.SelectItemsConverter" style="width:100%">
+				           <f:selectItem itemLabel="-Seleccionar-"></f:selectItem>
+				           <f:selectItems value="#{CAsuntosJuridicosMinas.materias}"
+				            var="vRespuesta" itemLabel="#{vRespuesta.descmateria}" />
+				          </p:selectOneMenu>
+				         </f:facet>
+				        </p:cellEditor>
+				       </center>
+				      </p:column>
+				      
+				     
+				      
+				      <p:column headerText="Fecha de vencimiento" style="font-size:12px;">
+			            <p:cellEditor>
+			               <f:facet name="output"><h:outputText value="#{tbl.fecvencimiento}" /></f:facet>
+			               <f:facet name="input"><p:calendar id="fechaVencimiento"	requiredMessage="Seleccione una Fecha" value="#{CAsuntosJuridicosMinas.fechaVencimiento}" locale="es"></p:calendar></f:facet>
+			            </p:cellEditor>
+       				  </p:column>
+       				         				         				 
+				      
+				      <p:column headerText="Acciones" style="font-size:12px; width: 120px;">				           
+				           <h:commandLink action="#{CConsultar.load(tbl.idregDoc)}">
+										<h:graphicImage library="imagenes" name="ConsultarDoc.png"></h:graphicImage>
+							</h:commandLink>
+									
+				           <p:commandLink onclick="PF('dlg1').show();" 
+				                          action="#{CTurnados.doEnvId(tbl.idregDoc)}" immediate="true">				           				           				           		    						
+				           		<h:graphicImage  library="imagenes" name="TurnarDoc.png"></h:graphicImage>				           				           
+				           </p:commandLink>
+				           
+           					<p:graphicImage id="img" library="imagenes" 
+				           name="#{CAsuntosJuridicosMinas.obtenerImg(tbl.acuseRecivo)}" width="24px"></p:graphicImage>
+				           				           
+				      </p:column> 
+				      
+					  <p:column headerText="Editar" style="width:32px; font-size:12px;">
+				           <p:rowEditor />
+				      </p:column>
+				      
+				</p:dataTable>
+			</div>
+			<!-- 	fin tabla -->
+
+		</div>
+		<!-- 	fin cuerpo -->
+				<ui:insert name="footer"> <ui:include src="/plantillas/footer.xhtml" /> </ui:insert>
+	</div>
+	
+			
+			    <p:dialog  header=" Acuse de recibo" widgetVar="dlg1"						  						  						 
+						  fixedCenter="true"            			            
+						  modal="true" width="580" >						  				    
+				    <table bgcolor="#ba2025" width="565" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="60" height="54" align="center" valign="middle">      
+      	<h:graphicImage library="imagenes" name="AvisosRojo.png" width="60" height="54" />
+      </td>
+      <td colspan="3" align="center" valign="middle">
+		      <p style=" font-size: 30px; color: white; "> 
+		      	Acuse de Recibo
+		      </p>
+      </td>
+      <td width="30" height="54" valign="top">      	
+      	
+      </td>
+    </tr>
+    <tr>
+      <td height="54" align="center" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
+      <td colspan="3" align="center" valign="middle" bgcolor="#FFFFFF" class="txtcuerpo">
+      	 <p style=" font-size: 12px" >ATENCIÓN: <br />
+         Para gestionar este documento, verifique que tenga el documento en su poder. La afirmación de este acuse de forma errónea es responsabilidad del usuario.</p>
+        <p style=" font-size: 12px">¿Tiene el documento físicamente?</p>
+       </td>
+      <td height="54" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="54" align="center" valign="middle" bgcolor="#FFFFFF">&nbsp;</td>
+      <td width="219" align="center" valign="middle" bgcolor="#FFFFFF" >
+      	<p style="font-size: 14px;">     		
+			<p:commandLink onclick="PF('dlg2').show(); PF('dlg1').hide();"
+					 	action="#{CArchivoGeneral.doMuestraTurnados}">						
+			     		<h:graphicImage  library="imagenes" name="si.png" width="110px" height="24px"></h:graphicImage>				           				           
+			</p:commandLink>
+							
+		</p>
+      </td>
+      <td width="9" align="center" valign="middle" bgcolor="#FFFFFF" >&nbsp;</td>
+      <td width="242" align="center" valign="middle" bgcolor="#FFFFFF" >
+       <p style="font-size: 14px;">
+      		<p:commandLink onclick="PF('dlg1').hide();">				           				           				           		    						
+			     		<h:graphicImage  library="imagenes" name="no.png" width="110px" height="24px"></h:graphicImage>				           				           
+			</p:commandLink>
+		</p>
+      </td>
+      <td height="54" valign="top" bgcolor="#FFFFFF">&nbsp;</td>
+    </tr>
+  </table>
+						  
+						  
+			    </p:dialog>
+			
+					 
+				<p:dialog id="turn" header="Turnar Documento" widgetVar="dlg2"						  						  						 
+						  fixedCenter="true"            			            
+						  modal="true" height="380" width="700" >				    				    				    
+				    <h:graphicImage library="imagenes/Titulos" name="TurnarDoc.png" width="340" height="75" />
+				    <br></br>
+				    	<table>
+				    		<tr>
+				    			<td></td>
+				    			<td>				    				
+				    				<label class="etiqueta">Turnado a: </label>
+				    			</td>				    				
+				    			<td colspan="2">			                    	
+			                    	<h:selectOneMenu style="width:200px;" id="cbmTurnado"  value="#{CAsuntosJuridicosMinas.cgbTurna}" 
+						   		                  converter="omnifaces.SelectItemsConverter" converterMessage="Selecciona un valor">
+				                        <f:selectItem  noSelectionOption="true" itemLabel="Selecciona"/>
+				                        <f:selectItems value="#{CAsuntosJuridicosMinas.turnados}" var="turnad" itemLabel="#{turnad.sDescripcionCat}"/>				                        
+				                        <f:ajax listener="#{CAsuntosJuridicosMinas.doCargaPuesto}" render="lblCargo" />				                        
+			                    	</h:selectOneMenu>			
+			                        <h:message for="cbmTurnado" style="color:red" />                					                   
+				    			</td>	
+				    			<td></td>						    				    							    		
+				    		</tr>
+				    		<tr>
+					    		<td colspan="5" >
+					    		</td>
+				    		</tr>
+				    		<tr>
+				    			<td></td>
+				    			<td >
+				    				<label class="etiqueta">Cargo: </label> 				    					
+				    			</td>
+				    			<td colspan="2">				    			
+				    				<h:outputLabel id="lblCargo"										
+										value="#{CAsuntosJuridicosMinas.lblCargo}" />				    								    				
+				    			</td>
+				    			<td></td>				    			
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td>				    					
+				    					<label class="etiqueta">Instrucción: </label>
+				    			</td>
+				    			<td>								    					    				
+            							<h:selectBooleanCheckbox id="tint1" 
+            							value="#{CTurnados.sint1}"/>
+            							<h:outputText value="Instrucción 1" />            							        						
+				    			</td>
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="tint2" 
+            							value="#{CTurnados.sint2}"  />
+            							<h:outputText value="Instrucción 2" />  
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="tint3" 
+            							value="#{CTurnados.sint3}" />
+            							<h:outputText value="Instrucción 3" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="tint4" 
+            							value="#{CTurnados.sint4}" />
+            							<h:outputText value="Instrucción 4" />            							        						
+				    			</td>				    						    		
+				    		</tr>
+				    		<tr>
+				    			<td> </td>				    			
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="tint5" 
+            							value="#{CTurnados.sint5}" />
+            							<h:outputText value="Instrucción 5" />            							        						
+				    			</td>
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="tint6" 
+            							value="#{CTurnados.sint6}" />
+            							<h:outputText value="Instrucción 6" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="tint7" 
+            							value="#{CTurnados.sint7}" />
+            							<h:outputText value="Instrucción 7" />            							        						
+				    			</td>				    		
+				    			<td>				    								    					
+            							<h:selectBooleanCheckbox id="tint8" 
+            							value="#{CTurnados.sint8}" />
+            							<h:outputText value="Instrucción 8" />            							        						
+				    			</td>				    					
+				    		</tr>				    		
+				    		<tr>
+				    			<td></td>
+				    			<td>				    					
+            							<h:selectBooleanCheckbox id="tint9" 
+            							 value="#{CTurnados.sint9}" />
+            							<h:outputText value="Otros" />            								
+				    			</td>
+				    			<td colspan="3">				    						
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td>
+				    				<label class="etiqueta">Especifique :</label>
+				    			</td>
+				    			<td colspan="4">
+				    				<h:inputText id="tespecifique" style="width:470px;" 
+				    				 styleClass="texto" 
+				    				 requiredMessage="Introduzca Especificacion"
+									 value="#{CTurnados.sespecifique}">
+									 		<f:validateLength maximum="50" />									 
+									 </h:inputText>
+				    								    			
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td>
+				    				<label class="etiqueta">Acto Reclamado :</label>
+				    			</td>
+				    			<td colspan="4">				    				
+				    				<h:inputTextarea id="tactoreclamado" rows="5" cols="90" autoResize="false" 
+				    					styleClass="texto"
+				    				 	requiredMessage="Introduzca Especificacion"
+									 	value="#{CTurnados.sactoreclamado}">
+									 	<f:validateLength maximum="200" />
+									</h:inputTextarea>
+									 				    				 
+    								<h:outputText id="display" />
+				    			</td>
+				    		</tr>
+				    		<tr>
+				    			<td colspan="5"></td>
+				    		</tr>
+				    		<tr>
+				    			<td></td>
+				    			<td colspan="2" align="right">				    				
+									 <p:commandLink onclick="alert('Desea turnar el documento?'); PF('dlg2').hide();" 
+									 action="#{CTurnados.InsertaRegistroTurnado}" 
+									 update="turn">				           				           				           		    						
+									     		<h:graphicImage  library="imagenes" name="guardar.png" width="110px" height="24px"></h:graphicImage>				           				           
+									</p:commandLink>
+											 							 			
+				    			</td>
+				    				<td colspan="2" align="left">
+				    				
+				    				<p:commandLink onclick="PF('dlg2').hide();" >				           				           				           		    						
+									     		<h:graphicImage  library="imagenes" name="cancelarg.png" width="110px" height="24px"></h:graphicImage>				           				           
+									</p:commandLink>
+				    													 									 			
+				    			</td>
+				    		</tr>
+				    	</table>
+				    
+				</p:dialog>   
+			
+			
+	
+	
+	
+	
+	
+			</div>
+			
+			
+			
+		</h:form>
+		
+	</f:view>
+</h:body>
+ 
+</html>

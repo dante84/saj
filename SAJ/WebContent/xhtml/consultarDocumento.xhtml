@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+<h:head>
+   <h:outputScript name="es.js" library="js"/>
+   <h:outputStylesheet library="css" name="Style.css"/>
+</h:head> 
+
+<h:body>   
+    
+   <h:form>  
+      <ui:insert name="header"><ui:include src="/plantillas/header.xhtml"/></ui:insert>	       
+	  <ui:insert name="logeo" ><ui:include src="/plantillas/logeo.xhtml" /></ui:insert>		       
+	  <ui:insert name="menuCabecera"><ui:include src="/plantillas/menuCabecera.xhtml"/></ui:insert>
+   </h:form>	  
+	  
+	  <div class="se-sheet"> 
+        <div class="se-sheet-body">                                  
+             <div class="contenedor">
+	              		 	   		       			  	                	                             
+		          <h:form id="forma" styleClass="formaFaces">
+		          
+		             <table class="tabla">
+                               
+                            <!-- Comunes -->
+                                
+                       		<tr>
+                           		<td><h:outputText value="Tipo de Juicio: " styleClass="etiqueta"/></td>
+                           	    <td>  
+                                    <h:selectOneMenu id="comboJuicio" value="#{CArchivoGeneral.cgbJuicios}" converter="omnifaces.SelectItemsConverter" 
+		                                             converterMessage="Selecciona un valor" required="true" requiredMessage="Seleccione un valor">
+			                           <f:selectItem  itemLabel="-- Selecciona tipo de Juicio --" noSelectionOption="true"/>
+	                                   <f:selectItems value="#{CArchivoGeneral.lcgbJuicios}" var="juicio" itemLabel="#{juicio.sDescripcionCat}"/>		                            
+	                                </h:selectOneMenu>
+	                            </td>
+	                            <td><h:message for="comboJuicio"/></td>
+					        </tr>
+					        					        	 
+                           	<tr>
+                           	    <td><h:outputLabel value="Número de Juicio: " styleClass="etiqueta"/></td>
+                           		<td><h:inputText id="textoNumeroJuicio" value="#{CArchivoGeneral.textoNumeroJuicio}"/></td>
+                           		<td><h:message for="textoNumeroJuicio"/></td>
+                            </tr>
+                                                        	
+                           	<tr>
+                           	    <td><h:outputLabel value="Actor / Demandante / Promovente: " styleClass="etiqueta"/></td>
+                           		<td><h:inputText id="textoActorDemandantePromovente" value="#{CArchivoGeneral.textoActorDemandantePromovente}" /></td>
+                           		<td><h:message for="textoActorDemandantePromovente"/></td>
+                           	</tr>
+                           	                           	                           
+                           	<tr>
+                           		<td><h:outputLabel value="Remitente / Autoridad-Juzgado / Tribunal: " styleClass="etiqueta"/></td>
+                           		<td><h:inputText id="textoRemitente" value="#{CArchivoGeneral.textoRemitente}" /></td>
+                           		<td><h:message for="textoRemitente"/></td>
+                            </tr>
+                           		                                                                                                        
+                            <tr>
+                           	    <td><h:outputLabel value="Número de Oficio: " styleClass="etiqueta"/></td>
+                           		<td><h:inputText id="textoNumeroOficio" value="#{CArchivoGeneral.textoNumeroOficio}"/></td>
+                           		<td><h:message for="textoNumeroOficio"/></td>
+                            </tr>
+                            
+                            <tr>
+                           	    <td><h:outputLabel value="Folio: " styleClass="etiqueta"/></td>
+                           		<td><h:inputText  id="textoNumeroFolio" value="#{CArchivoGeneral.textoNumeroFolio}"/></td>
+                           		<td><h:message   for="textoNumeroFolio"/></td>
+                            </tr>
+                                                        
+                            <tr>
+                           	    <td>
+                           	        <h:outputLabel value="Número de Registro (Inicio): " styleClass="etiqueta"/>                           		
+                           		    <h:inputText id="textoNumeroRegistro" value="#{CArchivoGeneral.textoNumeroRegistro}"  converterMessage="Solo Numeros">
+                           		       <f:convertNumber type="number" integerOnly="true"/>
+                           		    </h:inputText>
+                           		    <h:message for="textoNumeroRegistro" styleClass="etiquetaError"/>
+                           		</td>
+                           		<td>
+                           		    <h:outputLabel value="Número de Registro (Fin): " styleClass="etiqueta"/>                           		
+                           		    <h:inputText id="textoNumeroRegistroFin" value="#{CArchivoGeneral.textoNumeroRegistroFin}"  converterMessage="Solo Numeros">
+                           		       <f:convertNumber type="number" integerOnly="true"/>
+                           		    </h:inputText>
+                           		    <h:message for="textoNumeroRegistroFin" styleClass="etiquetaError"/>
+                           		</td>
+                           		<td></td>
+                           	</tr>
+                           	
+                           	<tr>
+                           	    <td><h:outputLabel value="Número de Expediente: " styleClass="etiqueta"/></td>
+                           		<td>
+                           		    <h:inputText id="textoNumeroExpediente" value="#{CArchivoGeneral.textoNumeroExpediente}"  converterMessage="Solo Numeros">
+                           		       <f:convertNumber type="number" integerOnly="true"/>
+                           		    </h:inputText>
+                           		</td>
+                           		<td><h:message for="textoNumeroExpediente" styleClass="etiquetaError"/></td>
+                           	</tr>
+                           	
+                           	<tr>
+                           	    <td><h:outputLabel value="Usuario: " styleClass="etiqueta"/></td>
+                           		<td><h:inputText id="textoUsuario" value="#{CArchivoGeneral.textoUsuario}"/></td>
+                           		<td><h:message for="textoUsuario"/></td>
+                            </tr>
+                            
+                            <tr>
+                           	     <td><h:outputLabel value="Fecha: " styleClass="etiqueta"/></td>
+                           		 <td><p:calendar id="fechaBusquedaInicio" value="#{CArchivoGeneral.fechaBusquedaInicio}" locale="es" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/></td>
+                           		 <td><h:message for="fechaBusquedaInicio" styleClass="etiquetaError"/></td>
+                            </tr>
+                            
+                            <tr>
+                           	     <td><h:outputLabel value="Hasta: " styleClass="etiqueta"/></td>
+                           		 <td><p:calendar id="fechaBusquedaFin" value="#{CArchivoGeneral.fechaBusquedaFin}" locale="es" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/></td>
+                           		 <td><h:message for="fechaBusquedaFin" styleClass="etiquetaError"/></td>
+                            </tr>
+                                                        
+                            <tr>
+                       	         <td>
+                       	         	
+                       	         </td>
+                       		     <td>
+                       		     	    <h:commandButton actionListener="#{CArchivoGeneral.buscarDocumento}" 
+                       	         					  image="../resources/imagenes/buscar.png" render="tblBs"/>
+                       	         		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                       		     		<h:commandButton action="consultarDocumento?faces-redirect=true" 
+                       		     					  image="../resources/imagenes/Limpiar.png"/>
+								 </td>
+                       		     <td></td>
+                            </tr>
+					        
+					   </table>
+					   
+					<div class="titulo"><h:graphicImage library="imagenes" name="Titulos/ResultadodeBusqueda.png"/></div>                  
+	      			<p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>
+	      			
+	      			<h:panelGroup id="cuerpo">
+					   <h:panelGrid width="100%">
+					       
+					      <p:dataTable width="100%" height="300px" id="tblBs" var="documento" widgetVar="widget" lazy="false" 
+					                   value="#{CArchivoGeneral.listaDocumentos}" filteredValue="#{CArchivoGeneral.listaDocumentosTemp}">
+		             			           		 
+			                 <f:facet name="header">
+			           	        <p:outputPanel>
+			           		       <h:outputText value="Consulta Documento" />
+			                    </p:outputPanel>
+			                 </f:facet>
+			           		 	
+			           	     <p:column headerText="Numero de Expediente">
+			           	        <center><h:outputLabel value="#{documento.iNumeroExpediente}"/></center>
+			                 </p:column>
+			           		 
+			           	     <p:column headerText="Tipo de Juicio">
+			           	        <center><h:outputLabel value="#{documento.sDescripcionTipoJuicio}"/></center>
+			                 </p:column>
+			           		 
+			           	     <p:column headerText="Numero de Juicio">
+			           	        <center><h:outputLabel value="#{documento.sNumeroJuicio}"/></center>
+			                 </p:column>
+			           		 
+			                 <p:column headerText="Actor Demandante / Promovente">
+			           	        <center><h:outputLabel value="#{documento.sAct}"/></center>
+			                 </p:column>
+			           		 
+			           	     <p:column headerText="Numero de Registro">
+			           	        <center><h:outputLabel value="#{documento.iNumeroRegistro}"/></center>
+			                 </p:column>
+			           		 			           			
+			           	     <p:column headerText="Sintesis">
+			           	        <center><h:outputLabel value="#{documento.sSint}"/></center>
+			                 </p:column>
+			           		 			           
+			           	     <p:column headerText="Acciones">
+			           	        <center>
+			           	          <h:commandLink action="#{CConsultar.load(documento.iIdRegDoc)}">
+							   	     <h:graphicImage library="imagenes" name="ConsultarDoc.png"/>
+							      </h:commandLink>
+							      <h:commandLink action="#{CArchivoGeneral.editarDocumentoConsulta(documento.iIdRegDoc,documento.iNumeroRegistro)}">
+							   	     <h:graphicImage library="imagenes" name="EditarDoc.png"/>
+							      </h:commandLink>
+							      <h:commandLink action="#{CConsultar.load(documento.iIdRegDoc)}">
+							   	     <h:graphicImage library="imagenes" name="eliminar.png"/>
+							      </h:commandLink>
+			           	        </center>
+			                 </p:column>
+			           		 			           					          			           						           			 							
+			              </p:dataTable>	          
+					       	  
+					   </h:panelGrid>
+					</h:panelGroup>
+					   					   					                                                                                                                                                                                
+                  </h:form>
+                  
+             </div>                                   
+        </div>
+        <ui:insert name="footer"><ui:include src="/plantillas/footer.xhtml"/></ui:insert>           
+   </div>                 
+                           		 		          		                                      		             		           
+</h:body>
+ 
+</html>

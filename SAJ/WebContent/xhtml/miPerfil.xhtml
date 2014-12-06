@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>      
+    <h:outputStylesheet library="css" name="Style.css"/>
+</h:head>
+ 
+	<h:body >        
+	   <f:view>
+	     <h:form> 
+	         <div class="se-sheet"> 
+	              <div class="se-sheet-body">
+	             
+	                   <ui:insert name="header" >
+			               <ui:include src="/plantillas/header.xhtml" />
+			           </ui:insert>
+			       
+			           <ui:insert name="logeo" >
+			               <ui:include src="/plantillas/logeo.xhtml" />
+			           </ui:insert>
+			       
+			           <ui:insert name="menuCabecera" >
+	 		               <ui:include src="/plantillas/menuCabecera.xhtml" />
+			           </ui:insert>
+			           
+			           <div class="Contenedor">
+			           	<div class="titulo3">
+			           		<hr/>
+			           			Mi Perfil
+			           		<hr/>
+			           	</div>
+			           	<br/>
+			           	<table class="cont" cellpadding="5%" id="agrario">
+			           		<tr>
+			           			<td width="200"><label class="etiqueta">Nombre(s): </label></td>
+			           			<td width="250">
+			           				<h:outputText value="#{CUsuarios.sesionBean.sNombre}"></h:outputText>
+			           			</td>
+			           		</tr>
+			           		<tr>
+			           			<td width="200"><label class="etiqueta">Primer Apellido: </label></td>
+			           			<td width="250">
+			           				<h:outputText value="#{CUsuarios.sesionBean.sApellido1}"></h:outputText>
+			           			</td>			           			
+			           		</tr>
+			           		<tr>
+			           			<td width="200"><label class="etiqueta">Segundo Apellido: </label></td>
+			           			<td width="250">
+			           				<h:outputText value="#{CUsuarios.sesionBean.sApellido2}"></h:outputText>
+			           			</td>			           			
+			           		</tr>	           				           		
+			           		<tr>
+			           			<td width="200"><label class="etiqueta">Puesto ó Cargo: </label></td>
+			           			<td width="250">
+			           				<h:selectOneMenu id="comboPuesto" class="input" style="width:200px" value="#{CUsuarios.comboPuesto}">
+			           					<f:selectItem itemValue="#{CUsuarios.puesto}" itemLabel="Prueba combo"/>
+			           					<f:selectItems value="#{CUsuarios.puestos}" var="vPuestos" itemLabel="#{vPuestos.sDescripcionCat}" />
+			           				</h:selectOneMenu>
+			           			</td>
+			           			<td>
+			           				<h:message for="comboPuesto"    style="color: #E6E6E6;"/>
+			           			</td>			           			
+			           		</tr>
+			           		<tr>
+			           			<td width="200"><label class="etiqueta">Departamento ó Área: </label></td>
+			           			<td width="250">
+			           				<h:selectOneMenu id="comboDepto" class="input" style="width:200px" value="#{CUsuarios.comboDepto}">
+			           					<f:selectItem itemValue="#{CUsuarios.depto}" itemLabel="Prueba combo"/>
+			           					<f:selectItems value="#{CUsuarios.deptos}" var="vDeptos" itemLabel="#{vDeptos.sDescripcionCat}" />
+			           				</h:selectOneMenu>
+			           			</td>
+			           			<td>
+			           				<h:message for="comboDepto"    style="color: #E6E6E6;"/>
+			           			</td>			           			
+			           		</tr>
+			           		<tr>
+			           			<td width="200"><label class="etiqueta">Unidad Administrativa: </label></td>
+			           			<td width="250">
+			           				<h:selectOneMenu id="comboUnidadAdministrativa" class="input" style="width:200px" value="#{CUsuarios.comboUnidadAdministrativa}">
+			           					<f:selectItem itemValue="#{CUsuarios.uniAdiminstrativa}" itemLabel="Prueba combo"/>
+			           					<f:selectItems value="#{CUsuarios.unidadAdiminstrativa}" var="vUnidadAdministrativa" itemLabel="#{vUnidadAdministrativa.sDescripcionCat}" />
+			           				</h:selectOneMenu>
+			           			</td>
+			           			<td>
+			           				<h:message for="comboUnidadAdministrativa"    style="color: #E6E6E6;"/>
+			           			</td>			           			
+			           		</tr>	
+			           		<tr>
+			           			<td width="200"><label class="etiqueta">Materia: </label></td>
+			           			<td width="250">
+			           				<h:selectOneMenu id="comboMateria" class="input" style="width:200px" value="#{CUsuarios.comboMateria}">
+			           					<f:selectItem itemValue="#{CUsuarios.materia}" itemLabel="Prueba combo"/>
+			           					<f:selectItems value="#{CUsuarios.materias}" var="vMateria" itemLabel="#{vMateria.sDescripcionCat}" />
+			           				</h:selectOneMenu>
+			           			</td>
+			           			<td>
+			           				<h:message for="comboMateria"    style="color: #E6E6E6;"/>
+			           			</td>			           			
+			           		</tr>	
+			           		<tr>
+			           			<td width="200"><label class="etiqueta">Correo Electronico: </label></td>
+			           			<td width="250">
+			           				<h:inputText id="comboEmail" value ="#{CUsuarios.sesionBean.sCorreoElectronico}"></h:inputText>
+	<!-- 		           				<h:outputText value="#{CUsuarios.sesionBean.sCorreoElectronico}"></h:outputText> -->
+			           			</td>
+			           			<td>
+			           				<h:message for="comboEmail"    style="color: #E6E6E6;"/>
+			           			</td>			           			
+			           		</tr>			           				           				           				           				           				           		
+			           	</table>
+			           	<br/><br/>
+           	
+			           	<table width="100%">
+			           		<tr align="center">
+				           		<td align="right"><h:commandButton value="Aceptar" action="#{CUsuarios.actualizaMiPerfil}" ></h:commandButton></td>
+				           		<td align="left"><h:commandButton value="Cancelar"></h:commandButton></td>
+			           		</tr>
+			           	</table>
+			           </div>   
+			      </div>
+<!-- 			      <div> -->
+<!-- 			      	<h:inputText id="hdIdUser" value="#{CUsuarios.sesionBean.sUser}" type="hidden" /> -->
+<!-- 			      	<h:inputText id="hdIdPerfil" value="#{CUsuarios.usuarioBean.iIdPerfil}" type="hidden" /> -->
+<!-- 			      	<h:inputText id="hdHabUser" value="#{CUsuarios.usuarioBean.iUsuarioHabilitado}" type="hidden" /> -->
+<!-- 			      </div> -->
+	         </div>
+<!-- 	         <p:growl id="growl" showDetail="true" sticky="true" /> -->
+	     </h:form>
+	   </f:view>
+	</h:body>
+ 
+</html>

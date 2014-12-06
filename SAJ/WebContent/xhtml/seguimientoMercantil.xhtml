@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+
+
+	<h:form id="forma">
+		<p:growl id="msgs" showDetail="true" />
+
+
+		<div class="se-sheet">
+			<div class="se-sheet-body">
+
+				<ui:insert name="header">
+					<ui:include src="/plantillas/header.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="logeo">
+					<ui:include src="/plantillas/logeo.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="menuCabecera">
+					<ui:include src="/plantillas/menuCabecera.xhtml" />
+				</ui:insert>
+
+
+					<div class="CAmparo">
+					
+					<div class="titulo"><h:graphicImage library="imagenes" name="Titulos/SAordinariosMercantiles.png"/></div>                  
+	      			<p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>
+					
+						<div class="AmparoRdo">
+							<p:selectOneRadio id="rbSeguimientoMercantil"
+								value="#{CRecepcion.rbSeguimientoMercantil}"
+								autoSubmit="true" style="margin:0 auto;">
+								<f:selectItem itemValue="7" itemLabel="Ordinario Mercantil Local"></f:selectItem>
+								<f:selectItem itemValue="8" itemLabel="Ordinario Mercantil Foraneo"></f:selectItem>
+								<f:ajax event="change"
+									listener="#{CRecepcion.cargarSeguimiento}" render="tblMercantilSeguimiento"></f:ajax>
+							</p:selectOneRadio>
+						</div>
+
+						<div align="right">
+							<h:commandLink>
+								<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+								<p:printer target="tblMercantilSeguimiento" />
+							</h:commandLink>
+						</div>
+
+						<div class="AmparoBusqueda">
+							<table width="100%">
+								<tr>
+									<td align="right">
+										<table>
+											<tr>
+												<td><a>Buscar:</a></td>
+												<td><h:inputText
+														value="#{CRecepcion.txtBusquedaSeg}"></h:inputText></td>
+												<td><h:commandLink
+														action="#{CRecepcion.busquedaTextoSeg}">
+														<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+													</h:commandLink></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!-- 	fin busqueda amparo -->
+
+						<div>
+
+
+
+							<p:dataTable styleClass="tblLocal" id="tblMercantilSeguimiento" var="tblMercantilSeguimiento"
+								value="#{CRecepcion.lsjbSeguimientoMercantil}"
+								editable="true" style="margin-bottom:20px" rendered="true">
+
+								<p:ajax event="rowEdit"
+									listener="#{CRecepcion.onRowEditSeg}"></p:ajax>
+								<p:ajax event="rowEditCancel"
+									listener="#{CRecepcion.onRowCancelSeg}" />
+
+
+								<p:column headerText="Número de Juicio " style="font-size:12px;" styleClass="tabla1">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tblMercantilSeguimiento.numjuicio}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tblMercantilSeguimiento.numjuicio}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Expediente Interno"
+									style="font-size:12px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tblMercantilSeguimiento.expinterno}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{tblMercantilSeguimiento.expinterno}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Actor" style="font-size:12px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tblMercantilSeguimiento.ac_de_pr_qu}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tblMercantilSeguimiento.ac_de_pr_qu}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Organo Jurisdiccional"
+									style="font-size:12px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tblMercantilSeguimiento.descripcion}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tblMercantilSeguimiento.descripcion}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Materia" style="font-size:12px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tblMercantilSeguimiento.descmateria}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tblMercantilSeguimiento.descmateria}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Turnado A:">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tblMercantilSeguimiento.nombrecompleto}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tblMercantilSeguimiento.nombrecompleto}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								
+<!-- 								<p:column headerText="Estado:"> -->
+<!-- 									<p:cellEditor> -->
+<!-- 										<f:facet name="output"> -->
+<!-- 											<h:outputText value="#{tblMercantilSeguimiento.nombrecompleto}" /> -->
+<!-- 										</f:facet> -->
+<!-- 										<f:facet name="input"> -->
+<!-- 											<h:outputText value="#{tblMercantilSeguimiento.nombrecompleto}" /> -->
+<!-- 										</f:facet> -->
+<!-- 									</p:cellEditor> -->
+<!-- 								</p:column>								 -->
+
+								<p:column headerText="Acciones" style="font-size:12px;">
+									<center>
+										<h:commandLink action="#{CDocumentos.cargar(tblMercantilSeguimiento.numjuicio, tblMercantilSeguimiento.ac_de_pr_qu, tblMercantilSeguimiento.numexpediente)}">									
+											<h:graphicImage library="imagenes" name="VerDocRelacionadaaExp.png"></h:graphicImage>
+										</h:commandLink>
+									</center>																		
+								</p:column>
+
+								<p:column headerText="Editar"
+									style="width:32px; font-size:12px;">
+									<p:rowEditor />
+								</p:column>
+
+							</p:dataTable>
+
+
+
+						</div>
+						<!-- 	fin tabla -->
+
+					</div>
+					<!-- 	fin cuerpo -->
+			</div>
+		</div>
+	</h:form>
+
+</h:body>
+
+</html>

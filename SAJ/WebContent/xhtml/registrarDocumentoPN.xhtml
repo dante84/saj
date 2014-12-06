@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>Sistemas de Asuntos Juridicos</title>
+</h:head>
+<h:body>
+	<center>
+		<table width="700px" border="0" cellpadding="0" cellspacing="0">
+		
+			<tr>
+				<td><h:outputLabel value="*Numero de Oficio: " styleClass="etiqueta" /></td>
+				<td>
+				    <h:inputText id="textoNumeroOficioPN" value="#{CArchivoGeneral.textoNumeroOficio}" required="true" requiredMessage="Introduzca un valor"
+						         converterMessage="Solo Numeros">
+					   <f:validateLength maximum="25" />
+					</h:inputText>
+			    </td>
+				<td><h:message for="textoNumeroOficioPN" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Fecha de Oficio: " styleClass="etiqueta" /></td>
+				<td>
+				    <p:calendar required="true" id="textoFechaOficioPN" requiredMessage="Seleccione una Fecha" value="#{CArchivoGeneral.fechaOficio}" 
+				                locale="es" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/>
+				</td>
+				<td><h:message for="textoFechaOficioPN"	styleClass="etiquetaError"/></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Remitente: " styleClass="etiqueta" /></td>
+				<td>
+				    <h:selectOneMenu style=" width: 250px;" id="textoRemitentePN" value="#{CArchivoGeneral.cgbRemitente}" converter="omnifaces.SelectItemsConverter">
+					   <f:selectItem noSelectionOption="true" itemLabel="-- Selecciona remitente --" />
+					   <f:selectItems value="#{CArchivoGeneral.lcgbRemitente}" var="remitente" itemLabel="#{remitente.sDescripcionCat}" />
+					   <f:ajax render="otrosRemitente" />
+					</h:selectOneMenu>
+			    </td>
+				<td><h:message for="textoRemitentePN" styleClass="etiquetaError" /></td>
+			</tr>
+			
+			<tr>
+				<td><h:panelGroup id="otrosRemitente">
+						<h:panelGrid
+							rendered="#{CArchivoGeneral.cgbRemitente.sIdCat == 54}">
+							<table class="tabla">
+								<tr>
+									<td><h:outputLabel value="Otros: " styleClass="etiqueta" /></td>
+									<td><h:inputText id="textoOtrosRemitente"
+											value="#{CArchivoGeneral.textoOtrosRemitente}"
+											required="true" requiredMessage="Introduzca un valor"
+											styleClass="texto">
+											<f:validateLength maximum="500" />
+										</h:inputText></td>
+									<td><h:message for="textoOtrosRemitente"
+											styleClass="etiquetaError" /></td>
+								</tr>
+							</table>
+						</h:panelGrid>
+					</h:panelGroup></td>
+			</tr>
+			
+			<tr>
+				<td><h:outputLabel value="Sintesis: " styleClass="etiqueta" /></td>
+				<td><h:inputTextarea id="textoSintesisPN"
+						value="#{CArchivoGeneral.textoSintesis}">
+						<f:validateLength maximum="1000" />
+					</h:inputTextarea></td>
+				<td><h:message for="textoSintesisPN" styleClass="etiquetaError" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="*Numero de Expediente: " styleClass="etiqueta" /></td>
+				<td>
+				    <h:inputText id="textoNumeroExpedientePN" value="#{CArchivoGeneral.textoNumeroExpediente}" required="true"
+						         requiredMessage="Introduzca un valor" converterMessage="Solo Numeros">
+					   <f:convertNumber type="number" integerOnly="true" />
+						<f:validateLength maximum="25" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroExpedientePN"
+						styleClass="etiquetaError" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="*Ministerio Público / Juez de Distrito: "	styleClass="etiqueta" /></td>
+				<td>
+				    <h:selectOneMenu style=" width: 250px;" id="textoJuezDTOPN"	value="#{CArchivoGeneral.cgbJuezDTO}"
+						             converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true" itemLabel="-- Selecciona MP/JuezDTO--" />
+						<f:selectItems value="#{CArchivoGeneral.lcgbJuezDTO}" var="remitente" itemLabel="#{remitente.sDescripcionCat}" />
+						<f:ajax render="otrosMPJuezDTO" />
+					</h:selectOneMenu>
+				</td>
+				<td><h:message for="textoJuezDTOPN" styleClass="etiquetaError" /></td>
+			</tr>
+			
+			<tr>
+				<td><h:panelGroup id="otrosMPJuezDTO">
+						<h:panelGrid rendered="#{CArchivoGeneral.cgbJuezDTO.sIdCat == 11}">
+							<table class="tabla">
+								<tr>
+									<td><h:outputLabel value="Otros: " styleClass="etiqueta" /></td>
+									<td>
+									    <h:inputText id="textoOtrosJuezDTO"	value="#{CArchivoGeneral.textoOtrosJuezDTO}"
+										             required="true" requiredMessage="Introduzca un valor" styleClass="texto">
+											<f:validateLength maximum="500" />
+										</h:inputText>
+								    </td>
+									<td><h:message for="textoOtrosJuezDTO"
+											styleClass="etiquetaError" /></td>
+								</tr>
+							</table>
+						</h:panelGrid>
+					</h:panelGroup></td>
+			</tr>
+			
+			<tr>
+				<td>
+				    <h:outputLabel value="*Carpeta de Investigación / Averiguación Previa / Causa Penal: " styleClass="etiqueta" style="width: 250px" />
+				</td>
+				<td>
+				    <h:inputText id="textoAveriguacionPreviaPN"	value="#{CArchivoGeneral.textoAveriguacionPrevia}" required="true" 
+				                 requiredMessage="Introduzca un valor">
+						<f:validateLength maximum="500" />
+					</h:inputText>
+			    </td>
+				<td><h:message for="textoAveriguacionPreviaPN" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="Número de Registro: "	styleClass="etiqueta" /></td>
+				<td><h:outputLabel id="textoNumeroRegistroPN" value="#{CArchivoGeneral.textoNumeroRegistro}" /></td>
+				<td><h:message for="textoNumeroRegistroPN" styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="Folio: " styleClass="etiqueta" /></td>
+				<td>
+				    <h:inputText id="textoNumeroFolioPN" value="#{CArchivoGeneral.textoNumeroFolio}" >
+					   <f:validateLength maximum="50" />
+					</h:inputText>
+			    </td>
+				<td><h:message for="textoNumeroFolioPN"	styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td class="txtcuerpo" valign="middle" align="left" colspan="4">
+					<span class="txtcuerpo2"><h:graphicImage library="imagenes" name="linearoja.png" styleClass="linea"/></span>
+				</td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="Nombre del Responsable: " styleClass="etiqueta" /></td>
+				<td><h:outputLabel id="comboResponsablePN" value="#{CArchivoGeneral.lcgbResponsables[0].nombre}" /></td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="Cargo: " styleClass="etiqueta" /></td>
+				<td><h:outputLabel id="etiquetaResponsablePN"
+						for="comboResponsablePN"
+						value="#{CArchivoGeneral.lcgbResponsables[0].descripcionPuesto}" /></td>
+				<td></td>
+			</tr>
+
+
+		</table>
+	</center>
+</h:body>
+
+</html>

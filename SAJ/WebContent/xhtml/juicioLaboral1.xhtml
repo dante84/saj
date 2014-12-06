@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head></h:head> 
+<h:body>
+ 
+   <h:panelGrid rendered="#{CArchivoGeneral.rdoLaboral == 1}">
+				   				   
+	  <table>
+					  
+		 	 <tr>
+				 <td>*Juicio de Amparo:</td>
+				 <td>
+				     <h:inputText id="textoJuicioAmparo" required="true" requiredMessage="Introduce un Valor" 
+				        value="#{CArchivoGeneral.textoJuicioAmparo}" />
+				 </td>
+				 <td><h:message for="textoJuicioAmparo" styleClass="etiquetaError"/></td>
+			 </tr>
+							 
+			 <tr>
+			     <td><h:outputLabel value="Autoridad Laboral: "	styleClass="etiqueta"></h:outputLabel></td>
+			     <td>
+			         <h:selectOneMenu id="comboAutoridad6" value="#{CArchivoGeneral.cgbAutoridad}" converter="omnifaces.SelectItemsConverter" required="true"
+					    requiredMessage="Selecciona un valor" converterMessage="Selecciona un valor">
+					    <f:selectItem itemLabel="-- Selecciona una Autoridad --" noSelectionOption="true" />
+					    <f:selectItems value="#{CArchivoGeneral.listaAutoridad}" var="autoridad" itemLabel="#{autoridad.descripcion}" />
+				     </h:selectOneMenu> <h:message for="comboAutoridad6" styleClass="etiquetaError" />
+		         </td>
+		     </tr>
+							 
+			 <tr>
+				 <td>*Quejoso:</td>
+				 <td><h:inputText id="textoQuejoso6" required="true" requiredMessage="Introduce un Valor" value="#{CArchivoGeneral.textoQuejoso}" /></td>
+				 <td><h:message for="textoQuejoso6" styleClass="etiquetaError"/></td>
+		    </tr>
+							 
+		    <tr>
+			    <td>Acuerdo/Citatorio:</td>
+				<td>
+				    <p:calendar id="fechaAcuerdo6" value="#{CArchivoGeneral.fechaAcuerdo}" locale="es" required="true" requiredMessage="Selecciona un Valor"
+				                converterMessage="El formato de fecha debe ser dd/MM/aaaa"/>
+				</td>
+				<td><h:message for="fechaAcuerdo6" styleClass="etiquetaError"/></td>
+			</tr>
+							 
+	        <tr>
+			    <td>*Síntesis:</td>
+				<td><h:inputTextarea id="textoSintesis6" value="#{CArchivoGeneral.textoSintesis}" required="true" requiredMessage="Introduce un Valor"/></td>
+				<td><h:message for="textoSintesis6" styleClass="etiquetaError"/></td>
+		    </tr>
+							 
+		    <tr>
+				<td>*Fecha de Oficio:</td>
+				<td>
+				    <p:calendar id="fechaOficio6" value="#{CArchivoGeneral.fechaOficio}" locale="es" required="true" requiredMessage="Selecciona un Valor"
+				                converterMessage="El formato de fecha debe ser dd/MM/aaaa"/>
+				</td>
+				<td><h:message for="fechaOficio6" styleClass="etiquetaError"/></td>
+			</tr>
+							 
+			<tr>
+			    <td>Número de Registro:</td>
+				<td><h:outputLabel value="#{CArchivoGeneral.textoNumeroRegistro}" /></td>
+				<td></td>
+ 		    </tr>
+							 
+		    <tr>
+				<td>*Folio:</td>
+				<td><h:inputText id="textoNumeroFolio6" value="#{CArchivoGeneral.textoNumeroFolio}" required="true" requiredMessage="Introduce un Valor"/></td>
+				<td><h:message for="textoNumeroFolio6" styleClass="etiquetaError"/></td>
+			</tr>
+							 
+			<tr>
+			    <td class="txtcuerpo" valign="middle" align="left" colspan="4">
+				    <span class="txtcuerpo2"> 
+					      <h:graphicImage library="imagenes" name="linearoja.png" styleClass="linea" />
+					</span>
+			    </td>
+			</tr>
+							 
+		    <tr>
+       	        <td><h:outputLabel value="Nombre del Responsable: " styleClass="etiqueta"/></td>
+                <td><h:outputLabel id="comboResponsable6" value="#{CArchivoGeneral.lcgbResponsables[0].nombre}"/></td>
+                <td><h:message for="comboResponsable6" styleClass="etiquetaError"/></td>
+            </tr>                           
+                         
+            <tr>
+	            <td><h:outputLabel value="Cargo: " styleClass="etiqueta"/></td>
+	            <td><h:outputLabel value="#{CArchivoGeneral.lcgbResponsables[0].descripcionPuesto}"/></td>
+	            <td></td>
+            </tr>
+							
+			<tr>
+				<td></td>
+			    <td>*Campos Obligatorios.</td>
+			</tr>
+							
+	  </table>
+				 
+    </h:panelGrid> 
+
+</h:body> 
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>Sistemas de Asuntos Juridicos</title>
+</h:head>
+<h:body>
+	<center>
+		<table width="700px" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td><h:outputLabel value="*Numero de Oficio: "
+						styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoNumeroOficio8"
+						value="#{CArchivoGeneral.textoNumeroOficio}" required="true"
+						requiredMessage="Introduzca un valor"
+						converterMessage="Solo Numeros">
+						<f:convertNumber type="number" integerOnly="true" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroOficio8"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Fecha de Oficio: "
+						styleClass="etiqueta" /></td>
+				<td><p:calendar required="true" id="textoFechaOficio8" requiredMessage="Seleccione una Fecha" value="#{CArchivoGeneral.fechaOficio}" 
+				                locale="es" converterMessage="El formato de fecha debe ser dd/MM/aaaa"/></td>
+				<td><h:message for="textoFechaOficio8"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputLabel value="*Remitente: " styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoRemitente8"
+						value="#{CArchivoGeneral.textoRemitente}" required="true"
+						requiredMessage="Introduzca un valor" /></td>
+				<td><h:message for="textoRemitente8" styleClass="etiquetaError" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="*Órgano Jurisdiccional: "
+						styleClass="etiqueta" /></td>
+				<td><h:selectOneMenu id="textoOrganoJurisdiccional"
+						value="#{CArchivoGeneral.cgbOrganoJud}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="Selecciona un valor"
+						converterMessage="Selecciona un valor">
+						<f:selectItem itemLabel="-- Selecciona tipo de Órgano --"
+							noSelectionOption="true" />
+						<f:selectItems value="#{CArchivoGeneral.lcgbOrganoJud}"
+							var="organo" itemLabel="#{organo.sDescripcionCat}" />
+					    <f:ajax render="otrosOrganosJurisdiccionales" />
+					</h:selectOneMenu></td>
+				<td><h:message for="textoOrganoJurisdiccional"
+						styleClass="etiquetaError" /></td>
+			</tr>
+			
+			<tr>
+				<td><h:panelGroup id="otrosOrganosJurisdiccionales">
+						<h:panelGrid
+							rendered="#{CArchivoGeneral.cgbOrganoJud.sIdCat == 5}">
+							<table class="tabla">
+								<tr>
+									<td><h:outputLabel value="Otros: " styleClass="etiqueta" /></td>
+									<td><h:inputText id="textoOtrosOrganosJurisdiccionales"
+											value="#{CArchivoGeneral.textoOtrosOrganosJurisdiccionales}" required="true"
+											requiredMessage="Introduzca un valor" styleClass="texto">
+											<f:validateLength maximum="500" />
+										</h:inputText></td>
+									<td><h:message for="textoOtrosOrganosJurisdiccionales"
+											styleClass="etiquetaError" /></td>
+								</tr>
+							</table>
+						</h:panelGrid>
+					</h:panelGroup></td>
+			</tr>
+			
+			<tr>
+				<td><h:outputLabel value="*Demandado: " styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoDemandado"
+						value="#{CArchivoGeneral.textoActorDemandantePromovente}"
+						required="true" requiredMessage="Introduzca un valor" /></td>
+				<td><h:message for="textoDemandado" styleClass="etiquetaError" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="Sintesis: " styleClass="etiqueta" /></td>
+				<td><h:inputTextarea id="textoSintesis8"
+						value="#{CArchivoGeneral.textoSintesis}" /></td>
+				<td><h:message for="textoSintesis8" styleClass="etiquetaError" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="*Numero de Expediente: "
+						styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoNumeroExpediente8"
+						value="#{CArchivoGeneral.textoNumeroExpediente}" required="true"
+						requiredMessage="Introduzca un valor"
+						converterMessage="Solo Numeros">
+						<f:convertNumber type="number" integerOnly="true" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroExpediente8"
+						styleClass="etiquetaError" /></td>
+			</tr>
+			<tr>
+				<td><h:outputLabel value="*Número de Juicio: "
+						styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoNumeroJuicio8"
+						value="#{CArchivoGeneral.textoNumeroJuicio}" required="true"
+						requiredMessage="Introduzca un valor"
+						converterMessage="Solo Numeros" styleClass="texto">
+						<f:convertNumber type="number" integerOnly="true" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroJuicio8"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+
+			<tr>
+				<td><h:outputLabel value="*Numero de Registro: "
+						styleClass="etiqueta" /></td>
+				<td><h:inputText id="textoNumeroRegistro8"
+						value="#{CArchivoGeneral.textoNumeroRegistro}" required="true"
+						requiredMessage="Introduzca un valor"
+						converterMessage="Solo Numeros">
+						<f:convertNumber type="number" integerOnly="true" />
+					</h:inputText></td>
+				<td><h:message for="textoNumeroRegistro8"
+						styleClass="etiquetaError" /></td>
+			</tr>
+
+			<tr>
+				<td class="txtcuerpo" valign="middle" align="left" colspan="3">
+					<span class="txtcuerpo2"> <h:graphicImage library="imagenes"
+							name="linearoja.png" styleClass="linea" />
+				</span>
+				</td>
+			</tr>
+
+			<tr>
+			<td><h:outputText value="Nombre del Responsable: "
+					styleClass="etiqueta" /></td>
+			<td><h:outputLabel id="comboResponsableOCP"
+					value="#{CArchivoGeneral.lcgbResponsables[0].nombre}" /></td>
+			<td></td>
+		</tr>
+
+		<tr>
+			<td><h:outputLabel value="Cargo: " styleClass="etiqueta" /></td>
+			<td><h:outputLabel style="width:100%"
+					for="textoNombreResponsableOCP"
+					value="#{CArchivoGeneral.cgbResponsables.descripcionPuesto}" /></td>
+			<td></td>
+		</tr>
+		
+		</table>
+	</center>
+</h:body>
+
+</html>

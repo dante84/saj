@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<title>Audiencia Final de Juicio</title>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+	<h:form id="form">
+
+		<div class="se-sheet">
+			<div class="se-sheet-body">
+
+				<ui:insert name="header">
+					<ui:include src="/plantillas/header.xhtml" />
+				</ui:insert>
+				<ui:insert name="logeo">
+					<ui:include src="/plantillas/logeo.xhtml" />
+				</ui:insert>
+				<ui:insert name="menuCabecera">
+					<ui:include src="/plantillas/menuCabecera.xhtml" />
+				</ui:insert>
+
+				<div class="AmparoBusqueda">
+
+					<div class="titulo">
+						<h:graphicImage library="imagenes"
+							name="Titulos/penalOCejecucion.png" />
+					</div>
+					<p:growl id="growl" showDetail="true" sticky="true"
+						globalOnly="true" />
+
+					<div align="right">
+						<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+					</div>
+
+				</div>
+				<div>
+					<center>
+						<table>
+							<tr>
+								<td><h:inputTextarea value="#{CAcciones.txtEjecucion}"
+										style="height: 178px; width: 906px; resize: none" /></td>
+							</tr>
+						</table>
+					</center>
+				</div>
+
+				<div>
+					<center>
+						<table>
+							<tr>
+								<td></td>
+								<td></td>
+								<td align="center"><p:commandLink>
+										<h:graphicImage library="imagenes" name="guardar.png"
+											width="110px" height="24px"></h:graphicImage>
+									</p:commandLink></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</center>
+				</div>
+			</div>
+		</div>
+	</h:form>
+
+	<ui:insert name="fotter">
+		<ui:include src="/plantillas/footer.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head></h:head>
+<h:body>
+	<table style="clear: both;">
+		<tr>
+			<td><h:outputLabel value="*Expediente Laboral: "
+					styleClass="etiqueta" /></td>
+			<td><h:inputText id="textoExpLaboral3"
+					value="#{CArchivoGeneral.textoExpLaboral}" required="true"
+					requiredMessage="Introduzca un valor" /></td>
+			<td><h:message for="textoExpLaboral3" /></td>
+		</tr>
+		<tr>
+			<td><h:outputLabel value="Actor: " styleClass="etiqueta" /></td>
+			<td><h:inputText id="textoActor3" value="#{CArchivoGeneral.textoActor}"
+					requires="true" requiredMessage="introduzca un valor"></h:inputText>
+			</td>
+			<td><h:message for="textoActor3"></h:message></td>
+		</tr>
+
+		<tr>
+			<td><h:outputLabel value="Autoridad Laboral: "
+					styleClass="etiqueta"></h:outputLabel></td>
+			<td><h:selectOneMenu id="textoAutoridadLaboral3" value="#{CArchivoGeneral.cgbAutoridad}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Selecciona un valor"
+					converterMessage="Selecciona un valor">
+					<f:selectItem itemLabel="-- Selecciona una Autoridad --"
+						noSelectionOption="true" />
+					<f:selectItems value="#{CArchivoGeneral.listaAutoridad}"
+						var="autoridad" itemLabel="#{autoridad.descripcion}" />
+				</h:selectOneMenu> <h:message for="textoAutoridadLaboral3" styleClass="etiquetaError" /></td>
+		</tr>
+
+		<tr>
+			<td><h:outputLabel value="Sintesis: " styleClass="etiqueta" /></td>
+			<td style="float: left;"><h:inputTextarea id="textoSintesis3"
+					value="#{CArchivoGeneral.textoSintesis}" /> <h:message
+					for="textoSintesis3" styleClass="etiquetaError" /></td>
+			<td></td>
+		</tr>
+
+		<tr>
+			<td><h:outputLabel value="*Fecha de Oficio: " styleClass="etiqueta" /></td>
+			<td>
+			    <p:calendar id="textoFexhaOficio3" required="true" requiredMessage="Seleccione una Fecha" value="#{CArchivoGeneral.fechaOficio}" locale="es"
+					        styleClass="texto" converterMessage="El formato de fecha debe ser dd/MM/aaaa" />
+			</td>
+			<td><h:message for="textoFexhaOficio3" styleClass="etiquetaError" /></td>
+		</tr>
+
+		<tr>
+			<td><h:outputLabel value="*Cedula de Notificación: "
+					styleClass="etiqueta" /></td>
+			<td style="float: left;"><h:inputText id="textoCedNotificacion3"
+					value="#{CArchivoGeneral.textoCedNotificacion}" required="true"
+					requiredMessage="Introduzca un valor"
+					converterMessage="Solo Numeros" styleClass="texto">
+					<f:convertNumber type="number" integerOnly="true" />
+				</h:inputText> <h:message for="textoCedNotificacion3" styleClass="etiquetaError" />
+			</td>
+		</tr>
+
+		<tr>
+			<td><h:outputLabel value="*Numero de Registro: "
+					styleClass="etiqueta" /></td>
+			<td style="float: left;"><h:inputText id="textoNumeroRegistro3"
+					value="#{CArchivoGeneral.textoNumeroRegistrol}" required="true"
+					requiredMessage="Introduzca un valor"
+					converterMessage="Solo Numeros" styleClass="texto">
+					<f:convertNumber type="number" integerOnly="true" />
+				</h:inputText> <h:message for="textoNumeroRegistro3" styleClass="etiquetaError" />
+			</td>
+		</tr>
+
+		<tr>
+			<td><h:outputLabel value="Folio: " styleClass="etiqueta" /></td>
+			<td style="float: left;"><h:inputText id="textoFolio3"
+					value="#{CArchivoGeneral.textoFoliol}" styleClass="texto" /> <h:message
+					for="textoFolio3" styleClass="etiquetaError" /></td>
+		</tr>
+
+		<!-- 		<tr> -->
+		<!-- 			<td><h:outputLabel value="Adjuntar Documento: " -->
+		<!-- 					styleClass="etiqueta" /></td> -->
+		<!-- 			<td style="float: left;"><p:fileUpload -->
+		<!-- 					value="#{CArchivoGeneral.archivoAdjuntadol}" mode="simple" /> <h:message -->
+		<!-- 					for="adjuntal" /></td> -->
+		<!-- 		</tr> -->
+		<tr>
+			<td class="txtcuerpo" valign="middle" align="left" colspan="4">
+				<span class="txtcuerpo2"> <h:graphicImage library="imagenes"
+						name="linearoja.png" styleClass="linea" />
+			</span>
+			</td>
+		</tr>
+
+		<tr>
+			<td><h:outputText value="Nombre del Responsable: "
+					styleClass="etiqueta" /></td>
+			<td><h:selectOneMenu id="textoNombreResponsable3" 
+			value="#{CArchivoGeneral.cgbResponsables}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="-- Selecciona responsable --" />
+					<f:selectItems value="#{CArchivoGeneral.lcgbResponsables}"
+						var="responsable" itemLabel="#{responsable.sIdCat}" />
+					<f:ajax render="etiquetaResponsable" />
+				</h:selectOneMenu> <h:message for="textoNombreResponsable3" /></td>
+			<td></td>
+		</tr>
+
+		<tr>
+			<td><h:outputLabel value="Cargo: " styleClass="etiqueta" /></td>
+			<td><h:outputLabel for="textoNombreResponsable3"
+					value="#{CArchivoGeneral.cgbResponsables.sDescripcionCat}" /></td>
+			<td></td>
+		</tr>
+		
+	</table>
+</h:body>
+</html>

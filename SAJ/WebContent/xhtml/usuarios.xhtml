@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+<h:head>      
+    <h:outputStylesheet library="css" name="Style.css"/>
+    <title>Sistema de Recepción y Archivo de Asuntos Jurídicos</title>
+    		
+</h:head>
+ 
+<h:body>        
+   <f:view>
+      
+     <h:form> 
+     
+         <div class="se-sheet"> 
+              <div class="se-sheet-body">
+             
+                   <ui:insert name="header" >
+		               <ui:include src="/plantillas/header.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="logeo" >
+		               <ui:include src="/plantillas/logeo.xhtml" />
+		           </ui:insert>
+		       
+		           <ui:insert name="menuCabecera" >
+ 		               <ui:include src="/plantillas/menuCabecera.xhtml" />
+		           </ui:insert>		       		   
+		      </div>
+		      
+		      	<div class="Contenedor">
+					<div class="titulos3">
+		   			<hr/>
+							USUARIOS
+		   			<hr />
+		  			</div>
+		  			
+		  			<div id="resultado" style="display: block; height: inherit;" align="center">
+						<table id="list4" class="scroll" ><tr><td/></tr></table> 
+							<div id="pager" class="scroll" style="text-align:center">
+							</div> 
+				    </div>		
+				    <h:panelGrid columns="1" width="100%" >
+				    	<center>				    
+				    		<h:commandButton id="idbotonA" class="boton" value="Agregar" action="doAgregausuario" />
+				    	</center>
+				    	<br/>
+				    	<center>
+				    		<h:graphicImage library="imagenes" name="ajaxloader.gif"/>
+				    	</center>				    					    
+				    </h:panelGrid>		    
+		  			
+	  			</div>	  
+         </div>
+ 
+     </h:form> 
+   </f:view>
+</h:body>
+ 
+</html>
+

@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<h:outputStylesheet library="css" name="principal.css" />
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+
+
+	<h:form id="forma">
+		<p:growl id="msgs" showDetail="true" />
+
+
+		<div class="se-sheet">
+			<div class="se-sheet-body">
+
+				<ui:insert name="header">
+					<ui:include src="/plantillas/header.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="logeo">
+					<ui:include src="/plantillas/logeo.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="menuCabecera">
+					<ui:include src="/plantillas/menuCabecera.xhtml" />
+				</ui:insert>
+
+
+					<div class="CAmparo">
+						<div class="AmparoRdo">
+							<p:selectOneRadio id="rdoAmparo"
+								value="#{CAsuntosJuridicos.rdoSeguimientoAmparo}"
+								autoSubmit="true" style="margin:0 auto;">
+								<f:selectItem itemValue="2" itemLabel="Amparo Local"></f:selectItem>
+								<f:selectItem itemValue="3" itemLabel="Amparo Foraneo"></f:selectItem>
+								<f:ajax event="change" listener="#{CAsuntosJuridicos.cargarSeguimiento}" render="tbl1"></f:ajax>
+							</p:selectOneRadio>
+						</div>
+
+						<div align="right">
+							<h:commandLink>
+								<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>
+								<p:printer target="tbl1" />
+							</h:commandLink>
+						</div>
+
+						<div class="AmparoBusqueda">
+							<table width="100%">
+								<tr>
+									<td align="right">
+										<table>
+											<tr>
+												<td><a>Buscar:</a></td>
+												<td><h:inputText
+														value="#{CAsuntosJuridicos.txtBusquedaSeg}"></h:inputText></td>
+												<td><h:commandLink
+														action="#{CAsuntosJuridicos.busquedaPorTextoSeg}">
+														<h:graphicImage library="imagenes" name="buscarNegro.png"></h:graphicImage>
+													</h:commandLink></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!-- 	fin busqueda amparo -->
+
+						<div>
+
+
+
+							<p:dataTable id="tbl1" var="tbl"
+								value="#{CAsuntosJuridicos.datosSeguimientoAmparo}"
+								editable="true" style="margin-bottom:20px" rendered="true">
+
+								<p:ajax event="rowEdit"
+									listener="#{CAsuntosJuridicos.onRowEditSeg}"></p:ajax>
+								<p:ajax event="rowEditCancel"
+									listener="#{CAsuntosJuridicos.onRowCancelSeg}" />
+
+
+								<p:column headerText="NÚMERO DE JUICIO" style="font-size:12px;" styleClass="tabla1">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.numjuicio}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.numjuicio}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="EXPEDIENTE INTERNO"
+									style="font-size:12px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.expinterno}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{CAsuntosJuridicos.expinterno}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="PROMOVENTE" style="font-size:12px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.ac_de_pr_qu}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.ac_de_pr_qu}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="ORGANO JURISDICCIONAL"
+									style="font-size:12px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.descripcion}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.descripcion}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="MATERIA" style="font-size:12px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.descmateria}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.descmateria}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="TURNADO A:">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{tbl.nombrecompleto}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:outputText value="#{tbl.nombrecompleto}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Acciones" style="font-size:12px;">
+									<h:commandLink action="#{CDocumentos.cargar(tbl.numjuicio, tbl.ac_de_pr_qu, tbl.numexpediente)}">
+										<h:graphicImage library="imagenes" name="ConsultarDoc.png"></h:graphicImage>
+									</h:commandLink>
+									<h:commandLink>
+										<h:graphicImage library="imagenes" name="TurnarDoc.png"></h:graphicImage>
+									</h:commandLink>
+								</p:column>
+
+								<p:column headerText="Editar"
+									style="width:32px; font-size:12px;">
+									<p:rowEditor />
+								</p:column>
+
+							</p:dataTable>
+
+
+
+						</div>
+						<!-- 	fin tabla -->
+
+					</div>
+					<!-- 	fin cuerpo -->
+			</div>
+		</div>
+	</h:form>
+
+
+
+</h:body>
+
+</html>

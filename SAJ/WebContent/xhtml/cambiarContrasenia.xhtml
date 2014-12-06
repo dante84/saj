@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>      
+    
+</h:head>
+ 
+<h:body >
+	<f:view>
+
+		<h:form id="forma">
+
+			<div class="se-sheet">
+				<div class="se-sheet-body">
+
+					<ui:insert name="header">
+						<ui:include src="/plantillas/header.xhtml" />
+					</ui:insert>
+
+					<ui:insert name="logeo">
+						<ui:include src="/plantillas/logeo.xhtml" />
+					</ui:insert>
+
+					<ui:insert name="menuCabecera">
+						<ui:include src="/plantillas/menuCabecera.xhtml" />
+					</ui:insert>
+					
+					<div>
+						<table>
+							<tr>
+								<td>
+									Contraseña:
+								</td>
+								<td width="500">
+									<h:inputSecret value="#{CUsuario.oldPass}" class="input1" id="txtPwdAnterior"></h:inputSecret><h:message for="forma:txtPwdAnterior"    style="color: red;"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Nueva contraseña:
+								</td>
+								<td>
+									<h:inputSecret value="#{CUsuario.pass}" class="input1" id="txtNuevaPwd"></h:inputSecret><h:message for="forma:txtNuevaPwd"    style="color: red;"/> 
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Confirmar contraseña:
+								</td>
+								<td>
+									<h:inputSecret value="#{CUsuario.cPass}" class="input1" id="txtConfirPwd"></h:inputSecret><h:messages for="txtConfirPwd"    style="color: red; width=300px;"/> 
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center" style="height: 30px">
+								 <h:message for="x" />
+								</td>
+							</tr>
+						</table>
+						<h:commandButton id="x" value="Aceptar" action="#{CUsuario.cambiaContrasenia}"/>
+					</div>
+			         
+				</div>
+			</div>
+			
+			
+			
+		</h:form>
+		
+	</f:view>
+</h:body>
+ 
+</html>

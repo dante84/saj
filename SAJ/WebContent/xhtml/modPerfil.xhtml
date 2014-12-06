@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<h:outputStylesheet library="css" name="Style.css" />
+</h:head>
+
+<h:body>
+	<f:view>
+
+		<h:form>
+			<ui:insert name="header"> <ui:include src="/plantillas/header.xhtml" /> </ui:insert>
+			<ui:insert name="logeo"> <ui:include src="/plantillas/logeo.xhtml" /> </ui:insert>
+			<ui:insert name="menuCabecera"> <ui:include src="/plantillas/menuCabecera.xhtml" /> </ui:insert>
+
+				<div class="se-sheet">
+					<div class="se-sheet-body">
+						<div class="contenedor">
+							<div class="titulo3">
+								<hr />
+								<center>Modificar Perfil</center>
+								<hr />
+								<h:inputText id="itUsuarioActual" style="display:none" value="#{sesionBean.sUser}" />
+								<h:inputText id="itPerfil" style="display:none" value="#{CAdministracion.sIdPerfil}" />
+								<br /><br />
+								<table>
+									<tr align="left">
+										<td width="200" align="left"><label class="etiqueta">Nombre del Perfil: </label></td>
+										<td width="200" ><p:inputText value="#{CAdministracion.sDescripcionCat}" /></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td>											
+											<br/><br/>
+											<f:facet name="start" />
+											<label>Menu Administrador</label> 													
+												<p:selectManyCheckbox  value="#{CAdministracion.selPerfil}" >
+													<f:selectItem itemValue="1" itemLabel="Usuarios"/>
+													<f:selectItem itemValue="2" itemLabel="Bitácora"/>
+													<f:selectItem itemValue="3" itemLabel="catálogos"/>
+													<f:selectItem itemValue="4" itemLabel="Perfiles"/>
+													<f:selectItem itemValue="5" itemLabel="Registrar Documento"/>
+													<f:selectItem itemValue="6" itemLabel="Consultar Documento"/>
+													<f:selectItem itemValue="8" itemLabel="Descargo"/>
+													<f:selectItem itemValue="7" itemLabel="Eliminar Documento"/>
+												</p:selectManyCheckbox>
+											<br/>
+										</td>
+									</tr>
+								</table>
+								<div>
+									<table width="100%">
+										<tr align="center">
+											<td align="center"><h:commandButton value="Aceptar" action="#{CAdministracion.actualizarPerfil}" /></td>
+											<td align="center"><h:commandButton value="Cancelar" ></h:commandButton></td>
+										</tr>
+									</table>
+								</div>								
+							</div>
+						</div>
+					</div>
+				</div>
+		</h:form>
+	</f:view>
+</h:body>
+</html>

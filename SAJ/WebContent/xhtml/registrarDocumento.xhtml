@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head><h:outputScript name="es.js" library="js"/></h:head> 
+
+<h:body>
+
+   <h:outputStylesheet library="css" name="Style.css"/>
+    
+   <h:form>  
+      <ui:insert name="header"><ui:include src="/plantillas/header.xhtml"/></ui:insert>		       
+	  <ui:insert name="logeo" ><ui:include src="/plantillas/logeo.xhtml" /></ui:insert>		       
+	  <ui:insert name="menuCabecera"><ui:include src="/plantillas/menuCabecera.xhtml"/></ui:insert>
+   </h:form>
+   
+   <div class="se-sheet"> 
+        <div class="se-sheet-body">                                  
+             <div class="contenedor">
+	              		 	   		       			  
+                  <div class="titulo"><h:graphicImage library="imagenes" name="Registrar-Doc.png"/></div>
+                  
+                  <p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>                                    
+	                	                             
+		          <h:form id="forma" styleClass="formaFaces">
+		          
+		             <table class="tabla">
+                               
+                            <!-- Comunes -->
+                                
+                       		<tr>
+                           		<td><h:outputLabel value="*Tipo de Juicio: " styleClass="etiqueta"/></td>
+                           	    <td>  
+                                    <h:selectOneMenu id="comboJuicios" value="#{CArchivoGeneral.cgbJuicios}" converter="omnifaces.SelectItemsConverter" 
+		                                             required="true" requiredMessage="Selecciona un valor" converterMessage="Selecciona un valor">
+			                           <f:selectItem  itemLabel="-- Selecciona tipo de Juicio --" noSelectionOption="true"/>
+	                                   <f:selectItems value="#{CArchivoGeneral.lcgbJuicios}" var="juicio" itemLabel="#{juicio.sDescripcionCat}"/>
+		                               <f:ajax listener="#{CArchivoGeneral.listenerJuicios}" render="cuerpo" />
+	                                </h:selectOneMenu>
+	                            </td>
+	                            <td><h:message for="comboJuicios" styleClass="etiquetaError"/></td>
+					        </tr>
+					        
+					 </table>
+					 
+					 <h:panelGroup>
+					        					        
+					  	<h:panelGroup id="cuerpo">
+					  						  	    					  	   
+					       <h:panelGrid rendered="#{CArchivoGeneral.cgbJuicios.sIdCat == 1}">
+					       	  <ui:insert name="juicios" ><ui:include src="Jagrario.xhtml" /></ui:insert>
+					       </h:panelGrid>
+					       <h:panelGrid rendered="#{CArchivoGeneral.cgbJuicios.sIdCat == 2 or CArchivoGeneral.cgbJuicios.sIdCat == 3 or CArchivoGeneral.cgbJuicios.sIdCat == 4}">
+					       	  <ui:insert name="juicios" ><ui:include src="juiciosAForaneoLocalMinas.xhtml"/></ui:insert>
+					   	   </h:panelGrid>
+					       <h:panelGrid rendered="#{CArchivoGeneral.cgbJuicios.sIdCat == 6}">
+					    	  <ui:insert name="juicios" ><ui:include src="juicioLaboral.xhtml" /></ui:insert>
+					       </h:panelGrid>					   	   					       
+					       <h:panelGrid rendered="#{CArchivoGeneral.cgbJuicios.sIdCat == 7 or CArchivoGeneral.cgbJuicios.sIdCat == 9 or CArchivoGeneral.cgbJuicios.sIdCat == 14 }">
+					    	  <ui:insert name="juicios" ><ui:include src="registrarDocumentoML.xhtml" /></ui:insert>
+					       </h:panelGrid>					       					       
+					       <h:panelGrid rendered="#{CArchivoGeneral.cgbJuicios.sIdCat == 8 or CArchivoGeneral.cgbJuicios.sIdCat == 10 or CArchivoGeneral.cgbJuicios.sIdCat == 15 }">
+					    	  <ui:insert name="juicios" ><ui:include src="registrarDocumentoMF.xhtml" /></ui:insert>
+					       </h:panelGrid>					       
+					       <h:panelGrid rendered="#{CArchivoGeneral.cgbJuicios.sIdCat == 11 }">
+					    	  <ui:insert name="juicios" ><ui:include src="registrarDocumentoOCP.xhtml" /></ui:insert>
+					       </h:panelGrid>
+					       <h:panelGrid rendered="#{CArchivoGeneral.cgbJuicios.sIdCat == 12 }">
+					    	  <ui:insert name="juicios" ><ui:include src="registrarDocumentoPN.xhtml" /></ui:insert>
+					       </h:panelGrid>
+					       					       
+					   	</h:panelGroup>
+					   						    
+			         </h:panelGroup>  				         
+                     
+                     <h:commandButton action="#{CArchivoGeneral.registraExpediente}"  image="../resources/imagenes/Registrar.png"/>                     
+                                          
+			         <h:commandButton actionListener="#{CArchivoGeneral.limpiaForma}" image="../resources/imagenes/cancelarg.png"/>
+                                       
+			         <p:dialog widgetVar="dlg" resizable="false" modal="true" fixedCenter="true" height="100px" width="300px">
+			                                      
+                        <h:outputLabel value="Juicio registrado correctamente ¿Desea generar volante?"/>
+ 
+                        <h:panelGrid columns="2" cellpadding="5">
+                        
+                           <p:commandLink>
+                              <h:graphicImage library="imagenes" name="Aceptar.png" width="110px" height="24px"/>
+                           </p:commandLink>
+                                                      
+                           <p:commandLink onclick="PF('dlg').hide();">
+                              <h:graphicImage library="imagenes" name="no.png" width="110px" height="24px"/>
+                           </p:commandLink>
+                        
+                        </h:panelGrid>
+                                                   
+                     </p:dialog>
+			         				  				        					                                                                                                                                                                            
+                  </h:form>
+                  
+             </div>                                   
+        </div>           
+   </div>           
+                           		 		          		                                      		             		           
+</h:body>
+ 
+</html>

@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+            http://www.springframework.org/schema/faces
+            http://www.springframework.org/schema/faces/spring-faces-2.2.xsd"        
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+       
+                        
+       <bean id="DataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+<!-- 		 <property name="jndiName" value="jndi/desarrollo" /> -->
+  		 <property name="jndiName" value="jndi/130"   />
+<!--         <property name="jndiName" value="jndi/local"         /> -->
+<!-- 			 <property name="jndiName" value="JNDI/Carlos" /> -->
+
+  	   </bean>
+  	   
+  	   <!-- JDBC TEMPLATE -->
+  	   
+	   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		     <constructor-arg>
+			    <ref bean="DataSource" /> 
+		     </constructor-arg>
+	   </bean>
+	
+	   <!-- TRANSACTION MANAGER (TX) -->
+	   
+	   <bean id="TransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		     <property name="dataSource" ref="DataSource" />
+	   </bean>
+                   
+       <!-- DAO -->
+            
+       <bean id="gestionaAccesoDAO" class="mx.gob.se.sraaj.persistencia.daoImpl.GestionaAccesoDAOImpl" scope="request">
+             <property name="accesoSP" ref="accesoSP"/>
+       </bean>
+       
+       <bean id="usuarioDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.UsuarioDAOImpl" scope="request">
+             <property name="usuarioInfoSP" ref="usuarioInfoSP"/>
+             <property name="cambiaPwdSP" ref="cambiaPwdSP"/>
+             <property name="repUsuarioSP" ref="repUsuarioSP"/>
+       </bean>
+       
+       <bean id="gestionaCatDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.GestionaCatDAOImpl" scope="session">
+             <property name="catTipoJuicioSP" 								ref="catTipoJuicioSP"/>
+             <property name="catResponsableSP" 								ref="catResponsableSP"/>
+             <property name="catDescargoSP"									ref="catDescargoSP"/>
+             <property name="catCircuitoSP"									ref="catCircuitoSP"/>
+             <property name="catEstadosSP"									ref="catEstadosSP"/>
+             <property name="repRemitenteSP"								ref="repRemitenteSP"/>
+             <property name="repCJFSP"										ref="repCJFSP"/>
+             <property name="repCircuitoSP"									ref="repCircuitoSP"/>
+             <property name="repClsDocumentalSP"							ref="repClsDocumentalSP" />
+             <property name="repDelegMetropolitanaSP"						ref="repDelegMetropolitanaSP"/>
+             <property name="repDepartamentoSP"								ref="repDepartamentoSP"/>
+             <property name="repIncidenteSuspensionSP"						ref="repIncidenteSuspensionSP"/>
+             <property name="repInstruccionSP"								ref="repInstruccionSP"/>
+             <property name="repJuntaEspecialSP"							ref="repJuntaEspecialSP"/>
+             <property name="repJuntaLocalSP"								ref="repJuntaLocalSP"/>
+             <property name="repJuzgadosConciliacionSP"						ref="repJuzgadosConciliacionSP"/>
+             <property name="repJuzgadoTribunalSP"							ref="repJuzgadoTribunalSP"/>
+             <property name="repMateriaSP"									ref="repMateriaSP"/>
+             <property name="repMinistroInstructorSP"						ref="repMinistroInstructorSP"/>
+             <property name="repPGJSP"										ref="repPGJSP"/>
+             <property name="modPerfilSP"									ref="modPerfilSP"/>
+             <property name="obtieneJuzgadosSP" 							ref="obtieneJuzgadosSP"/>
+             <property name="insertaNuevoDocumentoSP" 						ref="insertaNuevoDocumentoSP"/>
+             <property name="busquedaDocumentoSP" 							ref="busquedaDocumentoSP"/>
+             <property name="catOrganoJudSP"                                ref="catOrganoJudSP"/>
+             <property name="insertaAmparoFLMSP"                            ref="insertaAmparoFLMSP"/>
+             <property name="insertaAgrario"                                ref="insertaAgrario"/>
+             <property name="insertarActualizarDesacargoSP"                 ref="insertarActualizarDesacargoSP" />
+             <property name="insertaNuevoDocumentoMFSP"                     ref="insertaNuevoDocumentoMFSP" />
+             <property name="insertaNuevoDocumentoMLSP"                     ref="insertaNuevoDocumentoMLSP" />
+             <property name="insertaNuevoDocumentoPNSP"                     ref="insertaNuevoDocumentoPNSP"/>
+             <property name="catJuezDTOSP"                                  ref="catJuezDTOSP" />
+             <property name="catRemitenteSP"                                ref="catRemitenteSP"/>
+             <property name="obtenNumeroRegistroSP"                         ref="obtenNumeroRegistroSP"/>
+             <property name="insertaLaboralSP"                              ref="insertaLaboralSP"/>
+             <property name="selectNumeroRegistroSP"                        ref="selectNumeroRegistroSP"/>
+             <property name="catTurnadoSP"                                  ref="catTurnadoSP"/>
+             <property name="catPuestoSP"                                   ref="catPuestoSP"/>
+             <property name="consultaEditarDocumentoSP"                     ref="consultaEditarDocumentoSP"/>
+       </bean>
+       
+       <bean id="administracionDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.AdministracionDAOImpl" scope="request">
+             <property name="muestraPerfilesSP" ref="muestraPerfilesSP"/>
+       </bean>
+       
+       <bean id="gestionaExpedienteDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.GestionaExpedienteDAOImpl" scope="request">
+       		 <property name="reporteDocumentoDescargoSP" ref="reporteDocumentoDescargoSP"/>
+       </bean>
+       
+       <bean id="menusDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.MenusDAOImpl" scope="request">
+       		<property name="selCatMenuSP" 					ref="selCatMenuSP"></property>
+       </bean>
+
+       <bean id="perfilDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.PerfilDAOImpl" scope="request">
+       		<property name="permisosPerfilSP" 					ref="permisosPerfilSP"></property>
+       </bean>
+       
+       <bean id="recepcionDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.RecepcionDAOImpl" scope="request">
+       		<property name="repRecepcionAmparosForaneosSP"				ref="repRecepcionAmparosForaneosSP"/>
+       		<property name="repRecepcionAmparosLocalesSP"				ref="repRecepcionAmparosLocalesSP"/>
+       		<property name="repRecepcionMinasSP"                        ref="repRecepcionMinasSP"/>
+       </bean>
+       
+       <bean id="administracionAgrarioLaboralDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.AdministracionAgrarioLaboralImpl" scope="request">
+         <property name="catTribunalSP" ref="catTribunalSP"/>
+         <property name="catAutoridadSP" ref="catAutoridadSP"/>
+       </bean>
+       
+        <bean id="seguimientoDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.SeguimientoDAOImpl" scope="session">
+             <property name="seguimientoSP"                ref="seguimientoSP"/>
+             <property name="catTribunalSP"                ref="catTribunalSP"/>
+             <property name="catMateriaSP"                 ref="catMateriaSP"/>
+             <property name="actualizarAsuntosJuridicosSP" ref="actualizarAsuntosJuridicosSP"/>
+             <property name="actualizaJuicioAgrarioSP"     ref="actualizaJuicioAgrarioSP"/>
+             <property name="seguimientoJuiciosSP"         ref="seguimientoJuiciosSP"/>
+             <property name="actualizaAmparoAgrarioSegSP"  ref="actualizaAmparoAgrarioSegSP"/>
+             <property name="consultaRecepcionSP"          ref="consultaRecepcionSP"/>
+             <property name="documentosRelSP"              ref="documentosRelSP"/>
+             <property name="consultarSP"                  ref="consultarSP"/>
+       </bean>
+       
+       <bean id="seguimientoJuiciosSP" class="mx.gob.se.sraaj.persistencia.sp.SeguimientoJuiciosSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ASUNTOSJURIDICOSPKG.sp_SegAsuntosJuridicosTBL"/>
+       </bean>
+       
+       <bean id="actualizaAmparoAgrarioSegSP" class="mx.gob.se.sraaj.persistencia.sp.ActualizaAmparoAgrarioSegSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ASUNTOSJURIDICOSPKG.actualizaAmparoAgrarioSegSP"/>
+       </bean>
+       
+       <bean id="actualizaJuicioAgrarioSP" class="mx.gob.se.sraaj.persistencia.sp.ActualizaJuicioAgrarioSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ASUNTOSJURIDICOSPKG.actualizaJuicioAgrarioSP"/>
+       </bean>
+          
+       <bean id="catTurnadoSP" class="mx.gob.se.sraaj.persistencia.sp.CatTurnadoSP" scope="session">
+		 	 <constructor-arg ref="DataSource"/>
+		 	 <constructor-arg type="java.lang.String" value="SEJURIDICO.SELECTORPKG.selTurnado"/>
+	   </bean>
+       
+       <bean id="turnadoSP" class="mx.gob.se.sraaj.persistencia.sp.TurnadoSP" scope="session">
+		 	 <constructor-arg ref="DataSource"/>
+		 	 <constructor-arg type="java.lang.String" value="SEJURIDICO.SELECTORPKG.selTurnado"/>
+	   </bean>
+       
+       <bean id="catMateriaSP" class="mx.gob.se.sraaj.persistencia.sp.CatMateriaSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.SELECTORPKG.selMateria"/>
+       </bean> 
+       
+       <bean id="seguimientoSP" class="mx.gob.se.sraaj.persistencia.sp.SeguimientoSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ASUNTOSJURIDICOSPKG.sp_AsuntosJuridicosTBL"/>
+       </bean>
+       
+       <bean id="bitacoraDAOImpl" class="mx.gob.se.sraaj.persistencia.daoImpl.BitacoraDAOImpl" scope="session">
+         <property name="historialDocumentoSP" ref="historialDocumentoSP"/>
+       </bean>
+       
+       <!-- SP  -->
+       <bean id="penalTblSP" class="mx.gob.se.sraaj.persistencia.sp.PenalTblSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.PENALPKG.sp_PenalTBL"/>
+       </bean>
+       <bean id="catPenalSP" class="mx.gob.se.sraaj.persistencia.sp.CatPenalSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.PENALPKG.sp_CatPenal"/>
+       </bean>
+       <bean id="catTurnarASP" class="mx.gob.se.sraaj.persistencia.sp.CatTurnarASP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.PENALPKG.sp_CatTurnar"/>
+       </bean>
+                            
+       <bean id="historialDocumentoSP" class="mx.gob.se.sraaj.persistencia.sp.HistorialDocumentoSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.historialDocumentoSP"/>
+       </bean>
+  		
+	   <bean id="consultarSP" class="mx.gob.se.sraaj.persistencia.sp.ConsultarSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ASUNTOSJURIDICOSPKG.sp_consultaDocTBL"/>
+       </bean>
+       
+        <bean id="documentosRelSP" class="mx.gob.se.sraaj.persistencia.sp.DocumentosRelSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ASUNTOSJURIDICOSPKG.sp_obtenerDocumentosRelTBL"/>
+       </bean>
+                    
+       <!-- SP -->      
+       
+       <bean id="muestraPerfilesSP" class="mx.gob.se.sraaj.persistencia.sp.MuestraPerfilesSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repPerfiles"/>
+       </bean> 
+       
+       <bean id="accesoSP" class="mx.gob.se.sraaj.persistencia.sp.AccesoSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.SRAAJPKG.validaUsuario"/>
+       </bean>                  
+       
+       <bean id="usuarioInfoSP" class="mx.gob.se.sraaj.persistencia.sp.UsuarioInfoSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.SRAAJPKG.selUsuario"/>
+       </bean>
+       
+       <bean id="catTipoJuicioSP" class="mx.gob.se.sraaj.persistencia.sp.CatTipoJuicioSP" scope="request">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.SELECTORPKG.selTipoJuicio"/>
+	   </bean>
+	   
+	   <bean id="repUsuarioSP" class="mx.gob.se.sraaj.persistencia.sp.RepUsuarioSP" scope="request">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.SRAAJPKG.repUsuario"/>
+	   </bean>
+	   
+	   <bean id="cambiaPwdSP" class="mx.gob.se.sraaj.persistencia.sp.CambiaPwdSP" scope="request">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.SRAAJPKG.updPassword"/>
+	   </bean>
+
+	   <bean id="catPuestoSP" class="mx.gob.se.sraaj.persistencia.sp.CatPuestoSP" scope="request">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.SELECTORPKG.selPuesto"/>
+	   </bean>  
+	        	   
+	   <bean id="catDepartamentoSP" class="mx.gob.se.sraaj.persistencia.sp.CatDepartamentoSP" scope="request">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.SELECTORPKG.selDepartamento"/>	   
+	   </bean>
+	   
+	   <bean id="catUnidadAdministrativaSP" class="mx.gob.se.sraaj.persistencia.sp.CatUnidadAdministrativaSP" scope="request"> 
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.SELECTORPKG.selUnidadAdministrativa"/>	   
+	   </bean>
+	   	
+	   <bean id="catResponsableSP" class="mx.gob.se.sraaj.persistencia.sp.CatResponsableSP">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.SELECTORPKG.selResponsable"/>
+	   </bean>
+	   
+	   <bean id="catDescargoSP" class="mx.gob.se.sraaj.persistencia.sp.CatDescargoSP" scope="request">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" 	value="SEJURIDICO.SELECTORPKG.selDescargo" />
+	   </bean>
+	   
+	   	<bean id="catCircuitoSP" class="mx.gob.se.sraaj.persistencia.sp.CatCircuitoSP" scope="request">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String"  value="SEJURIDICO.SELECTORPKG.selCircuito" />
+		</bean>
+		
+		<bean id="catEstadosSP" class="mx.gob.se.sraaj.persistencia.sp.CatEstadosSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.SELECTORPKG.selEstado" />
+		</bean>
+	   
+	   	<bean id="reporteDocumentoDescargoSP"  class="mx.gob.se.sraaj.persistencia.sp.ReporteDocumentoDescargoSP" scope="request">
+		   	<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.obtieneDescargo" />
+		</bean>
+		
+		<bean id="repRemitenteSP" class="mx.gob.se.sraaj.persistencia.sp.RepRemitenteSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repRemitente" />
+		</bean>		
+		
+		<bean id="repCJFSP" class="mx.gob.se.sraaj.persistencia.sp.RepCJFSP">
+			<constructor-arg ref="DataSource" /> 
+			<constructor-arg type="java.lang.String"  value="SEJURIDICO.REPORTECATALOGOPKG.repCJF" />
+		</bean>		
+	   
+	   	<bean id="repCircuitoSP" class="mx.gob.se.sraaj.persistencia.sp.RepCircuitoSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repCircuito" />
+		</bean>
+		
+		<bean id="repClsDocumentalSP" class="mx.gob.se.sraaj.persistencia.sp.RepClsDocumentalSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repClsDocumental" />
+		</bean>
+		
+		<bean id="repDelegMetropolitanaSP" class="mx.gob.se.sraaj.persistencia.sp.RepDelegMetropolitanaSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String"  value="SEJURIDICO.REPORTECATALOGOPKG.repDelegMetropolitana" />
+		</bean>
+       
+		<bean id="repDepartamentoSP" class="mx.gob.se.sraaj.persistencia.sp.RepDepartamentoSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repDepartamento" />
+		</bean>
+
+		<bean id="repIncidenteSuspensionSP" class="mx.gob.se.sraaj.persistencia.sp.RepIncidenteSuspensionSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repIncidenteSuspension" />
+		</bean>		
+		
+		<bean id="repInstruccionSP" class="mx.gob.se.sraaj.persistencia.sp.RepInstruccionSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repInstruccion" />
+		</bean>		
+		
+		<bean id="repJuntaEspecialSP" class="mx.gob.se.sraaj.persistencia.sp.RepJuntaEspecialSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repJuntaEspecial" />
+		</bean>
+			
+		<bean id="repJuntaLocalSP" class="mx.gob.se.sraaj.persistencia.sp.RepJuntaLocalSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repJuntaLocal" />
+		</bean>			
+			
+		<bean id="repJuzgadosConciliacionSP" class="mx.gob.se.sraaj.persistencia.sp.RepJuzgadosConciliacionSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repJuzgadosConciliacion" />
+		</bean>			
+		
+		<bean id="repJuzgadoTribunalSP" class="mx.gob.se.sraaj.persistencia.sp.RepJuzgadoTribunalSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repJuzgadoTribunal" />
+		</bean>		
+		
+		<bean id="repMateriaSP" class="mx.gob.se.sraaj.persistencia.sp.RepMateriaSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repMateria" />
+		</bean>		
+		
+		<bean id="repMinistroInstructorSP" class="mx.gob.se.sraaj.persistencia.sp.RepMinistroInstructorSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repMinistroInstructor" />
+		</bean>		
+		
+		<bean id="repPGJSP" class="mx.gob.se.sraaj.persistencia.sp.RepPGJSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.repPGJ" />
+		</bean>
+       
+		<bean id="selCatMenuSP" class="mx.gob.se.sraaj.persistencia.sp.SelCatMenuSP" scope="request">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String"  value="SEJURIDICO.SELECTORPKG.selCatMenu" />
+		</bean>     
+		
+		<bean id="permisosPerfilSP" class="mx.gob.se.sraaj.persistencia.sp.PermisosPerfilSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.SELECTORPKG.selPermisoPerfil" />
+		</bean>		  
+		
+		<bean id="modPerfilSP" class="mx.gob.se.sraaj.persistencia.sp.ModPerfilSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String"  value="SEJURIDICO.ACTUALIZACATALOGOPKG.updPerfil" />
+		</bean>
+		
+		<bean id="repRecepcionAmparosForaneosSP" class="mx.gob.se.sraaj.persistencia.sp.RepRecepcionAmparosForaneosSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.SAJ.recepcionAmparosForaneos" />
+		</bean>		
+		
+		<bean id="repRecepcionAmparosLocalesSP" class="mx.gob.se.sraaj.persistencia.sp.RepRecepcionAmparosLocalesSP">
+			<constructor-arg ref="DataSource" />
+			<constructor-arg type="java.lang.String" value="SEJURIDICO.SAJ.recepcionAmparosLocales" />
+		</bean>		
+		
+		<bean id="obtieneJuzgadosSP" class="mx.gob.se.sraaj.persistencia.sp.ObtieneJuzgadosSP">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.obtenerJuzgados"/>
+	    </bean>
+	   
+	    <bean id="insertaNuevoDocumentoSP" class="mx.gob.se.sraaj.persistencia.sp.InsertaNuevoDocumentoSP">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.ARCHIVOGENERALPKG.insertaNuevoDocumento"/>
+	    </bean>
+	    
+	    <bean id="insertaNewTurnado" class="mx.gob.se.sraaj.persistencia.sp.InsertaNewTurnado">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.ASUNTOSJURIDICOSPKG.insertaNewTurnado"/>
+	    </bean>
+	   
+	    <bean id="busquedaDocumentoSP" class="mx.gob.se.sraaj.persistencia.sp.BusquedaDocumentoSP">
+	 	     <constructor-arg ref="DataSource"/>
+	 	     <constructor-arg type="java.lang.String" 	value="SEJURIDICO.ARCHIVOGENERALPKG.consultaDocumento"/>
+	    </bean>
+	    
+	    <bean id="catTribunalSP" class="mx.gob.se.sraaj.persistencia.sp.CatTribunalSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.SPCatTribunal"/>
+       </bean> 
+       
+       <bean id="catAutoridadSP" class="mx.gob.se.sraaj.persistencia.sp.obtenerCatAutoridadSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.obtenerCatAutoridad"/>
+       </bean>
+       
+       <bean id="catOrganoJudSP" class="mx.gob.se.sraaj.persistencia.sp.CatOrganoJudSP">
+             <constructor-arg ref="DataSource" />
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.REPORTECATALOGOPKG.catOrganoJud" />
+       </bean>
+       
+       <bean id="insertaAmparoFLMSP" class="mx.gob.se.sraaj.persistencia.sp.InsertaAmparoFLMSP">
+             <constructor-arg ref="DataSource" />
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.insertaAFLM" />
+       </bean>
+       
+       <bean id="insertaAgrario" class="mx.gob.se.sraaj.persistencia.sp.InsertaAgrario">
+             <constructor-arg ref="DataSource" />
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.insertaAgrario" />
+       </bean>
+              
+       <bean id="catRemitenteSP" class="mx.gob.se.sraaj.persistencia.sp.CatRemitenteSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String"  value="SEJURIDICO.ARCHIVOGENERALPKG.obtenerRemitente"/>
+       </bean>
+       
+       <bean id="repRecepcionMinasSP" class="mx.gob.se.sraaj.persistencia.sp.RepRecepcionMinasSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String"  value="SEJURIDICO.SAJ.recepcionMinas"/>
+       </bean>
+       
+       <bean id="insertarActualizarDesacargoSP" class="mx.gob.se.sraaj.persistencia.sp.InsertarActualizarDesacargoSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String"  value="SEJURIDICO.ARCHIVOGENERALPKG.spActualizarDescargo"/>
+       </bean>     
+  
+       <bean id="insertaNuevoDocumentoMFSP" class="mx.gob.se.sraaj.persistencia.sp.InsertaNuevoDocumentoMFSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String"  value="SEJURIDICO.ARCHIVOGENERALPKG.insertaNuevoDocumentoMFSP"/>
+       </bean>
+     
+       <bean id="insertaNuevoDocumentoMLSP" class="mx.gob.se.sraaj.persistencia.sp.InsertaNuevoDocumentoMLSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String"  value="SEJURIDICO.ARCHIVOGENERALPKG.insertaNuevoDocumentoMLSP"/>
+       </bean>   
+     
+       <bean id="insertaNuevoDocumentoPNSP" class="mx.gob.se.sraaj.persistencia.sp.InsertaNuevoDocumentoPNSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String"  value="SEJURIDICO.ARCHIVOGENERALPKG.insertaNuevoDocumentoPNSP"/>
+       </bean>          
+
+       <bean id="catJuezDTOSP" class="mx.gob.se.sraaj.persistencia.sp.CatJuezDTOSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String"  value="SEJURIDICO.ARCHIVOGENERALPKG.obtenerMP_JuezDTO"/>
+       </bean>
+       
+       <bean id="actualizarAsuntosJuridicosSP" class="mx.gob.se.sraaj.persistencia.sp.ActualizarAsuntosJuridicosSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ASUNTOSJURIDICOSPKG.actualizarAsuntosJuridicosSP"/>
+       </bean> 
+       
+       <bean id="obtenNumeroRegistroSP" class="mx.gob.se.sraaj.persistencia.sp.ObtenNumeroRegistroSP">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String"  value="SEJURIDICO.ARCHIVOGENERALPKG.obtenNumeroRegistroSP"/>
+       </bean>
+                               
+       <bean id="consultaRecepcionSP" class="mx.gob.se.sraaj.persistencia.sp.ConsultaRecepcionSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ASUNTOSJURIDICOSPKG.consultaRecepcion"/>
+       </bean>
+       
+       <bean id="insertaLaboralSP" class="mx.gob.se.sraaj.persistencia.sp.InsertaLaboralSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.insertaLaboralSP"/>
+       </bean>
+       
+       <bean id="selectNumeroRegistroSP" class="mx.gob.se.sraaj.persistencia.sp.SelectNumeroRegistroSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.selectNumeroRegistroSP"/>
+       </bean>
+       
+       <bean id="consultaEditarDocumentoSP" class="mx.gob.se.sraaj.persistencia.sp.ConsultaEditarDocumentoSP" scope="request">
+             <constructor-arg ref="DataSource"/>
+             <constructor-arg type="java.lang.String" value="SEJURIDICO.ARCHIVOGENERALPKG.consultaEditarDocumento"/>
+       </bean>
+				
+       <!-- Beans -->
+       
+       <bean id="sesionBean" class="mx.gob.se.sraaj.transferencia.beanImpl.SesionBeanImpl" scope="session"> 
+             <property name="permisosBean">
+                       <list></list>
+             </property>
+       </bean>      
+       
+       <bean id="permisosBean" class="mx.gob.se.sraaj.presentacion.beanImpl.PermisosBeanImpl" scope="request"/>
+              
+       <bean id="autenticaBean" class="mx.gob.se.sraaj.servicio.beanImpl.AutenticaBeanImpl" scope="request">
+             <property name="gestionaAccesoDAOImpl" ref="gestionaAccesoDAO"/>
+             <property name="usuarioDAOImpl" ref="usuarioDAOImpl"/>
+             <property name="sesionBean" ref="sesionBean"/>
+       </bean>
+       
+       <bean id="catBeanImpl" class="mx.gob.se.sraaj.transferencia.beanImpl.CatBeanImpl" scope="request">
+             <property name="catGeneralBean">
+                       <list></list>
+             </property>
+       </bean>
+                    	   	   	   	   	 	   
+       <bean id="usuariosBeanImpl" class="mx.gob.se.sraaj.transferencia.beanImpl.UsuariosBeanImpl" scope="request"> 
+       		<property name="usuarioDAOImpl" ref="usuarioDAOImpl"/>
+       </bean>
+       
+       <bean id="catGeneralBeanImpl" class="mx.gob.se.sraaj.transferencia.beanImpl.CatGeneralBeanImpl" scope="request">  
+             <property name="gestionaCatDAOImpl" ref="gestionaCatDAOImpl"/>
+       </bean>
+       
+</beans>

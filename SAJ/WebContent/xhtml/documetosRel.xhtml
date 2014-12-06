@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+	<h:outputStylesheet library="css" name="Style.css" />
+	<h:outputStylesheet library="css" name="principal.css" />
+</h:head>
+
+<h:body>
+
+
+	<h:form id="forma">
+		<p:growl id="msgs" showDetail="true" />
+
+
+		<div class="se-sheet">
+			<div class="se-sheet-body">
+
+				<ui:insert name="header">
+					<ui:include src="/plantillas/header.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="logeo">
+					<ui:include src="/plantillas/logeo.xhtml" />
+				</ui:insert>
+
+				<ui:insert name="menuCabecera">
+					<ui:include src="/plantillas/menuCabecera.xhtml" />
+				</ui:insert>
+
+
+					<div class="CAmparo">
+					<div class="titulo"><h:graphicImage library="imagenes" name="Titulos/DocRelacionadosalExpediente.png"/></div>                  
+	      			<p:growl id="growl" showDetail="true" sticky="true" globalOnly="true"/>
+
+				<div align="right">								
+						<h:graphicImage library="imagenes" name="printer.png"></h:graphicImage>												
+					</div>
+
+
+					
+					
+					<div style="color:red; font-size:12px; margin-left:100px;">
+							<h:outputLabel>Número de expediente:</h:outputLabel><h:outputLabel value="#{CDocumentos.noExp}"></h:outputLabel><br />
+							<h:outputLabel>Número de Juicio:</h:outputLabel><h:outputLabel value="#{CDocumentos.noJuicio}"></h:outputLabel><br />
+							<h:outputLabel>Promovente:</h:outputLabel><h:outputLabel value="#{CDocumentos.promo}"></h:outputLabel><br />
+					</div>
+						<br />
+						<div>
+
+
+
+							<p:dataTable id="tbl1" var="tbl" styleClass="tblLocal"
+								value="#{CDocumentos.obtenerDocumentos}" style="">
+
+							    
+							    <p:column headerText="NÚMERO DE REGISTRO" style="">
+							        <h:outputText value="#{tbl.numreg}" />
+							    </p:column>
+							    
+							    <p:column headerText="FECHA DE RECEPCIÓN" style="">
+							        <h:outputText value="#{tbl.fecha}" />
+							    </p:column>
+							    
+							     <p:column headerText="HORA DE RECEPCIÓN" style="">
+							        <h:outputText value="#{tbl.hora}" />
+							    </p:column>
+							    
+							    <p:column headerText="NÚMERO DE JUICIO" style="">
+							        <h:outputText value="#{tbl.numjuicio}" />
+							    </p:column>
+							    
+							    <p:column headerText="ÓRGANO JURISDICCIONAL" style="">
+							        <h:outputText value="#{tbl.organoj}" />
+							    </p:column>
+							    
+							    <p:column headerText="INSTRUCCIÓN" style="">
+							        <h:outputText value="#{tbl.instruccion}" />
+							    </p:column>
+							    
+							    <p:column headerText="TURNADO A:" style="">
+							        <h:outputText value="#{tbl.nombrecompleto}" />
+							    </p:column>
+							    
+							    <p:column headerText="ACIONES" style="">
+							        <h:commandLink action="#{CConsultar.load(93)}">
+										<h:graphicImage library="imagenes" name="ConsultarDoc.png"></h:graphicImage>
+									</h:commandLink>
+							    </p:column>
+							</p:dataTable>
+
+
+
+						</div>
+						<!-- 	fin tabla -->
+
+					</div>
+					<!-- 	fin cuerpo -->
+			</div>
+			<br />
+		<ui:insert name="footer"> <ui:include src="/plantillas/footer.xhtml" /> </ui:insert>
+		</div>
+	</h:form>
+
+
+
+</h:body>
+
+</html>

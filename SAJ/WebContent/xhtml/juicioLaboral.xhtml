@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head></h:head>
+<h:body>
+
+	<table style="clear: both;">
+	
+	    <tr>
+	        <td><h:outputLabel value="¿Qué tipo de Asunto es?:" styleClass="etiqueta" /></td>
+	        <td>
+				<h:selectOneRadio value="#{CArchivoGeneral.rdoLaboral}" >
+				   <f:selectItem itemValue="1" itemLabel="Amparo"/>
+				   <f:selectItem itemValue="2" itemLabel="Requerimientos Jurisdiccionales"/>
+				   <f:selectItem itemValue="3" itemLabel="Oficios Internos"/>
+				   <f:ajax render="tbl"/> 
+				</h:selectOneRadio>
+		    </td>
+	    </tr> 
+	    <tr>
+			<td colspan="2">
+			
+			    <h:panelGroup id="tbl">
+			    
+				   <ui:insert name="laboral" >        <ui:include src="juicioLaboral1.xhtml" /> </ui:insert>
+																	 
+                   <ui:insert name="requerimientos" > <ui:include src="juicioLaboral2.xhtml" /> </ui:insert>																	 
+										 
+				   <ui:insert name="oficios" >        <ui:include src="juicioLaboral3.xhtml" /> </ui:insert>
+									 
+			    </h:panelGroup>
+			    
+		   </td>		
+		   
+        </tr>
+        
+	</table>
+
+</h:body>
+</html>
